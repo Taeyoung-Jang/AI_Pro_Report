@@ -1,0 +1,16 @@
+{
+  "created_at_utc": "2026-10-23T15:39:43.775435+00:00",
+  "source_snapshot": "/workspace/g1_failure/src/physical_ai_test_gen/scene2test/development/paired_crossing_matched_local_20261023_v1/reports/20261023T114142_160351Z",
+  "artifacts": {
+    "74001_afs_attempts.json": "61f1b2655366b1ed4f79c4c8bb72362d3ec563c1675d4478f5b4f58e1c55ab5e",
+    "74001_afs_proposals.json": "1a5c33889e62e074cd7a94c13e942c577742e3ef869aba48bbc2f93232572f16",
+    "74001_random_attempts.json": "bc0cddbc8bf6fc4d07b28785127579e5d9ee09413ee84d58d695b2b8983353dc",
+    "74001_random_proposals.json": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+    "design_manifest.json": "61184c342a53efbc1219e569927be0083651fdc953db710b7dd95e6629090990",
+    "episodes.csv": "74021b6a3983b9a3e40b400a2a050714f4eba1c6b82785d7994ab6d6587a2455",
+    "failure_analysis.json": "cf6feb95310139e6e73714c5aa74cdeb20193300ca9ed043ab575c89dc7f2218",
+    "summary.json": "bff4d33a0ca2ef069d91ef0571f829aac6989f1f9bab7bd6e45a64a43d4c9386",
+    "verification.json": "a1981812e84f27d441f558f783d58fd4667df4682097291e4c2ab420b154fa55"
+  },
+  "scope": "small evidence copies; original videos and full traces remain at source"
+}

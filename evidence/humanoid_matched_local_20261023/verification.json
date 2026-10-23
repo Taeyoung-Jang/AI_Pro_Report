@@ -1,0 +1,256 @@
+{
+  "created_at_utc": "2026-10-23T15:30:24.034288+00:00",
+  "source_campaign": "/workspace/g1_failure/src/physical_ai_test_gen/scene2test/development/paired_crossing_matched_local_20261023_v1",
+  "source_snapshot": "/workspace/g1_failure/src/physical_ai_test_gen/scene2test/development/paired_crossing_matched_local_20261023_v1/reports/20261023T114142_160351Z",
+  "source_manifest_sha256": "8cac748ef25e81705e29a3de757e4ed0d2eb39e47cd08718b1d8e1d0a6fffb31",
+  "evaluation_complete": true,
+  "comparison": {
+    "status": "baseline_zero",
+    "relative_gain": null,
+    "difference_percentage_points": 40.0,
+    "failure_count_difference": 2,
+    "gain_target_observed": null,
+    "per_seed": [
+      {
+        "seed": 74001,
+        "status": "baseline_zero",
+        "relative_gain": null,
+        "difference_percentage_points": 40.0,
+        "failure_count_difference": 2,
+        "gain_target_observed": null
+      }
+    ]
+  },
+  "verified_artifacts": [
+    {
+      "path": "/workspace/g1_failure/src/physical_ai_test_gen/scene2test/development/paired_crossing_matched_local_20261023_v1/reports/20261023T114142_160351Z/74001_afs_attempts.json",
+      "sha256": "61f1b2655366b1ed4f79c4c8bb72362d3ec563c1675d4478f5b4f58e1c55ab5e"
+    },
+    {
+      "path": "/workspace/g1_failure/src/physical_ai_test_gen/scene2test/development/paired_crossing_matched_local_20261023_v1/reports/20261023T114142_160351Z/74001_afs_ledger.json",
+      "sha256": "d347d458729c37c6cd04015ea3a4e5bab4421b50033a78aa3c756e9a7221aa5e"
+    },
+    {
+      "path": "/workspace/g1_failure/src/physical_ai_test_gen/scene2test/development/paired_crossing_matched_local_20261023_v1/reports/20261023T114142_160351Z/74001_afs_proposals.json",
+      "sha256": "1a5c33889e62e074cd7a94c13e942c577742e3ef869aba48bbc2f93232572f16"
+    },
+    {
+      "path": "/workspace/g1_failure/src/physical_ai_test_gen/scene2test/development/paired_crossing_matched_local_20261023_v1/reports/20261023T114142_160351Z/74001_random_attempts.json",
+      "sha256": "bc0cddbc8bf6fc4d07b28785127579e5d9ee09413ee84d58d695b2b8983353dc"
+    },
+    {
+      "path": "/workspace/g1_failure/src/physical_ai_test_gen/scene2test/development/paired_crossing_matched_local_20261023_v1/reports/20261023T114142_160351Z/74001_random_ledger.json",
+      "sha256": "1632b1bffd73c952497184b6d13ab84a87ba7d4fc544d5e0360e2e3b526c8d2b"
+    },
+    {
+      "path": "/workspace/g1_failure/src/physical_ai_test_gen/scene2test/development/paired_crossing_matched_local_20261023_v1/reports/20261023T114142_160351Z/74001_random_proposals.json",
+      "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+    },
+    {
+      "path": "/workspace/g1_failure/src/physical_ai_test_gen/scene2test/development/paired_crossing_matched_local_20261023_v1/reports/20261023T114142_160351Z/afs_feedback_audit.json",
+      "sha256": "fe43be6944387088e346bed64399a087ede84d2a292d59b6212257925080952a"
+    },
+    {
+      "path": "/workspace/g1_failure/src/physical_ai_test_gen/scene2test/development/paired_crossing_matched_local_20261023_v1/reports/20261023T114142_160351Z/design_manifest.json",
+      "sha256": "61184c342a53efbc1219e569927be0083651fdc953db710b7dd95e6629090990"
+    },
+    {
+      "path": "/workspace/g1_failure/src/physical_ai_test_gen/scene2test/development/paired_crossing_matched_local_20261023_v1/reports/20261023T114142_160351Z/planned_random_scenes.json",
+      "sha256": "2ff3c62db69b6da40f5431f97c300a1e3f494c7e17ec5decdac1ad0c77c9f264"
+    },
+    {
+      "path": "/workspace/g1_failure/src/physical_ai_test_gen/scene2test/development/paired_crossing_matched_local_20261023_v1/reports/20261023T114142_160351Z/report.html",
+      "sha256": "dd8b9111ee52bc4dd201c09969e13e0b05a7c2d7b848d46b9ebd7370b136ecba"
+    },
+    {
+      "path": "/workspace/g1_failure/src/physical_ai_test_gen/scene2test/development/paired_crossing_matched_local_20261023_v1/reports/20261023T114142_160351Z/summary.json",
+      "sha256": "bff4d33a0ca2ef069d91ef0571f829aac6989f1f9bab7bd6e45a64a43d4c9386"
+    },
+    {
+      "path": "/workspace/g1_failure/src/physical_ai_test_gen/scene2test/development/paired_crossing_matched_local_20261023_v1/seeds/74001/afs/attempts/attempt_00000/rollout/result.json",
+      "sha256": "28bd7906ceb499eea05732e13090c61b74812158653c784b75214b0b4b3b91ab"
+    },
+    {
+      "path": "/workspace/g1_failure/src/physical_ai_test_gen/scene2test/development/paired_crossing_matched_local_20261023_v1/seeds/74001/afs/attempts/attempt_00000/rollout/protocol.json",
+      "sha256": "9a66391812f1045dd4134b1fc0bff65dec6ba8cb03a84cb10fba65aea60119fa"
+    },
+    {
+      "path": "/workspace/g1_failure/src/physical_ai_test_gen/scene2test/development/paired_crossing_matched_local_20261023_v1/seeds/74001/afs/attempts/attempt_00000/rollout/decisions.jsonl",
+      "sha256": "2e948eb42373bf390c6bf9dbb578b151837a4326297238e7138d1ef3fa0e89ae"
+    },
+    {
+      "path": "/workspace/g1_failure/src/physical_ai_test_gen/scene2test/development/paired_crossing_matched_local_20261023_v1/seeds/74001/afs/attempts/attempt_00001/rollout/result.json",
+      "sha256": "d87bb65e3c80605c83718bff49a2575881a698774f61bbfd72eb60968ceb29be"
+    },
+    {
+      "path": "/workspace/g1_failure/src/physical_ai_test_gen/scene2test/development/paired_crossing_matched_local_20261023_v1/seeds/74001/afs/attempts/attempt_00001/rollout/protocol.json",
+      "sha256": "f7f26ee31be48d24d9508a650930df54a19fcf9ebedbeb9861a90ce04322258e"
+    },
+    {
+      "path": "/workspace/g1_failure/src/physical_ai_test_gen/scene2test/development/paired_crossing_matched_local_20261023_v1/seeds/74001/afs/attempts/attempt_00001/rollout/decisions.jsonl",
+      "sha256": "eac4fe510b7228136c7005ae8e06b95193fb28615564b53e8f88c3417738a029"
+    },
+    {
+      "path": "/workspace/g1_failure/src/physical_ai_test_gen/scene2test/development/paired_crossing_matched_local_20261023_v1/seeds/74001/afs/attempts/attempt_00002/rollout/result.json",
+      "sha256": "735f87398667176fb5fe3040b13e6fe2322a4206593af0bc9d0322a010e0d14c"
+    },
+    {
+      "path": "/workspace/g1_failure/src/physical_ai_test_gen/scene2test/development/paired_crossing_matched_local_20261023_v1/seeds/74001/afs/attempts/attempt_00002/rollout/protocol.json",
+      "sha256": "7fa9ca07aec8ed51e0c2393b657e741402cc53fd48015bb7e08a3ac0118b7a74"
+    },
+    {
+      "path": "/workspace/g1_failure/src/physical_ai_test_gen/scene2test/development/paired_crossing_matched_local_20261023_v1/seeds/74001/afs/attempts/attempt_00002/rollout/decisions.jsonl",
+      "sha256": "9a1253681b64d7e970f156fdbdb4cf96f25b92e4b6bb8e46970f4556270fbe05"
+    },
+    {
+      "path": "/workspace/g1_failure/src/physical_ai_test_gen/scene2test/development/paired_crossing_matched_local_20261023_v1/seeds/74001/afs/attempts/attempt_00003/rollout/result.json",
+      "sha256": "97c0fa1335f11741f427d3528737f314f4eaf78e5e3df9adeff1ec2aadad2e83"
+    },
+    {
+      "path": "/workspace/g1_failure/src/physical_ai_test_gen/scene2test/development/paired_crossing_matched_local_20261023_v1/seeds/74001/afs/attempts/attempt_00003/rollout/protocol.json",
+      "sha256": "369c5d29a8f7e7ee04006e16bf1aed75fe9564b0cc86218128b1345f42c92fc3"
+    },
+    {
+      "path": "/workspace/g1_failure/src/physical_ai_test_gen/scene2test/development/paired_crossing_matched_local_20261023_v1/seeds/74001/afs/attempts/attempt_00003/rollout/decisions.jsonl",
+      "sha256": "ce613d325e49dc4bc963c4efeceff44228db19c28df832e967d7d82335576a63"
+    },
+    {
+      "path": "/workspace/g1_failure/src/physical_ai_test_gen/scene2test/development/paired_crossing_matched_local_20261023_v1/seeds/74001/afs/attempts/attempt_00004/rollout/result.json",
+      "sha256": "64770b467fc132bb8481539fd53b89b56d91072ba30017ee7ba6c6cfa5cf0eab"
+    },
+    {
+      "path": "/workspace/g1_failure/src/physical_ai_test_gen/scene2test/development/paired_crossing_matched_local_20261023_v1/seeds/74001/afs/attempts/attempt_00004/rollout/protocol.json",
+      "sha256": "a3d27567c2d59778e15d8f61e902773b1b5f9704bfc88ae756eda224860676ae"
+    },
+    {
+      "path": "/workspace/g1_failure/src/physical_ai_test_gen/scene2test/development/paired_crossing_matched_local_20261023_v1/seeds/74001/afs/attempts/attempt_00004/rollout/decisions.jsonl",
+      "sha256": "6a6f76425317c25ed7d7c0b2552739bdbc4bf4d0490604b51f6026d059bf1c26"
+    },
+    {
+      "path": "/workspace/g1_failure/src/physical_ai_test_gen/scene2test/development/paired_crossing_matched_local_20261023_v1/seeds/74001/random/attempts/attempt_00000/rollout/result.json",
+      "sha256": "befb95bb191b47d529ccbbe226a6220d44b26a5d929847965273f0af1ceccfe6"
+    },
+    {
+      "path": "/workspace/g1_failure/src/physical_ai_test_gen/scene2test/development/paired_crossing_matched_local_20261023_v1/seeds/74001/random/attempts/attempt_00000/rollout/protocol.json",
+      "sha256": "9a66391812f1045dd4134b1fc0bff65dec6ba8cb03a84cb10fba65aea60119fa"
+    },
+    {
+      "path": "/workspace/g1_failure/src/physical_ai_test_gen/scene2test/development/paired_crossing_matched_local_20261023_v1/seeds/74001/random/attempts/attempt_00000/rollout/decisions.jsonl",
+      "sha256": "1f54f14c5a3c82aff5fe57c0d9bd3367e70ff9f8e55eda81fbdf5c81d7425b8e"
+    },
+    {
+      "path": "/workspace/g1_failure/src/physical_ai_test_gen/scene2test/development/paired_crossing_matched_local_20261023_v1/seeds/74001/random/attempts/attempt_00001/rollout/result.json",
+      "sha256": "3bd89650745cebaeb77cdb00e9de2808233db0fbe137d597ebabfab3bab59b19"
+    },
+    {
+      "path": "/workspace/g1_failure/src/physical_ai_test_gen/scene2test/development/paired_crossing_matched_local_20261023_v1/seeds/74001/random/attempts/attempt_00001/rollout/protocol.json",
+      "sha256": "c4b05586ba99f72ba0aaec00123d1274dfa8768a2ac9e0bc1e9ca539fb3eb4a6"
+    },
+    {
+      "path": "/workspace/g1_failure/src/physical_ai_test_gen/scene2test/development/paired_crossing_matched_local_20261023_v1/seeds/74001/random/attempts/attempt_00001/rollout/decisions.jsonl",
+      "sha256": "57c724d988be2195a98916427ccaf15382cd19418fedea5d2d0d58a28721f8b3"
+    },
+    {
+      "path": "/workspace/g1_failure/src/physical_ai_test_gen/scene2test/development/paired_crossing_matched_local_20261023_v1/seeds/74001/random/attempts/attempt_00002/rollout/result.json",
+      "sha256": "9da982731fa93f5e4bc89d355c4d08a5aedb9f20a11e32175cd6b543405c2f58"
+    },
+    {
+      "path": "/workspace/g1_failure/src/physical_ai_test_gen/scene2test/development/paired_crossing_matched_local_20261023_v1/seeds/74001/random/attempts/attempt_00002/rollout/protocol.json",
+      "sha256": "d99f377ea3c0855d41d564cae2c461a24c9a205e5ed1e727f14d122967cfac77"
+    },
+    {
+      "path": "/workspace/g1_failure/src/physical_ai_test_gen/scene2test/development/paired_crossing_matched_local_20261023_v1/seeds/74001/random/attempts/attempt_00002/rollout/decisions.jsonl",
+      "sha256": "ef6215b5e5b16dcad3db49a4463ec2d2654b0e9b9f8d2342c97b8befd12c07ea"
+    },
+    {
+      "path": "/workspace/g1_failure/src/physical_ai_test_gen/scene2test/development/paired_crossing_matched_local_20261023_v1/seeds/74001/random/attempts/attempt_00003/rollout/result.json",
+      "sha256": "1a74a828b5ab8f77529a40ae649f534f588bff3ddd5a8094aa96c15b90a6ca20"
+    },
+    {
+      "path": "/workspace/g1_failure/src/physical_ai_test_gen/scene2test/development/paired_crossing_matched_local_20261023_v1/seeds/74001/random/attempts/attempt_00003/rollout/protocol.json",
+      "sha256": "8b3b6bac71e72bde6032f9d09173790514d12400f4bde9b6efe41409e422b65d"
+    },
+    {
+      "path": "/workspace/g1_failure/src/physical_ai_test_gen/scene2test/development/paired_crossing_matched_local_20261023_v1/seeds/74001/random/attempts/attempt_00003/rollout/decisions.jsonl",
+      "sha256": "afa681dab30f71e510a0a2208e347d9cd62b39192b28fdf5ec15b99ea45c2226"
+    },
+    {
+      "path": "/workspace/g1_failure/src/physical_ai_test_gen/scene2test/development/paired_crossing_matched_local_20261023_v1/seeds/74001/random/attempts/attempt_00004/rollout/result.json",
+      "sha256": "ad43d1f2c3012d5b8760922b051e42d4d2a46fb9435a8b5f8a4c19e2561509d5"
+    },
+    {
+      "path": "/workspace/g1_failure/src/physical_ai_test_gen/scene2test/development/paired_crossing_matched_local_20261023_v1/seeds/74001/random/attempts/attempt_00004/rollout/protocol.json",
+      "sha256": "f891545ae374fae7ff381109c8bc9a864a2603aaa16a5293560bcad15355130d"
+    },
+    {
+      "path": "/workspace/g1_failure/src/physical_ai_test_gen/scene2test/development/paired_crossing_matched_local_20261023_v1/seeds/74001/random/attempts/attempt_00004/rollout/decisions.jsonl",
+      "sha256": "7e308fa459c1841f7be21ac460ad3c1636b3b2072a5f5e1fac3a7c11a737f48d"
+    },
+    {
+      "path": "/workspace/g1_failure/src/physical_ai_test_gen/scene2test/development/paired_crossing_matched_local_20261023_v1/seeds/74001/random/attempts/attempt_00005/rollout/result.json",
+      "sha256": "0ea74553879d9db1d223e355bad0dcf07be0293f4efb7dd7c5ef6fd4f18b043c"
+    },
+    {
+      "path": "/workspace/g1_failure/src/physical_ai_test_gen/scene2test/development/paired_crossing_matched_local_20261023_v1/seeds/74001/random/attempts/attempt_00005/rollout/protocol.json",
+      "sha256": "4e785a94bd7415fafa2c28ea1be1e7e83b585ec81c3a6a4b3825d374ca2a3b4f"
+    },
+    {
+      "path": "/workspace/g1_failure/src/physical_ai_test_gen/scene2test/development/paired_crossing_matched_local_20261023_v1/seeds/74001/random/attempts/attempt_00005/rollout/decisions.jsonl",
+      "sha256": "6a249aebde0467c07acae13475743462a1542a26ea81062cbf65f62a86e86133"
+    }
+  ],
+  "core_files_verified": 33,
+  "snapshot_files_verified": 11,
+  "video_files_present": 11,
+  "video_decoded_during_report": false,
+  "video_analysis": {
+    "path": "/workspace/g1_failure/src/physical_ai_test_gen/scene2test/development/matched_local_failure_explanation_20261023_v1/analysis.json",
+    "sha256": "cf6feb95310139e6e73714c5aa74cdeb20193300ca9ed043ab575c89dc7f2218"
+  },
+  "safety_measurement_scope": "saved verified final summary; no fresh remeasurement",
+  "matched_change_counts": [
+    {
+      "method": "afs",
+      "seed": 74001,
+      "counts": {
+        "0": {
+          "attempted": 1,
+          "valid": 1,
+          "excluded": 0
+        },
+        "1": {
+          "attempted": 2,
+          "valid": 2,
+          "excluded": 0
+        },
+        "2": {
+          "attempted": 2,
+          "valid": 2,
+          "excluded": 0
+        }
+      }
+    },
+    {
+      "method": "random",
+      "seed": 74001,
+      "counts": {
+        "0": {
+          "attempted": 1,
+          "valid": 1,
+          "excluded": 0
+        },
+        "1": {
+          "attempted": 3,
+          "valid": 3,
+          "excluded": 0
+        },
+        "2": {
+          "attempted": 2,
+          "valid": 1,
+          "excluded": 1
+        }
+      }
+    }
+  ],
+  "summary_sha256": "bff4d33a0ca2ef069d91ef0571f829aac6989f1f9bab7bd6e45a64a43d4c9386"
+}

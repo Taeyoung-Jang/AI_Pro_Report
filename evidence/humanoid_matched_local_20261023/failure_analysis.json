@@ -1,0 +1,260 @@
+{
+  "scope": "Read-only analysis of preserved final experiment; no rerun/controller edit",
+  "video_timebase": "12 fps video duration matches simulation duration within one frame; no encoding slow-motion",
+  "navigation_command_cap_mps": 0.2,
+  "episode_phase_durations": "Approximate from logged .05s samples; boundary rounding applies",
+  "causality": "Recorded behavior and rejected interfaces, not counterfactual causal proof",
+  "episodes": [
+    {
+      "attempt": "attempt_00000",
+      "outcome": "PASS",
+      "termination": "GOAL_REACHED",
+      "simulation_s": 228.5899999998646,
+      "video": {
+        "avg_frame_rate": "12/1",
+        "duration": "228.666667"
+      },
+      "phase_duration_s_approx": {
+        "settle": 2.0499999999999785,
+        "inference_wait": 188.749999999899,
+        "navigate_to": 37.74999999996567
+      },
+      "inference_wait_fraction_approx": 0.8257141607244883,
+      "navigate_net_speeds_mps": [
+        0.16208507327603786,
+        0.14367706331712007,
+        0.16365072230913788,
+        0.1575127309283532
+      ],
+      "tool_results": [
+        {
+          "observation_version": 0,
+          "status": "execution_slice_ended",
+          "reason": null,
+          "elapsed_s": 10.0049999999909,
+          "net_translation_m": 1.6216611581252838
+        },
+        {
+          "observation_version": 1,
+          "status": "execution_slice_ended",
+          "reason": null,
+          "elapsed_s": 10.0049999999909,
+          "net_translation_m": 1.437489018486479
+        },
+        {
+          "observation_version": 2,
+          "status": "execution_slice_ended",
+          "reason": null,
+          "elapsed_s": 10.0049999999909,
+          "net_translation_m": 1.6373254767014354
+        },
+        {
+          "observation_version": 3,
+          "status": "goal_reached",
+          "reason": null,
+          "elapsed_s": 7.754999999992947,
+          "net_translation_m": 1.221511228348268
+        }
+      ],
+      "final_goal_distance_m": 0.11605971361462404,
+      "primary_family": null
+    },
+    {
+      "attempt": "attempt_00001",
+      "outcome": "FAIL",
+      "termination": "BUDGET_EXHAUSTED",
+      "simulation_s": 609.2099999995185,
+      "video": {
+        "avg_frame_rate": "12/1",
+        "duration": "609.250000"
+      },
+      "phase_duration_s_approx": {
+        "settle": 2.0499999999999785,
+        "inference_wait": 558.5549999995485,
+        "navigate_to": 44.54499999997369,
+        "move": 4.0499999999963165
+      },
+      "inference_wait_fraction_approx": 0.9168513320529702,
+      "navigate_net_speeds_mps": [
+        0.16358287327203708,
+        0.14567115091647992,
+        0.12923645356997007,
+        0.16171020473745593,
+        0.14775851035526175
+      ],
+      "tool_results": [
+        {
+          "observation_version": 0,
+          "status": "execution_slice_ended",
+          "reason": null,
+          "elapsed_s": 10.000000000005116,
+          "net_translation_m": 1.6358287327212075
+        },
+        {
+          "observation_version": 1,
+          "status": "execution_slice_ended",
+          "reason": null,
+          "elapsed_s": 10.0049999999909,
+          "net_translation_m": 1.457439864918056
+        },
+        {
+          "observation_version": 2,
+          "status": "execution_slice_ended",
+          "reason": null,
+          "elapsed_s": 10.0049999999909,
+          "net_translation_m": 1.2930107179663746
+        },
+        {
+          "observation_version": 3,
+          "status": "execution_slice_ended",
+          "reason": null,
+          "elapsed_s": 10.0049999999909,
+          "net_translation_m": 1.617910598396775
+        },
+        {
+          "observation_version": 4,
+          "status": "target_reached",
+          "reason": null,
+          "elapsed_s": 4.194999999996185,
+          "net_translation_m": 0.6198469509397593
+        },
+        {
+          "observation_version": 5,
+          "status": "executed",
+          "reason": null,
+          "elapsed_s": 2.0049999999981765,
+          "net_translation_m": 0.055575083539896215
+        },
+        {
+          "observation_version": 6,
+          "status": "blocked_endpoint",
+          "reason": null,
+          "elapsed_s": 0.20499999999981355,
+          "net_translation_m": 0.018507010599905577
+        },
+        {
+          "observation_version": 7,
+          "status": "executed",
+          "reason": null,
+          "elapsed_s": 2.0049999999981765,
+          "net_translation_m": 0.1005022824506532
+        },
+        {
+          "observation_version": 8,
+          "status": "rejected",
+          "reason": "unsupported_box_face",
+          "elapsed_s": null,
+          "net_translation_m": null
+        },
+        {
+          "observation_version": 9,
+          "status": "blocked_endpoint",
+          "reason": null,
+          "elapsed_s": 0.20499999999981355,
+          "net_translation_m": 0.026855387261182497
+        }
+      ],
+      "final_goal_distance_m": 0.8599879686368215,
+      "primary_family": "goal_occupied"
+    },
+    {
+      "attempt": "attempt_00004",
+      "outcome": "FAIL",
+      "termination": "BUDGET_EXHAUSTED",
+      "simulation_s": 607.50999999952,
+      "video": {
+        "avg_frame_rate": "12/1",
+        "duration": "607.583333"
+      },
+      "phase_duration_s_approx": {
+        "settle": 2.0499999999999785,
+        "inference_wait": 558.7999999995621,
+        "navigate_to": 40.999999999962995,
+        "plan_path": 0.1999999999998181,
+        "observe": 3.4999999999968168,
+        "move": 1.9499999999982265
+      },
+      "inference_wait_fraction_approx": 0.919820249872436,
+      "navigate_net_speeds_mps": [
+        0.15884552729198917,
+        0.16081862941319805,
+        0.14470575832649882,
+        0.15825461271636304
+      ],
+      "tool_results": [
+        {
+          "observation_version": 0,
+          "status": "blocked_endpoint",
+          "reason": null,
+          "elapsed_s": 0.20000000000010232,
+          "net_translation_m": 0.0019497300563294355
+        },
+        {
+          "observation_version": 1,
+          "status": "path_found",
+          "reason": null,
+          "elapsed_s": 0.20499999999981355,
+          "net_translation_m": 0.008638970218412334
+        },
+        {
+          "observation_version": 2,
+          "status": "execution_slice_ended",
+          "reason": null,
+          "elapsed_s": 10.0049999999909,
+          "net_translation_m": 1.589249500554906
+        },
+        {
+          "observation_version": 3,
+          "status": "recovery_connector_blocked",
+          "reason": null,
+          "elapsed_s": 6.259999999994307,
+          "net_translation_m": 0.9968554827201678
+        },
+        {
+          "observation_version": 4,
+          "status": "executed",
+          "reason": null,
+          "elapsed_s": 3.504999999996812,
+          "net_translation_m": 0.008604521020334132
+        },
+        {
+          "observation_version": 5,
+          "status": "execution_slice_ended",
+          "reason": null,
+          "elapsed_s": 10.0049999999909,
+          "net_translation_m": 1.6089903872775833
+        },
+        {
+          "observation_version": 6,
+          "status": "target_reached",
+          "reason": null,
+          "elapsed_s": 6.979999999993652,
+          "net_translation_m": 1.0100461931180431
+        },
+        {
+          "observation_version": 7,
+          "status": "target_reached",
+          "reason": null,
+          "elapsed_s": 7.369999999993297,
+          "net_translation_m": 1.166336495718535
+        },
+        {
+          "observation_version": 8,
+          "status": "blocked_endpoint",
+          "reason": null,
+          "elapsed_s": 0.20499999999981355,
+          "net_translation_m": 0.009916199317491105
+        },
+        {
+          "observation_version": 9,
+          "status": "executed",
+          "reason": null,
+          "elapsed_s": 2.0049999999981765,
+          "net_translation_m": 0.2296667466859002
+        }
+      ],
+      "final_goal_distance_m": 0.42626952466823564,
+      "primary_family": null
+    }
+  ]
+}

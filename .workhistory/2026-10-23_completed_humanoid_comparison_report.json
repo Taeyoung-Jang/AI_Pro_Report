@@ -1,0 +1,26 @@
+{
+  "date": "2026-10-23",
+  "files": [
+    "report.tex",
+    "README.md",
+    "evidence/humanoid_matched_local_20261023"
+  ],
+  "source_snapshot": "/workspace/g1_failure/src/physical_ai_test_gen/scene2test/development/paired_crossing_matched_local_20261023_v1/reports/20261023T114142_160351Z",
+  "scope": "update existing 10-section report with completed humanoid matched-local comparison",
+  "before_report_sha256": "2f1c59fd46d84649475769b772e50ccf2586d7b79aaa41e163c63ecaa9e59e4b",
+  "after_report_sha256": "3c26c9a4f41bc0d8943333f358f617ebcf77f5e405dcc39411d2f102b174ae35",
+  "new_live_execution": false,
+  "source_experiment_modified": false,
+  "pdf_compiled": false,
+  "verification": {
+    "balanced_braces": true,
+    "balanced_environments": true,
+    "sections": 10,
+    "explicit_page_breaks": 9,
+    "evidence_manifest_hashes": true,
+    "episode_video_paths": true,
+    "initial_plan_and_additional_work_unchanged": true,
+    "git_diff_check": true
+  },
+  "pdf_build_result": "make pdf failed: xelatex unavailable; page count and visual layout unverified"
+}
