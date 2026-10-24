@@ -5,7 +5,8 @@
 ## 파일
 
 - `init_report.md`: 초기 기획서. 원본을 보존합니다.
-- `report.tex`: 논문 형식 보고서. 본문 10쪽 이내, 실험 설정 등 상세 자료는 부록.
+- `report.tex`: 논문 형식 보고서의 메인 파일(프리앰블, 표지·초록). 본문 10쪽 이내, 실험 설정 등 상세 자료는 부록.
+- `chapters/`: 본문 장별 파일(`01_introduction.tex`~`09_conclusion.tex`, `references.tex`)과 `appendix/` 부록 파일(A~F). `report.tex`에서 `\input`으로 불러옵니다.
 - `additional_work.tex`: 제출 자료 보완, 회귀 검증, 정량 평가와 후속 구현의 우선순위·완료 기준.
 - `figures/`: 보고서 그림(휴머노이드 장면, 로봇팔 실패 프레임).
 - `evidence/robot_arm_environment_20261023/`: 로봇팔 비교·통제 실험 분석 사본.

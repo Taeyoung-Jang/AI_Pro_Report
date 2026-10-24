@@ -1,0 +1,132 @@
+\section{시스템 구성}
+
+\begin{figure*}[!t]
+\centering
+\definecolor{c1}{HTML}{4F46E5}\definecolor{c1l}{HTML}{EEF0FD}
+\definecolor{c2}{HTML}{0F8B7E}\definecolor{c2l}{HTML}{E8F6F4}
+\definecolor{c3}{HTML}{C2620A}\definecolor{c3l}{HTML}{FDF3E7}
+\definecolor{cg}{HTML}{475569}\definecolor{cgl}{HTML}{F1F5F9}
+\newcommand{\agenticon}[2]{\begin{scope}[shift={#1}]
+  \fill[#2] (-3.5,-0.8) rectangle (-2.9,0.8); \fill[#2] (2.9,-0.8) rectangle (3.5,0.8);
+  \fill[#2,rounded corners=0.9mm] (-3,-2.4) rectangle (3,2.4);
+  \fill[white] (-1.25,0.35) circle (0.62); \fill[white] (1.25,0.35) circle (0.62);
+  \draw[white,line width=0.55pt,line cap=round] (-1.1,-1.15)--(1.1,-1.15);
+  \draw[#2,line width=0.6pt] (0,2.4)--(0,3.6); \fill[#2] (0,3.9) circle (0.6);
+  \end{scope}}
+% 단계 상자: #1=왼쪽 x, #2=색, #3=제목, #4=항목, #5=예시
+\newcommand{\stepbox}[5]{%
+  \fill[white,rounded corners=1.3mm,drop shadow={opacity=0.10,shadow xshift=0.4mm,shadow yshift=-0.5mm}] (#1,55) rectangle ++(36,29);
+  \fill[#2!14,rounded corners=1.3mm] (#1,84) rectangle ++(36,-5.2);
+  \fill[#2!14] (#1,79.6) rectangle ++(36,-0.8);
+  \draw[#2!55,rounded corners=1.3mm,line width=0.5pt] (#1,55) rectangle ++(36,29);
+  \node[font=\figsans\footnotesize\bfseries,text=#2] at (#1+18,81.4) {#3};
+  \node[anchor=north west,text width=33.5mm,align=left,inner sep=0pt,
+    font=\figsans\fontsize{6.4}{7.9}\selectfont,text=black!80] at (#1+1.5,77.3) {#4};
+  \node[anchor=south west,text width=33.5mm,align=left,inner sep=0pt,
+    font=\figsans\fontsize{6}{7.2}\selectfont,text=#2!80!black] at (#1+1.5,56.6) {#5};}
+\begin{tikzpicture}[x=1mm,y=1mm,font=\figsans\footnotesize,
+  panel/.style={rounded corners=2.5mm},
+  card/.style={rounded corners=1.5mm,fill=white,draw=#1!45,line width=0.5pt,
+    minimum width=40mm,minimum height=11mm,align=center,
+    drop shadow={opacity=0.12,shadow xshift=0.5mm,shadow yshift=-0.6mm}},
+  sutcard/.style={rounded corners=1.8mm,fill=cgl,draw=cg!70,line width=0.9pt,dash pattern=on 2.2pt off 1.4pt,
+    minimum width=40mm,minimum height=14mm},
+  pill/.style={rounded corners=1mm,fill=#1,text=white,inner xsep=1.2mm,inner ysep=0.5mm,
+    font=\figsans\fontsize{5}{5}\selectfont\bfseries},
+  title/.style={font=\figsans\footnotesize\bfseries},
+  sub/.style={font=\figsans\scriptsize,text=cg},
+  badge/.style={circle,fill=#1,text=white,inner sep=0pt,minimum size=4.6mm,font=\figsans\scriptsize\bfseries},
+  flow/.style={-{Stealth[length=2.6mm,width=2.2mm]},line width=1.1pt,draw=#1},
+  step/.style={-{Stealth[length=2mm,width=1.8mm]},line width=0.9pt,draw=#1},
+  tiny/.style={font=\figsans\fontsize{5.5}{6}\selectfont,text=#1}]
+% ================= ① AFS
+\fill[c1l,panel] (0,50) rectangle (166,104);
+\node[badge=c1] at (5,99.5) {1};
+\node[title,text=c1,anchor=west] at (8.5,99.5) {능동 실패 탐색 (AFS)};
+\node[sub,anchor=west] at (46,99.5) {이전 실행을 읽고 실패 가능성이 높은 다음 테스트 환경을 설계한다};
+% 탐색 Agent 틀
+\draw[c1,line width=1.1pt,rounded corners=2mm,fill=white,fill opacity=0.55,
+  drop shadow={opacity=0.18,shadow xshift=0.6mm,shadow yshift=-0.8mm}] (2,52) rectangle (123,94);
+\node[pill=c1] at (115.5,94) {AGENT};
+\agenticon{(7.5,88.8)}{c1}
+\node[title,anchor=west] at (12.3,89.3) {탐색 Agent};
+\node[sub,anchor=west] at (31,89.3) {LLM (GPT-6 Luna Pro) \textbullet\ 한 번의 응답에서 관측 분석부터 환경 제안까지 수행};
+\stepbox{5}{c1}{관측}
+  {\textbullet\ 목표 결과·종료 상태\\\textbullet\ 행동 기록: 경로 거절,\\\hspace*{1.6mm}중간 목표 도착, 조작 요청\\\textbullet\ 측정값: 접촉 시간,\\\hspace*{1.6mm}물체 이동, 목표 거리}
+  {예) 초기 장면 FAIL, 로봇–장애물\\접촉 13.3초, 그릇 미이동}
+\stepbox{44.5}{c1}{가설}
+  {\textbullet\ 관측된 사실로 실패 원인 추론\\\textbullet\ 다른 설명과 불확실성 검토\\\textbullet\ 아직 못 찾은 실패 유형,\\\hspace*{1.6mm}성공 경계 근처를 우선}
+  {예) ``경로 중앙의 크고 높은 상자가\\그리퍼 접근을 막을 것''}
+\stepbox{84}{c1}{제안}
+  {\textbullet\ 허용 범위 안의 변경 축·값\\\textbullet\ 근거로 삼은 이전 실행 명시\\\textbullet\ 예상 실패 유형과 근거\\\textbullet\ 정해진 형식으로 출력}
+  {예) 장애물 폭·깊이 6\,cm,\\높이 17\,cm로 변경}
+\draw[step=c1] (41.3,69.5)--(44.2,69.5);
+\draw[step=c1] (80.8,69.5)--(83.7,69.5);
+% 후보 검증 (규칙 기반)
+\fill[white,rounded corners=1.3mm,drop shadow={opacity=0.12,shadow xshift=0.4mm,shadow yshift=-0.5mm}] (127,55) rectangle (163,84);
+\draw[cg!45,rounded corners=1.3mm,line width=0.5pt] (127,55) rectangle (163,84);
+\node[font=\figsans\footnotesize\bfseries,text=cg!90!black] at (145,81.2) {후보 검증·선택};
+\node[anchor=north west,text width=33.5mm,align=left,inner sep=0pt,
+  font=\figsans\fontsize{6.4}{7.9}\selectfont,text=black!80] at (128.5,77.3)
+  {\textbullet\ 값의 범위·형식\\\textbullet\ 근거 실행의 실재 여부\\\textbullet\ 변경 축 수·남은 예산\\\textbullet\ 기준 장면·중복 확인};
+\node[anchor=south west,text width=33.5mm,align=left,inner sep=0pt,
+  font=\figsans\fontsize{6}{7.2}\selectfont,text=cg] at (128.5,56.6) {범위 밖 후보는 실행 전 거부,\\통과한 후보만 실행};
+\draw[flow=c1] (120.3,69.5)--(126.6,69.5);
+% ================= 아래 단
+\fill[cgl,panel] (0,0) rectangle (30,46);
+\node[title,text=cg] at (15,41.5) {입력};
+\node[align=left,sub,anchor=north west,text width=27mm] at (2,36)
+  {\textbullet\ 작업 목표\\[1.8mm]\textbullet\ 환경 변경 범위\\[1.8mm]\textbullet\ 테스트 대상 로봇\\[1.8mm]\textbullet\ 실행 예산};
+\fill[c2l,panel] (36,0) rectangle (98,46);
+\node[badge=c2] at (41,41.5) {2}; \node[title,text=c2,anchor=west] at (44.5,41.5) {시뮬레이션 실행};
+\fill[c3l,panel] (104,0) rectangle (166,46);
+\node[badge=c3] at (109,41.5) {3}; \node[title,text=c3,anchor=west] at (112.5,41.5) {판정·자산화};
+\node[card=c2] (b1) at (67,30) {{\figsans\footnotesize\bfseries 환경 생성·시뮬레이터}\\[-0.3mm]{\figsans\scriptsize\color{cg}장면 그래프·MJCF·물리 계산}};
+\node[sutcard] (b2) at (67,9) {};
+\node[pill=cg] at (80.5,16) {테스트 대상};
+\agenticon{(52,10)}{cg!70}
+\node[title,anchor=west,text=cg!80!black] at (57,11.6) {로봇 Agent};
+\node[sub,anchor=west] at (57,7.6) {VLA 정책 / LLM Agent};
+\node[tiny=cg,anchor=west] at (49,3.6) {외부 제공 \textbullet\ 블랙박스 \textbullet\ 수정하지 않음};
+\draw[-{Stealth[length=1.8mm]},line width=0.8pt,draw=c2] (59,24.3)--(59,16.3);
+\draw[-{Stealth[length=1.8mm]},line width=0.8pt,draw=c2] (75,16.3)--(75,24.3);
+\node[tiny=c2,anchor=east] at (58.3,20.3) {카메라·상태};
+\node[tiny=c2,anchor=west] at (75.7,20.3) {동작 명령};
+\node[card=c3] (d1) at (135,30) {{\figsans\footnotesize\bfseries 3단계 판정}\\[-0.3mm]{\figsans\scriptsize\color{cg}유효성·목표·실패 유형}};
+\node[card=c3] (d2) at (135,9) {{\figsans\footnotesize\bfseries 회귀 테스트 자산}\\[-0.3mm]{\figsans\scriptsize\color{cg}영상·상태 기록·재실행}};
+\draw[-{Stealth[length=1.8mm]},line width=0.7pt,draw=c3!70] (d1)--(d2);
+% 흐름
+\draw[flow=cg] (15,46.3)--(15,51.7);
+\draw[flow=c1] (145,54.6)--(145,48)--(67,48)--(67,35.8);
+\draw[flow=c2] (b2.east)--(101,9)|-(d1.west);
+% 메모리·피드백
+\fill[cgl,panel] (0,-13) rectangle (166,-4);
+\node[anchor=west] at (40,-8.5) {{\figsans\footnotesize\bfseries 실행 이력 메모리}\quad
+  {\figsans\scriptsize\color{cg}성공·실패 행동 요약 \textbullet\ 측정된 실패 유형 \textbullet\ 예상과 실제의 차이}};
+\draw[flow=c3] (155,0)--(155,-3.6);
+\draw[flow=c1,dashed] (33,-3.6)--(33,54.6);
+\node[font=\figsans\scriptsize,text=c1,anchor=west] at (34,49) {행동 피드백};
+% 범례
+\agenticon{(4,-18.5)}{c1}
+\node[sub,anchor=west] at (8.5,-18.5) {본 시스템의 탐색 Agent (LLM)};
+\draw[rounded corners=0.8mm,fill=cgl,draw=cg!70,line width=0.8pt,dash pattern=on 2pt off 1.2pt] (55,-20.3) rectangle (62,-16.7);
+\node[sub,anchor=west] at (63.5,-18.5) {테스트 대상: 외부에서 제공된 로봇 Agent (블랙박스)};
+\draw[rounded corners=0.8mm,fill=white,draw=cg!60,line width=0.5pt] (127,-20.3) rectangle (134,-16.7);
+\node[sub,anchor=west] at (135.5,-18.5) {규칙 기반 프로그램};
+\end{tikzpicture}
+\caption{전체 처리 흐름. 핵심인 능동 실패 탐색(AFS)에서 탐색 Agent(LLM)는 판정된 실행 기록을 관측하고, 실패 가설을 세운 뒤, 다음 테스트 환경을 제안한다. 예시는 로봇팔 실험의 실제 기록이다. 제안은 규칙 기반 검증을 통과해야 실행된다. 점선의 로봇 Agent는 외부에서 제공된 테스트 대상으로, 본 시스템은 이를 수정하지 않고 생성된 환경에서 실행만 한다. 나머지는 규칙 기반 프로그램이다.}\label{fig:arch}
+\end{figure*}
+
+그림~\ref{fig:arch}와 같이 시스템은 환경을 제안하는 역할, 로봇을 실행하는 역할, 결과를 판정하는 역할을 분리한다.
+탐색기는 고정된 작업과 허용된 환경 변경 범위 안에서 테스트 후보만 만들고, 로봇은 주어진 장면에서
+원래 목표를 수행한다. 로봇 Agent(VLA 정책 또는 LLM Agent)는 외부에서 제공된 테스트 대상으로,
+본 시스템은 그 내부를 수정하지 않고 블랙박스로 실행하며 결과만 관측한다. 평가기는 실행 기록에서 목표 결과와 실패 유형을 측정하며, 저장소는 장면,
+작업 목표, 모델·소프트웨어 버전, 영상과 상태 기록을 함께 보존한다. 이 분리 덕분에 탐색기가
+예상한 실패가 판정에 섞이지 않고, 같은 사례를 다른 버전에서 다시 실행할 수 있다.
+
+\subsection*{3단계 판정}
+\begin{enumerate}
+\item \textbf{실행 유효성}: LLM 서비스·네트워크 중단, 물체가 겹친 채 시작한 장면, 불완전한 기록은 판정 불가로 분리하고 로봇 실패로 집계하지 않는다.
+\item \textbf{목표 결과}: 원래 작업의 성공 조건으로 PASS/FAIL을 판정한다. 로봇팔은 그릇이 접시 위에 놓였는지(LIBERO 기본 판정), 휴머노이드는 목표 반경 0.25\,m 안에서 1초 이상 머물렀는지를 본다.
+\item \textbf{실패 유형}: 접촉, 자세, 경로 계획 결과, 목표 영역 점유, 사람과의 거리 등 관측 규칙으로 대표 유형 1개를 부여한다(부록 B).
+\end{enumerate}

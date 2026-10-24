@@ -1,0 +1,71 @@
+\section{실험 결과}
+
+\subsection*{실패 발견율과 Random 대비 향상}
+\begin{table}[!t]
+\centering\footnotesize\setlength{\tabcolsep}{3pt}
+\caption{AFS와 Random의 실패 발견 결과}\label{tab:result}
+\begin{tabularx}{\linewidth}{@{}Ycccc@{}}
+\toprule
+& \multicolumn{2}{c}{실험 1: 로봇팔} & \multicolumn{2}{c}{실험 2: 휴머노이드} \\
+\cmidrule(lr){2-3}\cmidrule(lr){4-5}
+& AFS & Random & AFS & Random \\
+\midrule
+유효 시도 & 12 & 12 & 5 & 5 \\
+PASS / FAIL & 5 / 7 & 10 / 2 & 3 / 2 & 5 / 0 \\
+\textbf{실패 발견율 (FDR)} & \textbf{58.3\%} & 16.7\% & \textbf{40.0\%} & 0.0\% \\
+탐색 단계 FDR (초기 장면 제외) & 6/6 (100\%) & 1/6 (16.7\%) & 2/4 (50\%) & 0/4 (0\%) \\
+실패한 고유 환경 수 & 4 & 2 & 2 & 0 \\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+\begin{figure}[!t]
+\centering
+\begin{tikzpicture}
+\begin{axis}[
+  ybar, width=\linewidth, height=48mm, bar width=9pt,
+  ymin=0, ymax=125, ylabel={FDR (\%)}, ylabel style={font=\small},
+  symbolic x coords={A,B,C,D}, xtick=data,
+  xticklabels={{로봇팔\\전체},{로봇팔\\탐색 단계},{휴머노이드\\전체},{휴머노이드\\탐색 단계}},
+  xticklabel style={font=\scriptsize,align=center},
+  tick label style={font=\scriptsize},
+  nodes near coords, nodes near coords style={font=\scriptsize},
+  legend style={font=\scriptsize,at={(0.5,1)},anchor=north,draw=none,legend columns=2},
+  axis lines*=left, enlarge x limits=0.18]
+\addplot[fill=afs,draw=afs] coordinates {(A,58.3) (B,100) (C,40) (D,50)};
+\addplot[fill=rnd,draw=rnd] coordinates {(A,16.7) (B,16.7) (C,0) (D,0)};
+\legend{AFS, Random}
+\end{axis}
+\end{tikzpicture}
+\caption{방법별 실패 발견율. 탐색 단계는 공통 초기 장면을 제외한 적응적 선택 구간이다.}\label{fig:fdr}
+\end{figure}
+
+표~\ref{tab:result}와 그림~\ref{fig:fdr}에 결과를 정리하였다. 로봇팔 실험에서 AFS의 FDR은 58.3\%로 목표 30\%를 넘었고, Random(16.7\%) 대비 상대 향상률은
+$(58.3-16.7)/16.7 = 250\%$로 목표 20\%를 크게 웃돈다. 공통 초기 장면을 제외한 탐색 단계만 보면
+AFS는 6회 모두 실패를 찾았고 Random은 1회였다. 시드별로도 AFS는 3/2/2건, Random은 1/1/0건으로
+모든 시드에서 AFS가 더 많은 실패를 발견했다. 휴머노이드 실험에서도 AFS는 40\%, Random은 0\%로
+40퍼센트포인트 차이를 보였다. 사람 안전 이벤트는 AFS 4/5회에서 검출되었다.
+
+\subsection*{실패 유형 다양성}
+\begin{table*}[!t]
+\centering\small
+\caption{초기 정의 6종 기준 실패 유형 발견 현황}\label{tab:div}
+\begin{tabularx}{\textwidth}{@{}p{24mm}cp{26mm}Y@{}}
+\toprule
+유형 & 발견 & 실험 & 관측 근거 \\
+\midrule
+충돌 & \checkmark & 로봇팔 & 로봇–장애물 접촉 10.7--13.7초, 최대 접촉력 약 200--280\,N, 그릇 이동 1\,mm 미만 \\
+장애물 간섭 & \checkmark & 휴머노이드 & 장애물 부근에서 경로 계획이 반복 거절되며 정체 \\
+목표 위치 점유 & \checkmark & 휴머노이드 & 상자가 목표 영역을 점유, 목표 0.86\,m 앞에서 정체 \\
+작업자 안전 위험 & \checkmark & 휴머노이드 & 사람과 1\,m 이내 0.5초 이상 노출 또는 접촉, AFS 4/5회 \\
+도달 불가 & 후보 & 로봇팔·휴머노이드 & 그릇을 들어 운반했으나 접시 8.7\,cm 앞에서 미완료, 최종 목표점 경로 계획 반복 거절 \\
+인식 오류 & -- & -- & 가림·유사 물체 조건은 후속 실험 \\
+\midrule
+\multicolumn{4}{@{}l}{\textbf{합계: 6종 중 4종 발견 + 도달 불가 후보 1종 (목표 4종 달성)}} \\
+\bottomrule
+\end{tabularx}
+\end{table*}
+표~\ref{tab:div}는 초기 정의 6종 기준의 발견 현황이다. 작업자 안전 위험은 목표 달성 여부와 무관하게 안전 요구사항을 위반한 실행을 실패 사례로 본다.
+실제 실행에서는 초기 6종으로 설명하기 어려운 행동 실패도 관측되어, 넘어짐·이동 정체·물체 조작
+실패·목표 완료 실패와 시스템 연동 문제 2종(최종 목표점 경로 계획 거절, 중간 목표 반복 도착)을 더한 12종 체계로 확장하였다(부록 B).
+이 확장 체계로는 목표 완료 실패, 물체 조작 실패, 중간 목표 반복을 추가로 관측하였다.
