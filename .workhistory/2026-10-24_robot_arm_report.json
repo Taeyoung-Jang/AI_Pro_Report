@@ -1,0 +1,14 @@
+{
+  "request": "Reflect completed robot-arm analysis in AI_Pro_Report",
+  "modified": [
+    "report.tex",
+    "README.md"
+  ],
+  "evidence": "evidence/robot_arm_free_pair_20261024",
+  "attempt_yield": {
+    "afs": "7/12",
+    "random": "3/12"
+  },
+  "original_results_modified": false,
+  "live_calls": 0
+}

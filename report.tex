@@ -1,5 +1,5 @@
 % !TeX program = xelatex
-% 한글 보고서 초안. 각 절을 한 쪽으로 편집하는 10쪽 구성이다.
+% 한글 보고서. 기존 10쪽 구성에 로봇팔 완료 실험과 상세 분석을 추가했다.
 % 실제 쪽 수와 넘침은 PDF 빌드 후 확인해야 한다.
 \documentclass[a4paper,11pt]{article}
 \usepackage{kotex}
@@ -29,7 +29,7 @@
 \pagestyle{fancy}
 \fancyhf{}
 \fancyhead[L]{\small Physical AI 작업 수행 검증 및 회귀 테스트 자동화}
-\fancyhead[R]{\small 보고서 v0.2}
+\fancyhead[R]{\small 보고서 v0.3}
 \fancyfoot[C]{\small \thepage\,/\,\pageref{LastPage}}
 \newcommand{\pageheading}[2]{\section{#1}\textcolor{accent}{\textbf{#2}}\par}
 \newcommand{\draftnote}[1]{\par\begingroup\small\color{accent}\textbf{제출 전 보완:} #1\par\endgroup}
@@ -50,7 +50,7 @@
   \vspace{6pt}
   {\large 행동 피드백 기반 실패 환경 탐색과 G1/MuJoCo 검증 사례\par}
   \vspace{5pt}
-  {\small 작성 기준: 2026년 10월 23일 \quad | \quad 완료 개발 비교 반영 v0.2}
+  {\small 작성 기준: 2026년 10월 24일 \quad | \quad G1·로봇팔 완료 개발 비교 반영 v0.3}
 \end{center}
 
 \pageheading{과제 개요와 문제 정의}{환경 변화에 따른 작업 실패를 자동으로 찾고 재검증 가능한 자산으로 남긴다.}
@@ -91,6 +91,8 @@ Physical AI는 물체와 장애물이 있는 공간에서 행동하므로, 동�
 10월 23일 완료한 고정 기준 장면 비교에서 AFS는 유효 5회 중 2 FAIL(40\%),
 Random은 유효 5회 중 0 FAIL(0\%)을 기록했다. 차이는 40퍼센트포인트이며,
 Random 1회 제외와 단일 seed의 소규모 개발 비교라는 한계를 함께 보고한다.
+별도 로봇팔 실험에서는 취소 포함 각 12개 슬롯에서 AFS 7 FAIL, Random 3 FAIL을
+발견했다(58.33\% 대 25.00\%). 이 결과는 제11--12절에 별도로 분석하며 G1 결과와 합산하지 않는다.
 
 \evidence{초기 기획서 [A], 환경 변형 공간 구현 [B], 개발 실행 결과 [C, D], 완료 비교 [I].}
 
@@ -514,7 +516,7 @@ Random 대비 20\% 향상 & 40퍼센트포인트 차이 관측. Random 0\%라 �
 방식을 사전에 정하고, 유효 예산뿐 아니라 변경 개수 비중과 비용도 공개해야 한다.
 완료 비교를 재초기화하거나 제외를 FAIL로 바꿔 성과를 보정하지 않는다.
 
-현재 결론은 한 개발 seed에서 AFS가 Random보다 목표 실패 장면을 2건 더 찾았다는
+G1 비교의 결론은 한 개발 seed에서 AFS가 Random보다 목표 실패 장면을 2건 더 찾았다는
 것이다. 실패 장면 수와 유형 수를 구분하고, 목표 PASS와 사람 안전 이벤트도 별도로
 보고한다. 통계적 우위, 근본 원인과 실제 하드웨어의 한계는 이 결과로 확정하지 않는다.
 
@@ -543,5 +545,113 @@ Random 대비 20\% 향상 & 40퍼센트포인트 차이 관측. Random 0\%라 �
 최종 \path{reports/20261023T114142_160351Z/summary.json} 및 method별 attempts·proposals.
 \item[{[J]}] 실패·영상 분석: \path{scene2test/development/matched_local_failure_explanation_20261023_v1/analysis.json}.
 \end{description}}
+
+
+\clearpage
+\pageheading{독립 두 장애물 로봇팔 실험}{취소까지 포함한 동일 시도 예산에서 실패 발견 수율을 비교한다.}
+
+\subsection*{실험 조건과 보고 지표}
+G1과 별도로, 고정 GR00T-N1.7-LIBERO 정책으로 검은 bowl을 plate에 옮기는
+native LIBERO/MuJoCo 작업을 시험했다. 로봇 정책과 성공 조건은 변경하지 않았으며,
+실행당 최대 300 step, action chunk 8을 유지했다. 환경은 bowl·plate XY 4축과
+독립된 두 정적 상자의 XY·폭·깊이·높이·yaw 각 6축, 합계 16축이다.
+두 상자는 정해진 서로 다른 테이블 영역 안에서 독립 배치되며 전체 작업 공간의
+무제한 배치는 아니다. 잘못된 초기 겹침은 FAIL로 인정하지 않는다.
+탐색 seed 727/733/739 각각 방법당 4슬롯, 총 방법당 12슬롯을 배정했다.
+처음 2슬롯/seed는 공통 Uniform 후보를 별도 실행하는 bootstrap이며,
+이후 AFS는 자기 seed의 이전 AFS 기록만 이용하고 Random은 공통 범위에서 균등 추출한다.
+
+사용자 요청에 따라 \textbf{전체 시도당 실패 발견률 = native FAIL 수 / 소비된 전체 슬롯 수}를
+보고 지표로 추가한다. 첫 AFS 슬롯의 정책 로딩 취소도 분모에 포함하되,
+그 결과는 INCONCLUSIVE로 유지한다. 취소를 PASS나 로봇 FAIL로 바꾸지 않는다.
+이 지표는 운영상 예산당 발견 수율이며, 완료 실행의 실패 확률과 다르다.
+결과 확인 후 추가한 보고 지표로서 사전 등록 지표라고 주장하지 않는다.
+
+{\small
+\begin{tabularx}{\linewidth}{@{}Yrr@{}}
+\toprule
+완료 결과 & AFS & Random \\
+\midrule
+전체 시도 슬롯 (취소 포함) & 12 & 12 \\
+유효 실행 / 취소·제외 & 11 / 1 & 12 / 0 \\
+native PASS / FAIL & 4 / 7 & 9 / 3 \\
+전체 시도 기준 발견률 & \textbf{58.33\%} & \textbf{25.00\%} \\
+유효 실행 기준 기존 FDR & 63.64\% & 25.00\% \\
+정확히 다른 실패 설정 / 재확인 실패 & 7 / 0 & 3 / 0 \\
+미완료 pending & 0 & 0 \\
+\bottomrule
+\end{tabularx}}
+
+전체 시도 기준 차이는 \textbf{33.33퍼센트포인트}, 비율은 \textbf{2.33배},
+상대 증가는 \textbf{133.33\%}다. 기존 JSON의 \code{relative_fdr_gain=null}은
+유효 수 일치를 요구하는 계약에 따른 값으로 보존한다. 위 상대 증가는 별도 전체
+시도 지표이며 기존 필드를 덮어쓰지 않는다. 전체 슬롯 처리는 완료됐으나 유효 수는
+다르다. 숫자를 맞추기 위한 추가 실행, 제외 대체나 Random 결과 삭제는 하지 않았다.
+
+\subsection*{탐색 단계 및 seed별 결과}
+bootstrap은 AFS 6슬롯 중 5유효·1FAIL·1취소, Random 6유효·1FAIL이었다.
+이후 선택 단계의 같은 6슬롯에서 \textbf{AFS 6FAIL, Random 2FAIL}을 발견했다.
+bootstrap을 LLM 추론의 성과로 간주하지 않는다. 전체 슬롯 기준 seed별 실패 수는
+727에서 2 대 0(AFS 취소 1), 733에서 3 대 2, 739에서 2 대 1이다.
+세 seed 모두 AFS 발견 수가 많지만 적응형 이력 의존성과 작은 표본 때문에
+통계적 우월성을 선언하지 않는다. 이 결과는 고정 개발 도메인의 관측 성과다.
+
+\evidence{원본: \path{scene2test/experiments/robot_arm_libero/free_pair_continuation_v5/}.
+소형 분석 사본: 본 저장소 \path{evidence/robot_arm_free_pair_20261024/}.}
+
+\clearpage
+\pageheading{로봇팔 실패 증거와 추가 분석}{환경 설정의 다양성과 실패 원인의 다양성을 구분한다.}
+
+\subsection*{기록·환경 선택 검증}
+동결 소스·모델·상속 취소 기록과 24개 슬롯 증거 해시를 검증했다. 유효 23개 실행의
+전체 물리 기록에서 접촉·움직임 측정을 재계산해 저장 측정값과 일치함을 확인했다.
+6개 AFS 요청의 자기 seed 이전 이력 및 응답--실행 후보 연결, Uniform 후보의 동결
+추출 규칙도 검증했다. 분석 과정의 새 API·로봇 실행과 원본 결과 변경은 없다.
+
+AFS 유효 11개와 Random 12개에는 방법 내 정확한 16축 설정 중복이 없었다.
+AFS 실패 7개는 bootstrap 1개와 신규 선택 6개, Random 3개는 bootstrap 1개와 신규 선택
+2개다. 공통 bootstrap 실패가 양쪽에 포함되므로 이를 합쳐 총 10개 고유 환경이라 하지 않는다.
+정확한 설정 차이가 곧 다른 실패 원인을 뜻하지도 않는다.
+
+AFS 선택 6개 모두 box1 폭 6cm, box2 깊이 6cm를 골랐다. box1 깊이·box2 폭은 각각
+5/6개가 상한 6cm이며, 두 상자 높이는 5개 환경에서 20cm, 나머지 1개에서 19cm였다.
+큰 장애물 선택 전략에 집중하므로 LLM 고유 추론의 효과와 단순 최대 크기 휴리스틱의
+효과를 분리할 수 없다. 두 상자 각각의 기여나 상호작용도 제거 대조 없이 확정하지 않는다.
+
+\subsection*{실패 행동과 접촉의 의미}
+AFS 실패는 물체 정체 6개와 목표 근처 미완료 1개, Random은 정체 3개였다.
+정체 9개 실행 모두 안정화 1초 이후 bowl 몸체 원점의 상승·XY 이동이 1mm 미만이며,
+로봇--장애물 접촉은 13.354--13.860초, bowl--장애물 접촉은 0초였다.
+접근 중 장시간 접촉과 정체가 함께 관측되지만 파지 불능·관절 제한·인식 오류나
+충돌의 인과성까지 확정한 것은 아니다.
+
+AFS \code{seed_727/afs/attempt_00003}에서는 최대 상승 22.65cm, XY 이동 26.70cm,
+plate 몸체 원점과 최소 XY 간격 3.20cm, 최종 간격 3.22cm가 관측됐다.
+로봇 접촉 7.614초·bowl 접촉 1.146초 이후 300 step에서 native FAIL이었다.
+저장 영상의 1fps 모음을 직접 검토해 물체의 목표 접시 근처 이동을 확인했다.
+전체 프레임의 정밀 파지 판독은 수행하지 않았으며, XY 근접은 native 성공의 대체 조건이 아니다.
+파지 해제 실패·놓침·배치 방해의 원인 판정은 보류한다. 프레임 시각은 영상 시간이며
+시뮬레이션 시간과 동일하다고 가정하지 않는다.
+
+실패 전부에 로봇 접촉이 있었지만 성공에도 AFS 1/4, Random 3/9에서 접촉이 있었다.
+접촉 자체는 작업 실패 판정이 아니다. 유효 실행에 테이블 아래 낙하는 관측되지 않았으나
+전체 안전성을 보증하지 않으며 취소 슬롯의 물리 측정 부재를 안전 사건 0으로 바꾸지 않는다.
+
+\subsection*{비용과 최종 해석}
+AFS 제어 step 합계는 2,493, Random은 1,801이다. AFS 제안 6회는 알려진 입력
+160,298 / 출력 17,936토큰을 사용했다. 슬롯 수가 같아도 총 계산·API·시간 비용은 다르다.
+이전 통로 실험의 AFS 2FAIL보다 이번 7FAIL이 많고, 이전 10축 실험과 실패 수는 같지만
+방법 내 고유 실패 설정은 4개에서 7개로 늘었다. 도메인·seed·예산 차이 때문에
+통제된 알고리즘 개선율로 제시하거나 G1 결과와 합산하지 않는다.
+
+\textbf{결론:} 취소 포함 각 12슬롯에서 AFS는 Random보다 4개 많은 실패 환경을 발견했다.
+개발 도메인의 발견 수율 이점은 관측됐지만 7개 서로 다른 원인이나 통계적 우월성은
+입증되지 않았다. 후속 검증은 별도 고정 seed·동일 예산과 최대 크기 휴리스틱 기준선,
+원인 확인은 장애물 개별 제거와 같은 설정 반복을 별도 설계하는 것이 적절하다.
+현재 완료 결과에는 후속 실행을 사후 합산하지 않는다.
+
+\evidence{전체 분석 \path{evidence/robot_arm_free_pair_20261024/analysis.json},
+실행별 \path{episodes.csv}, 영상 모음 \path{near_goal_frames.jpg}, 사본 해시 \path{manifest.json}.
+원본 영상·전체 물리 기록은 외부 원본 경로에 보존한다.}
 
 \end{document}

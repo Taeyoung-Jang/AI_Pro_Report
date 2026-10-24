@@ -1,0 +1,1797 @@
+{
+  "root": "/workspace/g1_failure/src/physical_ai_test_gen/scene2test/experiments/robot_arm_libero/free_pair_continuation_v5",
+  "verification": "root sources/models/inherited artifacts; all 24 evidence seals; all 23 full-physics measurements recomputed; six AFS own-seed request/response bindings and all uniform candidates verified",
+  "summary": {
+    "totals": {
+      "afs": {
+        "attempts": 12,
+        "valid": 11,
+        "pass": 4,
+        "fail": 7,
+        "excluded": 1,
+        "pending": 0,
+        "afs_requests": 6,
+        "known_input_tokens": 160298,
+        "known_output_tokens": 17936,
+        "unknown_usage_requests": 0,
+        "contact_pass": 1,
+        "contact_fail": 7,
+        "unknown_measurement": 0,
+        "unique_failing_environment_settings": 7,
+        "recheck_failures": 0,
+        "failure_motion_patterns": {
+          "little_object_motion": 6,
+          "object_near_goal_native_task_incomplete": 1
+        },
+        "unique_environment_settings": 11,
+        "repeated_environment_settings": 0,
+        "first_failure_attempt_by_seed": {
+          "727": 3,
+          "733": 1,
+          "739": 3
+        },
+        "fdr": 0.6363636363636364
+      },
+      "random": {
+        "attempts": 12,
+        "valid": 12,
+        "pass": 9,
+        "fail": 3,
+        "excluded": 0,
+        "pending": 0,
+        "afs_requests": 0,
+        "known_input_tokens": 0,
+        "known_output_tokens": 0,
+        "unknown_usage_requests": 0,
+        "contact_pass": 3,
+        "contact_fail": 3,
+        "unknown_measurement": 0,
+        "unique_failing_environment_settings": 3,
+        "recheck_failures": 0,
+        "failure_motion_patterns": {
+          "little_object_motion": 3
+        },
+        "unique_environment_settings": 12,
+        "repeated_environment_settings": 0,
+        "first_failure_attempt_by_seed": {
+          "727": null,
+          "733": 1,
+          "739": 4
+        },
+        "fdr": 0.25
+      }
+    },
+    "equal_valid_budget_complete": false,
+    "attempt_budget_complete": true,
+    "recovery": {
+      "version": "pre-rollout-cancel-continuation-v1",
+      "source": "/workspace/g1_failure/src/physical_ai_test_gen/scene2test/experiments/robot_arm_libero/free_pair_comparison_v4",
+      "excluded_slots": {
+        "seed_727/afs/attempt_00000": "f0f488cc805d1556b1f49cfb707fec4692b1af49bbedd0a635e816455ef2e3b3"
+      },
+      "new_attempt_cap": 23,
+      "source_changes": [
+        "/workspace/g1_failure/src/physical_ai_test_gen/scene2test/src/robot_arm/free_pair_search.py"
+      ],
+      "comparison_limit": "One AFS slot excluded; equal-valid Gain unavailable without a separately approved design."
+    },
+    "relative_fdr_gain": null,
+    "statistical_superiority_established": false,
+    "scope": "Development pilot, 16 shared axes with two independent rotated boxes. Contact is separate; no causal failure-family or transport-avoidance claim."
+  },
+  "attempt_denominator_metrics": {
+    "afs": {
+      "attempt_rate": 0.5833333333333334,
+      "steps": 2493,
+      "by_seed": {
+        "727": {
+          "PASS": 1,
+          "FAIL": 2
+        },
+        "733": {
+          "PASS": 1,
+          "FAIL": 3
+        },
+        "739": {
+          "PASS": 2,
+          "FAIL": 2
+        }
+      },
+      "by_segment": {
+        "bootstrap": {
+          "attempts": 6,
+          "valid": 5,
+          "fail": 1
+        },
+        "selected": {
+          "attempts": 6,
+          "valid": 6,
+          "fail": 6
+        }
+      },
+      "box1_upper_bound_counts": {
+        "width": 6,
+        "depth": 5,
+        "height": 5
+      },
+      "box2_upper_bound_counts": {
+        "width": 5,
+        "depth": 6,
+        "height": 5
+      },
+      "failing_pair_normalized_rms_distance": {
+        "min": 0.0930802968448483,
+        "max": 0.6034290486221643,
+        "definition": "RMS across 16 axes, each divided by frozen domain span; exact settings, not causal families"
+      }
+    },
+    "random": {
+      "attempt_rate": 0.25,
+      "steps": 1801,
+      "by_seed": {
+        "727": {
+          "PASS": 4,
+          "FAIL": 0
+        },
+        "733": {
+          "PASS": 2,
+          "FAIL": 2
+        },
+        "739": {
+          "PASS": 3,
+          "FAIL": 1
+        }
+      },
+      "by_segment": {
+        "bootstrap": {
+          "attempts": 6,
+          "valid": 6,
+          "fail": 1
+        },
+        "selected": {
+          "attempts": 6,
+          "valid": 6,
+          "fail": 2
+        }
+      },
+      "box1_upper_bound_counts": {
+        "width": 0,
+        "depth": 0,
+        "height": 0
+      },
+      "box2_upper_bound_counts": {
+        "width": 0,
+        "depth": 0,
+        "height": 0
+      },
+      "failing_pair_normalized_rms_distance": {
+        "min": 0.34523774013542236,
+        "max": 0.38883828880599375,
+        "definition": "RMS across 16 axes, each divided by frozen domain span; exact settings, not causal families"
+      }
+    }
+  },
+  "attempt_rate_difference": 0.33333333333333337,
+  "attempt_relative_gain": 1.3333333333333335,
+  "episodes": [
+    {
+      "case": "seed_727/afs/attempt_00000",
+      "method": "afs",
+      "seed": 727,
+      "index": 0,
+      "status": "INCONCLUSIVE",
+      "outcome": null,
+      "parameters": {
+        "bowl_x": -0.06491940218547876,
+        "bowl_y": -0.003821085890437963,
+        "plate_x": 0.07361113361087866,
+        "plate_y": 0.19368812178477904,
+        "box1_x": -0.2116633791315239,
+        "box1_y": 0.11016013270484723,
+        "box1_width": 0.024555464117168167,
+        "box1_depth": 0.03359923772487038,
+        "box1_height": 0.15885076699995176,
+        "box1_yaw": -0.7709194502021157,
+        "box2_x": -0.11309982328419908,
+        "box2_y": 0.2918375547241563,
+        "box2_width": 0.028428930019134702,
+        "box2_depth": 0.05319254713457107,
+        "box2_height": 0.18460565071465326,
+        "box2_yaw": 0.6493431507304237
+      }
+    },
+    {
+      "case": "seed_727/afs/attempt_00001",
+      "method": "afs",
+      "seed": 727,
+      "index": 1,
+      "status": "VALID",
+      "outcome": "PASS",
+      "parameters": {
+        "bowl_x": -0.06926559207811905,
+        "bowl_y": 0.009690274521171006,
+        "plate_x": 0.08284696680345485,
+        "plate_y": 0.19930475627444308,
+        "box1_x": -0.21540414052614887,
+        "box1_y": 0.1075067601018312,
+        "box1_width": 0.025745728143309818,
+        "box1_depth": 0.05343876081646362,
+        "box1_height": 0.1714119839770739,
+        "box1_yaw": -1.530489499557438,
+        "box2_x": -0.08613181079080545,
+        "box2_y": 0.2847058689617329,
+        "box2_width": 0.038367932897738655,
+        "box2_depth": 0.024291272192004963,
+        "box2_height": 0.17734321423078278,
+        "box2_yaw": -1.4570430607929379
+      },
+      "measurement": {
+        "status": "COMPLETE",
+        "physics_samples": 2376,
+        "duration_s": 4.749999999999699,
+        "contact": true,
+        "contact_kinds": [
+          "robot_obstacle"
+        ],
+        "contact_duration_s": {
+          "robot_obstacle": 0.1360000000000001,
+          "bowl_obstacle": 0.0
+        },
+        "peak_obstacle_force_n": 243.38622292754346,
+        "fell_below_table": false,
+        "longest_below_table_s": 0.0,
+        "min_bowl_plate_xy_distance_m": 0.00954950705236052,
+        "cause": "UNCONFIRMED",
+        "claim": "Observed contact/below-surface events only; grasp/drop/avoidance cause unconfirmed.",
+        "motion_contract": {
+          "version": "object-motion-observation-v1",
+          "settle_s": 1.0,
+          "rise_m": 0.03,
+          "movement_m": 0.05,
+          "near_goal_center_xy_m": 0.05,
+          "little_motion_m": 0.02
+        },
+        "motion_observations": {
+          "status": "COMPLETE",
+          "pattern": "native_task_completed",
+          "max_rise_after_settle_m": 0.1580459423108288,
+          "max_xy_movement_after_settle_m": 0.24175468567872124,
+          "min_goal_center_xy_gap_after_settle_m": 0.00954950705236052,
+          "first_obstacle_contact_elapsed_s": 2.0259999999999985,
+          "rise_ge_3cm": true,
+          "movement_ge_5cm": true,
+          "cause": "UNCONFIRMED",
+          "claim": "Motion heuristics only; no confirmed grasp, drop, avoidance or causal failure type."
+        }
+      },
+      "steps": 95,
+      "final_gap_m": 0.00969946131222479,
+      "videos": [
+        "seed_727/afs/attempt_00001/videos/257b95fe-63ea-4cc9-856b-61811f88cf96_s1.mp4"
+      ]
+    },
+    {
+      "case": "seed_727/afs/attempt_00002",
+      "method": "afs",
+      "seed": 727,
+      "index": 2,
+      "status": "VALID",
+      "outcome": "FAIL",
+      "parameters": {
+        "bowl_x": -0.1,
+        "bowl_y": -0.01,
+        "plate_x": 0.1,
+        "plate_y": 0.24,
+        "box1_x": -0.0075,
+        "box1_y": 0.11,
+        "box1_width": 0.06,
+        "box1_depth": 0.06,
+        "box1_height": 0.2,
+        "box1_yaw": 0,
+        "box2_x": -0.075,
+        "box2_y": 0.24,
+        "box2_width": 0.06,
+        "box2_depth": 0.06,
+        "box2_height": 0.2,
+        "box2_yaw": 0
+      },
+      "measurement": {
+        "status": "COMPLETE",
+        "physics_samples": 7501,
+        "duration_s": 15.000000000001679,
+        "contact": true,
+        "contact_kinds": [
+          "robot_obstacle"
+        ],
+        "contact_duration_s": {
+          "robot_obstacle": 13.422000000001152,
+          "bowl_obstacle": 0.0
+        },
+        "peak_obstacle_force_n": 390.4711118812306,
+        "fell_below_table": false,
+        "longest_below_table_s": 0.0,
+        "min_bowl_plate_xy_distance_m": 0.32015621187164245,
+        "cause": "UNCONFIRMED",
+        "claim": "Observed contact/below-surface events only; grasp/drop/avoidance cause unconfirmed.",
+        "motion_contract": {
+          "version": "object-motion-observation-v1",
+          "settle_s": 1.0,
+          "rise_m": 0.03,
+          "movement_m": 0.05,
+          "near_goal_center_xy_m": 0.05,
+          "little_motion_m": 0.02
+        },
+        "motion_observations": {
+          "status": "COMPLETE",
+          "pattern": "little_object_motion",
+          "max_rise_after_settle_m": 6.374900607397649e-13,
+          "max_xy_movement_after_settle_m": 6.938893903907228e-17,
+          "min_goal_center_xy_gap_after_settle_m": 0.32018303722848307,
+          "first_obstacle_contact_elapsed_s": 1.1080000000000008,
+          "rise_ge_3cm": false,
+          "movement_ge_5cm": false,
+          "cause": "UNCONFIRMED",
+          "claim": "Motion heuristics only; no confirmed grasp, drop, avoidance or causal failure type."
+        }
+      },
+      "steps": 300,
+      "final_gap_m": 0.3201830372284831,
+      "videos": [
+        "seed_727/afs/attempt_00002/videos/ae6d764d-ec6b-4639-b21e-c8e97ed1d88f_s0.mp4"
+      ]
+    },
+    {
+      "case": "seed_727/afs/attempt_00003",
+      "method": "afs",
+      "seed": 727,
+      "index": 3,
+      "status": "VALID",
+      "outcome": "FAIL",
+      "parameters": {
+        "bowl_x": -0.09,
+        "bowl_y": -0.005,
+        "plate_x": 0.09,
+        "plate_y": 0.23,
+        "box1_x": -0.015,
+        "box1_y": 0.115,
+        "box1_width": 0.06,
+        "box1_depth": 0.055,
+        "box1_height": 0.2,
+        "box1_yaw": 0.35,
+        "box2_x": -0.095,
+        "box2_y": 0.275,
+        "box2_width": 0.055,
+        "box2_depth": 0.06,
+        "box2_height": 0.2,
+        "box2_yaw": -0.45
+      },
+      "measurement": {
+        "status": "COMPLETE",
+        "physics_samples": 7501,
+        "duration_s": 15.000000000001679,
+        "contact": true,
+        "contact_kinds": [
+          "bowl_obstacle",
+          "robot_obstacle"
+        ],
+        "contact_duration_s": {
+          "robot_obstacle": 7.6139999999993835,
+          "bowl_obstacle": 1.1460000000000008
+        },
+        "peak_obstacle_force_n": 401.9285573817232,
+        "fell_below_table": false,
+        "longest_below_table_s": 0.0,
+        "min_bowl_plate_xy_distance_m": 0.03203543707148781,
+        "cause": "UNCONFIRMED",
+        "claim": "Observed contact/below-surface events only; grasp/drop/avoidance cause unconfirmed.",
+        "motion_contract": {
+          "version": "object-motion-observation-v1",
+          "settle_s": 1.0,
+          "rise_m": 0.03,
+          "movement_m": 0.05,
+          "near_goal_center_xy_m": 0.05,
+          "little_motion_m": 0.02
+        },
+        "motion_observations": {
+          "status": "COMPLETE",
+          "pattern": "object_near_goal_native_task_incomplete",
+          "max_rise_after_settle_m": 0.22651170227308148,
+          "max_xy_movement_after_settle_m": 0.26700730333111544,
+          "min_goal_center_xy_gap_after_settle_m": 0.03203543707148781,
+          "first_obstacle_contact_elapsed_s": 1.1280000000000008,
+          "rise_ge_3cm": true,
+          "movement_ge_5cm": true,
+          "cause": "UNCONFIRMED",
+          "claim": "Motion heuristics only; no confirmed grasp, drop, avoidance or causal failure type."
+        }
+      },
+      "steps": 300,
+      "final_gap_m": 0.03217260379979343,
+      "videos": [
+        "seed_727/afs/attempt_00003/videos/42f70c2c-60bc-4da3-9396-c22af55bd29a_s0.mp4"
+      ]
+    },
+    {
+      "case": "seed_727/random/attempt_00000",
+      "method": "random",
+      "seed": 727,
+      "index": 0,
+      "status": "VALID",
+      "outcome": "PASS",
+      "parameters": {
+        "bowl_x": -0.06491940218547876,
+        "bowl_y": -0.003821085890437963,
+        "plate_x": 0.07361113361087866,
+        "plate_y": 0.19368812178477904,
+        "box1_x": -0.2116633791315239,
+        "box1_y": 0.11016013270484723,
+        "box1_width": 0.024555464117168167,
+        "box1_depth": 0.03359923772487038,
+        "box1_height": 0.15885076699995176,
+        "box1_yaw": -0.7709194502021157,
+        "box2_x": -0.11309982328419908,
+        "box2_y": 0.2918375547241563,
+        "box2_width": 0.028428930019134702,
+        "box2_depth": 0.05319254713457107,
+        "box2_height": 0.18460565071465326,
+        "box2_yaw": 0.6493431507304237
+      },
+      "measurement": {
+        "status": "COMPLETE",
+        "physics_samples": 2401,
+        "duration_s": 4.799999999999693,
+        "contact": true,
+        "contact_kinds": [
+          "robot_obstacle"
+        ],
+        "contact_duration_s": {
+          "robot_obstacle": 0.030000000000000013,
+          "bowl_obstacle": 0.0
+        },
+        "peak_obstacle_force_n": 71.10998545407901,
+        "fell_below_table": false,
+        "longest_below_table_s": 0.0,
+        "min_bowl_plate_xy_distance_m": 0.016380528346407006,
+        "cause": "UNCONFIRMED",
+        "claim": "Observed contact/below-surface events only; grasp/drop/avoidance cause unconfirmed.",
+        "motion_contract": {
+          "version": "object-motion-observation-v1",
+          "settle_s": 1.0,
+          "rise_m": 0.03,
+          "movement_m": 0.05,
+          "near_goal_center_xy_m": 0.05,
+          "little_motion_m": 0.02
+        },
+        "motion_observations": {
+          "status": "COMPLETE",
+          "pattern": "native_task_completed",
+          "max_rise_after_settle_m": 0.1781870102025035,
+          "max_xy_movement_after_settle_m": 0.2413839012091712,
+          "min_goal_center_xy_gap_after_settle_m": 0.016380528346407006,
+          "first_obstacle_contact_elapsed_s": 2.1799999999999815,
+          "rise_ge_3cm": true,
+          "movement_ge_5cm": true,
+          "cause": "UNCONFIRMED",
+          "claim": "Motion heuristics only; no confirmed grasp, drop, avoidance or causal failure type."
+        }
+      },
+      "steps": 96,
+      "final_gap_m": 0.017217014474302263,
+      "videos": [
+        "seed_727/random/attempt_00000/videos/b218903a-a0ad-4b87-b11b-8a9e81ec899c_s1.mp4"
+      ]
+    },
+    {
+      "case": "seed_727/random/attempt_00001",
+      "method": "random",
+      "seed": 727,
+      "index": 1,
+      "status": "VALID",
+      "outcome": "PASS",
+      "parameters": {
+        "bowl_x": -0.06926559207811905,
+        "bowl_y": 0.009690274521171006,
+        "plate_x": 0.08284696680345485,
+        "plate_y": 0.19930475627444308,
+        "box1_x": -0.21540414052614887,
+        "box1_y": 0.1075067601018312,
+        "box1_width": 0.025745728143309818,
+        "box1_depth": 0.05343876081646362,
+        "box1_height": 0.1714119839770739,
+        "box1_yaw": -1.530489499557438,
+        "box2_x": -0.08613181079080545,
+        "box2_y": 0.2847058689617329,
+        "box2_width": 0.038367932897738655,
+        "box2_depth": 0.024291272192004963,
+        "box2_height": 0.17734321423078278,
+        "box2_yaw": -1.4570430607929379
+      },
+      "measurement": {
+        "status": "COMPLETE",
+        "physics_samples": 2376,
+        "duration_s": 4.749999999999699,
+        "contact": true,
+        "contact_kinds": [
+          "robot_obstacle"
+        ],
+        "contact_duration_s": {
+          "robot_obstacle": 0.1360000000000001,
+          "bowl_obstacle": 0.0
+        },
+        "peak_obstacle_force_n": 243.38622292754346,
+        "fell_below_table": false,
+        "longest_below_table_s": 0.0,
+        "min_bowl_plate_xy_distance_m": 0.00954950705236052,
+        "cause": "UNCONFIRMED",
+        "claim": "Observed contact/below-surface events only; grasp/drop/avoidance cause unconfirmed.",
+        "motion_contract": {
+          "version": "object-motion-observation-v1",
+          "settle_s": 1.0,
+          "rise_m": 0.03,
+          "movement_m": 0.05,
+          "near_goal_center_xy_m": 0.05,
+          "little_motion_m": 0.02
+        },
+        "motion_observations": {
+          "status": "COMPLETE",
+          "pattern": "native_task_completed",
+          "max_rise_after_settle_m": 0.1580459423108288,
+          "max_xy_movement_after_settle_m": 0.24175468567872124,
+          "min_goal_center_xy_gap_after_settle_m": 0.00954950705236052,
+          "first_obstacle_contact_elapsed_s": 2.0259999999999985,
+          "rise_ge_3cm": true,
+          "movement_ge_5cm": true,
+          "cause": "UNCONFIRMED",
+          "claim": "Motion heuristics only; no confirmed grasp, drop, avoidance or causal failure type."
+        }
+      },
+      "steps": 95,
+      "final_gap_m": 0.00969946131222479,
+      "videos": [
+        "seed_727/random/attempt_00001/videos/241972ae-7d35-413b-a855-ebd27c6f7813_s1.mp4"
+      ]
+    },
+    {
+      "case": "seed_727/random/attempt_00002",
+      "method": "random",
+      "seed": 727,
+      "index": 2,
+      "status": "VALID",
+      "outcome": "PASS",
+      "parameters": {
+        "bowl_x": -0.06426459376621617,
+        "bowl_y": 0.007161314009138215,
+        "plate_x": 0.08778434727165002,
+        "plate_y": 0.201807109820498,
+        "box1_x": -0.013994939165250408,
+        "box1_y": 0.11557260186952395,
+        "box1_width": 0.03809610015178945,
+        "box1_depth": 0.024874346688763364,
+        "box1_height": 0.06752179247709682,
+        "box1_yaw": -1.2898756079135347,
+        "box2_x": -0.11142225507808154,
+        "box2_y": 0.2807604557926185,
+        "box2_width": 0.02499721700497997,
+        "box2_depth": 0.05232166194526511,
+        "box2_height": 0.032376246380459016,
+        "box2_yaw": -1.353305368339993
+      },
+      "measurement": {
+        "status": "COMPLETE",
+        "physics_samples": 2401,
+        "duration_s": 4.799999999999693,
+        "contact": false,
+        "contact_kinds": [],
+        "contact_duration_s": {
+          "robot_obstacle": 0.0,
+          "bowl_obstacle": 0.0
+        },
+        "peak_obstacle_force_n": 0.0,
+        "fell_below_table": false,
+        "longest_below_table_s": 0.0,
+        "min_bowl_plate_xy_distance_m": 0.006145715200972601,
+        "cause": "UNCONFIRMED",
+        "claim": "Observed contact/below-surface events only; grasp/drop/avoidance cause unconfirmed.",
+        "motion_contract": {
+          "version": "object-motion-observation-v1",
+          "settle_s": 1.0,
+          "rise_m": 0.03,
+          "movement_m": 0.05,
+          "near_goal_center_xy_m": 0.05,
+          "little_motion_m": 0.02
+        },
+        "motion_observations": {
+          "status": "COMPLETE",
+          "pattern": "native_task_completed",
+          "max_rise_after_settle_m": 0.15632431789822465,
+          "max_xy_movement_after_settle_m": 0.2523208312952248,
+          "min_goal_center_xy_gap_after_settle_m": 0.006145715200972601,
+          "first_obstacle_contact_elapsed_s": null,
+          "rise_ge_3cm": true,
+          "movement_ge_5cm": true,
+          "cause": "UNCONFIRMED",
+          "claim": "Motion heuristics only; no confirmed grasp, drop, avoidance or causal failure type."
+        }
+      },
+      "steps": 96,
+      "final_gap_m": 0.006145715200972601,
+      "videos": [
+        "seed_727/random/attempt_00002/videos/377b94ea-3ac9-48e9-adb2-b5cc71dc91af_s1.mp4"
+      ]
+    },
+    {
+      "case": "seed_727/random/attempt_00003",
+      "method": "random",
+      "seed": 727,
+      "index": 3,
+      "status": "VALID",
+      "outcome": "PASS",
+      "parameters": {
+        "bowl_x": -0.08110879475083492,
+        "bowl_y": 0.006803133713507331,
+        "plate_x": 0.09856024650868023,
+        "plate_y": 0.20827069887067345,
+        "box1_x": -0.18597543025412763,
+        "box1_y": 0.1168592718170973,
+        "box1_width": 0.04054606867954219,
+        "box1_depth": 0.059510002191448017,
+        "box1_height": 0.055452979427930635,
+        "box1_yaw": 0.5034554898154213,
+        "box2_x": -0.10692923227062391,
+        "box2_y": 0.2601608480178529,
+        "box2_width": 0.05797447025553687,
+        "box2_depth": 0.04005711766924697,
+        "box2_height": 0.08877404411602224,
+        "box2_yaw": 0.22198922388026365
+      },
+      "measurement": {
+        "status": "COMPLETE",
+        "physics_samples": 2426,
+        "duration_s": 4.849999999999688,
+        "contact": false,
+        "contact_kinds": [],
+        "contact_duration_s": {
+          "robot_obstacle": 0.0,
+          "bowl_obstacle": 0.0
+        },
+        "peak_obstacle_force_n": 0.0,
+        "fell_below_table": false,
+        "longest_below_table_s": 0.0,
+        "min_bowl_plate_xy_distance_m": 0.0016640989859994368,
+        "cause": "UNCONFIRMED",
+        "claim": "Observed contact/below-surface events only; grasp/drop/avoidance cause unconfirmed.",
+        "motion_contract": {
+          "version": "object-motion-observation-v1",
+          "settle_s": 1.0,
+          "rise_m": 0.03,
+          "movement_m": 0.05,
+          "near_goal_center_xy_m": 0.05,
+          "little_motion_m": 0.02
+        },
+        "motion_observations": {
+          "status": "COMPLETE",
+          "pattern": "native_task_completed",
+          "max_rise_after_settle_m": 0.17307288171413526,
+          "max_xy_movement_after_settle_m": 0.2744442687254532,
+          "min_goal_center_xy_gap_after_settle_m": 0.0016640989859994368,
+          "first_obstacle_contact_elapsed_s": null,
+          "rise_ge_3cm": true,
+          "movement_ge_5cm": true,
+          "cause": "UNCONFIRMED",
+          "claim": "Motion heuristics only; no confirmed grasp, drop, avoidance or causal failure type."
+        }
+      },
+      "steps": 97,
+      "final_gap_m": 0.0018080079971649627,
+      "videos": [
+        "seed_727/random/attempt_00003/videos/ae156ab0-579a-46fe-9706-05fa94d362ac_s1.mp4"
+      ]
+    },
+    {
+      "case": "seed_733/afs/attempt_00000",
+      "method": "afs",
+      "seed": 733,
+      "index": 0,
+      "status": "VALID",
+      "outcome": "FAIL",
+      "parameters": {
+        "bowl_x": -0.0615498623352039,
+        "bowl_y": -0.007850434809508304,
+        "plate_x": 0.0611925952061189,
+        "plate_y": 0.23723975492943825,
+        "box1_x": -0.019643111652633466,
+        "box1_y": 0.11042576885890255,
+        "box1_width": 0.03689019743903671,
+        "box1_depth": 0.032620140545320156,
+        "box1_height": 0.11649374138837808,
+        "box1_yaw": -0.31874646580353905,
+        "box2_x": -0.0961134321252551,
+        "box2_y": 0.27042812177055,
+        "box2_width": 0.05275492528450293,
+        "box2_depth": 0.04779405601674631,
+        "box2_height": 0.03791357582664484,
+        "box2_yaw": 0.19962436410776707
+      },
+      "measurement": {
+        "status": "COMPLETE",
+        "physics_samples": 7501,
+        "duration_s": 15.000000000001679,
+        "contact": true,
+        "contact_kinds": [
+          "robot_obstacle"
+        ],
+        "contact_duration_s": {
+          "robot_obstacle": 13.422000000001152,
+          "bowl_obstacle": 0.0
+        },
+        "peak_obstacle_force_n": 286.83848172512404,
+        "fell_below_table": false,
+        "longest_below_table_s": 0.0,
+        "min_bowl_plate_xy_distance_m": 0.2741074825493756,
+        "cause": "UNCONFIRMED",
+        "claim": "Observed contact/below-surface events only; grasp/drop/avoidance cause unconfirmed.",
+        "motion_contract": {
+          "version": "object-motion-observation-v1",
+          "settle_s": 1.0,
+          "rise_m": 0.03,
+          "movement_m": 0.05,
+          "near_goal_center_xy_m": 0.05,
+          "little_motion_m": 0.02
+        },
+        "motion_observations": {
+          "status": "COMPLETE",
+          "pattern": "little_object_motion",
+          "max_rise_after_settle_m": 6.374900607397649e-13,
+          "max_xy_movement_after_settle_m": 7.076311083754595e-17,
+          "min_goal_center_xy_gap_after_settle_m": 0.2741382920484317,
+          "first_obstacle_contact_elapsed_s": 1.5800000000000012,
+          "rise_ge_3cm": false,
+          "movement_ge_5cm": false,
+          "cause": "UNCONFIRMED",
+          "claim": "Motion heuristics only; no confirmed grasp, drop, avoidance or causal failure type."
+        }
+      },
+      "steps": 300,
+      "final_gap_m": 0.27413829204843176,
+      "videos": [
+        "seed_733/afs/attempt_00000/videos/8c0da7cb-ede8-4e27-a077-f4a754631266_s0.mp4"
+      ]
+    },
+    {
+      "case": "seed_733/afs/attempt_00001",
+      "method": "afs",
+      "seed": 733,
+      "index": 1,
+      "status": "VALID",
+      "outcome": "PASS",
+      "parameters": {
+        "bowl_x": -0.09861568908762963,
+        "bowl_y": 0.00733620713953286,
+        "plate_x": 0.07588271736015384,
+        "plate_y": 0.21457231183797693,
+        "box1_x": -0.16207113514607988,
+        "box1_y": 0.10987715815792544,
+        "box1_width": 0.043376399653015485,
+        "box1_depth": 0.02193642764862698,
+        "box1_height": 0.038177039278884786,
+        "box1_yaw": 0.8123849725447854,
+        "box2_x": -0.1142298052526162,
+        "box2_y": 0.26028199351040515,
+        "box2_width": 0.05082178001883362,
+        "box2_depth": 0.0422864077779667,
+        "box2_height": 0.1814761136886964,
+        "box2_yaw": 1.3511718332018021
+      },
+      "measurement": {
+        "status": "COMPLETE",
+        "physics_samples": 2551,
+        "duration_s": 5.09999999999966,
+        "contact": false,
+        "contact_kinds": [],
+        "contact_duration_s": {
+          "robot_obstacle": 0.0,
+          "bowl_obstacle": 0.0
+        },
+        "peak_obstacle_force_n": 0.0,
+        "fell_below_table": false,
+        "longest_below_table_s": 0.0,
+        "min_bowl_plate_xy_distance_m": 0.00883463736627104,
+        "cause": "UNCONFIRMED",
+        "claim": "Observed contact/below-surface events only; grasp/drop/avoidance cause unconfirmed.",
+        "motion_contract": {
+          "version": "object-motion-observation-v1",
+          "settle_s": 1.0,
+          "rise_m": 0.03,
+          "movement_m": 0.05,
+          "near_goal_center_xy_m": 0.05,
+          "little_motion_m": 0.02
+        },
+        "motion_observations": {
+          "status": "COMPLETE",
+          "pattern": "native_task_completed",
+          "max_rise_after_settle_m": 0.1668236720692612,
+          "max_xy_movement_after_settle_m": 0.2847468892402103,
+          "min_goal_center_xy_gap_after_settle_m": 0.00883463736627104,
+          "first_obstacle_contact_elapsed_s": null,
+          "rise_ge_3cm": true,
+          "movement_ge_5cm": true,
+          "cause": "UNCONFIRMED",
+          "claim": "Motion heuristics only; no confirmed grasp, drop, avoidance or causal failure type."
+        }
+      },
+      "steps": 102,
+      "final_gap_m": 0.013085232561111588,
+      "videos": [
+        "seed_733/afs/attempt_00001/videos/4ebfc4ae-7352-4d3c-8fbc-0553571a9808_s1.mp4"
+      ]
+    },
+    {
+      "case": "seed_733/afs/attempt_00002",
+      "method": "afs",
+      "seed": 733,
+      "index": 2,
+      "status": "VALID",
+      "outcome": "FAIL",
+      "parameters": {
+        "bowl_x": -0.085,
+        "bowl_y": -0.005,
+        "plate_x": 0.09,
+        "plate_y": 0.235,
+        "box1_x": -0.02,
+        "box1_y": 0.11,
+        "box1_width": 0.06,
+        "box1_depth": 0.06,
+        "box1_height": 0.19,
+        "box1_yaw": 0,
+        "box2_x": -0.103,
+        "box2_y": 0.27,
+        "box2_width": 0.06,
+        "box2_depth": 0.06,
+        "box2_height": 0.19,
+        "box2_yaw": 0
+      },
+      "measurement": {
+        "status": "COMPLETE",
+        "physics_samples": 7501,
+        "duration_s": 15.000000000001679,
+        "contact": true,
+        "contact_kinds": [
+          "robot_obstacle"
+        ],
+        "contact_duration_s": {
+          "robot_obstacle": 13.782000000001272,
+          "bowl_obstacle": 0.0
+        },
+        "peak_obstacle_force_n": 381.1606713176493,
+        "fell_below_table": false,
+        "longest_below_table_s": 0.0,
+        "min_bowl_plate_xy_distance_m": 0.2970269348055829,
+        "cause": "UNCONFIRMED",
+        "claim": "Observed contact/below-surface events only; grasp/drop/avoidance cause unconfirmed.",
+        "motion_contract": {
+          "version": "object-motion-observation-v1",
+          "settle_s": 1.0,
+          "rise_m": 0.03,
+          "movement_m": 0.05,
+          "near_goal_center_xy_m": 0.05,
+          "little_motion_m": 0.02
+        },
+        "motion_observations": {
+          "status": "COMPLETE",
+          "pattern": "little_object_motion",
+          "max_rise_after_settle_m": 6.374900607397649e-13,
+          "max_xy_movement_after_settle_m": 7.546047120499111e-17,
+          "min_goal_center_xy_gap_after_settle_m": 0.29705471238065906,
+          "first_obstacle_contact_elapsed_s": 1.1420000000000008,
+          "rise_ge_3cm": false,
+          "movement_ge_5cm": false,
+          "cause": "UNCONFIRMED",
+          "claim": "Motion heuristics only; no confirmed grasp, drop, avoidance or causal failure type."
+        }
+      },
+      "steps": 300,
+      "final_gap_m": 0.29705471238065917,
+      "videos": [
+        "seed_733/afs/attempt_00002/videos/bcd82080-c558-46db-ac02-a4d6bedd3d6f_s0.mp4"
+      ]
+    },
+    {
+      "case": "seed_733/afs/attempt_00003",
+      "method": "afs",
+      "seed": 733,
+      "index": 3,
+      "status": "VALID",
+      "outcome": "FAIL",
+      "parameters": {
+        "bowl_x": -0.05,
+        "bowl_y": 0.01,
+        "plate_x": 0.1,
+        "plate_y": 0.19,
+        "box1_x": -0.0075,
+        "box1_y": 0.1048,
+        "box1_width": 0.06,
+        "box1_depth": 0.06,
+        "box1_height": 0.2,
+        "box1_yaw": 0.15,
+        "box2_x": -0.075,
+        "box2_y": 0.295,
+        "box2_width": 0.06,
+        "box2_depth": 0.06,
+        "box2_height": 0.2,
+        "box2_yaw": -0.2
+      },
+      "measurement": {
+        "status": "COMPLETE",
+        "physics_samples": 7501,
+        "duration_s": 15.000000000001679,
+        "contact": true,
+        "contact_kinds": [
+          "robot_obstacle"
+        ],
+        "contact_duration_s": {
+          "robot_obstacle": 13.742000000001259,
+          "bowl_obstacle": 0.0
+        },
+        "peak_obstacle_force_n": 390.2153629717239,
+        "fell_below_table": false,
+        "longest_below_table_s": 0.0,
+        "min_bowl_plate_xy_distance_m": 0.23430749027719963,
+        "cause": "UNCONFIRMED",
+        "claim": "Observed contact/below-surface events only; grasp/drop/avoidance cause unconfirmed.",
+        "motion_contract": {
+          "version": "object-motion-observation-v1",
+          "settle_s": 1.0,
+          "rise_m": 0.03,
+          "movement_m": 0.05,
+          "near_goal_center_xy_m": 0.05,
+          "little_motion_m": 0.02
+        },
+        "motion_observations": {
+          "status": "COMPLETE",
+          "pattern": "little_object_motion",
+          "max_rise_after_settle_m": 6.374900607397649e-13,
+          "max_xy_movement_after_settle_m": 7.076311083754595e-17,
+          "min_goal_center_xy_gap_after_settle_m": 0.2343338725523348,
+          "first_obstacle_contact_elapsed_s": 1.260000000000001,
+          "rise_ge_3cm": false,
+          "movement_ge_5cm": false,
+          "cause": "UNCONFIRMED",
+          "claim": "Motion heuristics only; no confirmed grasp, drop, avoidance or causal failure type."
+        }
+      },
+      "steps": 300,
+      "final_gap_m": 0.23433387255233484,
+      "videos": [
+        "seed_733/afs/attempt_00003/videos/399c4255-b3fc-40ed-9ef8-2a8e8632673d_s0.mp4"
+      ]
+    },
+    {
+      "case": "seed_733/random/attempt_00000",
+      "method": "random",
+      "seed": 733,
+      "index": 0,
+      "status": "VALID",
+      "outcome": "FAIL",
+      "parameters": {
+        "bowl_x": -0.0615498623352039,
+        "bowl_y": -0.007850434809508304,
+        "plate_x": 0.0611925952061189,
+        "plate_y": 0.23723975492943825,
+        "box1_x": -0.019643111652633466,
+        "box1_y": 0.11042576885890255,
+        "box1_width": 0.03689019743903671,
+        "box1_depth": 0.032620140545320156,
+        "box1_height": 0.11649374138837808,
+        "box1_yaw": -0.31874646580353905,
+        "box2_x": -0.0961134321252551,
+        "box2_y": 0.27042812177055,
+        "box2_width": 0.05275492528450293,
+        "box2_depth": 0.04779405601674631,
+        "box2_height": 0.03791357582664484,
+        "box2_yaw": 0.19962436410776707
+      },
+      "measurement": {
+        "status": "COMPLETE",
+        "physics_samples": 7501,
+        "duration_s": 15.000000000001679,
+        "contact": true,
+        "contact_kinds": [
+          "robot_obstacle"
+        ],
+        "contact_duration_s": {
+          "robot_obstacle": 13.422000000001152,
+          "bowl_obstacle": 0.0
+        },
+        "peak_obstacle_force_n": 286.83848172512404,
+        "fell_below_table": false,
+        "longest_below_table_s": 0.0,
+        "min_bowl_plate_xy_distance_m": 0.2741074825493756,
+        "cause": "UNCONFIRMED",
+        "claim": "Observed contact/below-surface events only; grasp/drop/avoidance cause unconfirmed.",
+        "motion_contract": {
+          "version": "object-motion-observation-v1",
+          "settle_s": 1.0,
+          "rise_m": 0.03,
+          "movement_m": 0.05,
+          "near_goal_center_xy_m": 0.05,
+          "little_motion_m": 0.02
+        },
+        "motion_observations": {
+          "status": "COMPLETE",
+          "pattern": "little_object_motion",
+          "max_rise_after_settle_m": 6.374900607397649e-13,
+          "max_xy_movement_after_settle_m": 7.076311083754595e-17,
+          "min_goal_center_xy_gap_after_settle_m": 0.2741382920484317,
+          "first_obstacle_contact_elapsed_s": 1.5800000000000012,
+          "rise_ge_3cm": false,
+          "movement_ge_5cm": false,
+          "cause": "UNCONFIRMED",
+          "claim": "Motion heuristics only; no confirmed grasp, drop, avoidance or causal failure type."
+        }
+      },
+      "steps": 300,
+      "final_gap_m": 0.27413829204843176,
+      "videos": [
+        "seed_733/random/attempt_00000/videos/9a3d1102-cbf8-413b-af2c-c0649948953b_s0.mp4"
+      ]
+    },
+    {
+      "case": "seed_733/random/attempt_00001",
+      "method": "random",
+      "seed": 733,
+      "index": 1,
+      "status": "VALID",
+      "outcome": "PASS",
+      "parameters": {
+        "bowl_x": -0.09861568908762963,
+        "bowl_y": 0.00733620713953286,
+        "plate_x": 0.07588271736015384,
+        "plate_y": 0.21457231183797693,
+        "box1_x": -0.16207113514607988,
+        "box1_y": 0.10987715815792544,
+        "box1_width": 0.043376399653015485,
+        "box1_depth": 0.02193642764862698,
+        "box1_height": 0.038177039278884786,
+        "box1_yaw": 0.8123849725447854,
+        "box2_x": -0.1142298052526162,
+        "box2_y": 0.26028199351040515,
+        "box2_width": 0.05082178001883362,
+        "box2_depth": 0.0422864077779667,
+        "box2_height": 0.1814761136886964,
+        "box2_yaw": 1.3511718332018021
+      },
+      "measurement": {
+        "status": "COMPLETE",
+        "physics_samples": 2551,
+        "duration_s": 5.09999999999966,
+        "contact": false,
+        "contact_kinds": [],
+        "contact_duration_s": {
+          "robot_obstacle": 0.0,
+          "bowl_obstacle": 0.0
+        },
+        "peak_obstacle_force_n": 0.0,
+        "fell_below_table": false,
+        "longest_below_table_s": 0.0,
+        "min_bowl_plate_xy_distance_m": 0.00883463736627104,
+        "cause": "UNCONFIRMED",
+        "claim": "Observed contact/below-surface events only; grasp/drop/avoidance cause unconfirmed.",
+        "motion_contract": {
+          "version": "object-motion-observation-v1",
+          "settle_s": 1.0,
+          "rise_m": 0.03,
+          "movement_m": 0.05,
+          "near_goal_center_xy_m": 0.05,
+          "little_motion_m": 0.02
+        },
+        "motion_observations": {
+          "status": "COMPLETE",
+          "pattern": "native_task_completed",
+          "max_rise_after_settle_m": 0.1668236720692612,
+          "max_xy_movement_after_settle_m": 0.2847468892402103,
+          "min_goal_center_xy_gap_after_settle_m": 0.00883463736627104,
+          "first_obstacle_contact_elapsed_s": null,
+          "rise_ge_3cm": true,
+          "movement_ge_5cm": true,
+          "cause": "UNCONFIRMED",
+          "claim": "Motion heuristics only; no confirmed grasp, drop, avoidance or causal failure type."
+        }
+      },
+      "steps": 102,
+      "final_gap_m": 0.013085232561111588,
+      "videos": [
+        "seed_733/random/attempt_00001/videos/14dab13d-a24a-47e6-a35b-155d21dca566_s1.mp4"
+      ]
+    },
+    {
+      "case": "seed_733/random/attempt_00002",
+      "method": "random",
+      "seed": 733,
+      "index": 2,
+      "status": "VALID",
+      "outcome": "FAIL",
+      "parameters": {
+        "bowl_x": -0.06365733301587267,
+        "bowl_y": 0.00865257759243084,
+        "plate_x": 0.07344439268862886,
+        "plate_y": 0.23556892556496478,
+        "box1_x": -0.014839556233385148,
+        "box1_y": 0.1046995858063969,
+        "box1_width": 0.05334028317615977,
+        "box1_depth": 0.0244041306587488,
+        "box1_height": 0.11947871135055778,
+        "box1_yaw": 0.012719244850238676,
+        "box2_x": -0.10125363343828593,
+        "box2_y": 0.2602912265464403,
+        "box2_width": 0.044101998494708194,
+        "box2_depth": 0.02039091697111104,
+        "box2_height": 0.18090960596014616,
+        "box2_yaw": 1.037459634306824
+      },
+      "measurement": {
+        "status": "COMPLETE",
+        "physics_samples": 7501,
+        "duration_s": 15.000000000001679,
+        "contact": true,
+        "contact_kinds": [
+          "robot_obstacle"
+        ],
+        "contact_duration_s": {
+          "robot_obstacle": 13.354000000001129,
+          "bowl_obstacle": 0.0
+        },
+        "peak_obstacle_force_n": 385.98899659974006,
+        "fell_below_table": false,
+        "longest_below_table_s": 0.0,
+        "min_bowl_plate_xy_distance_m": 0.26511867563101715,
+        "cause": "UNCONFIRMED",
+        "claim": "Observed contact/below-surface events only; grasp/drop/avoidance cause unconfirmed.",
+        "motion_contract": {
+          "version": "object-motion-observation-v1",
+          "settle_s": 1.0,
+          "rise_m": 0.03,
+          "movement_m": 0.05,
+          "near_goal_center_xy_m": 0.05,
+          "little_motion_m": 0.02
+        },
+        "motion_observations": {
+          "status": "COMPLETE",
+          "pattern": "little_object_motion",
+          "max_rise_after_settle_m": 6.374900607397649e-13,
+          "max_xy_movement_after_settle_m": 6.938893903907228e-17,
+          "min_goal_center_xy_gap_after_settle_m": 0.265148136998087,
+          "first_obstacle_contact_elapsed_s": 1.5060000000000011,
+          "rise_ge_3cm": false,
+          "movement_ge_5cm": false,
+          "cause": "UNCONFIRMED",
+          "claim": "Motion heuristics only; no confirmed grasp, drop, avoidance or causal failure type."
+        }
+      },
+      "steps": 300,
+      "final_gap_m": 0.26514813699808704,
+      "videos": [
+        "seed_733/random/attempt_00002/videos/6b07db93-d34b-4794-9e2e-8e13643a44fd_s0.mp4"
+      ]
+    },
+    {
+      "case": "seed_733/random/attempt_00003",
+      "method": "random",
+      "seed": 733,
+      "index": 3,
+      "status": "VALID",
+      "outcome": "PASS",
+      "parameters": {
+        "bowl_x": -0.07860460411037275,
+        "bowl_y": -0.0037403386028904426,
+        "plate_x": 0.09811693822965734,
+        "plate_y": 0.2001300723459447,
+        "box1_x": -0.1721972695959607,
+        "box1_y": 0.10270303593611382,
+        "box1_width": 0.04997999832169802,
+        "box1_depth": 0.05126739729719493,
+        "box1_height": 0.19836394402598612,
+        "box1_yaw": -1.3803726277187351,
+        "box2_x": -0.07931154322198901,
+        "box2_y": 0.24019546334198205,
+        "box2_width": 0.04057081368288759,
+        "box2_depth": 0.03009603638798778,
+        "box2_height": 0.0974509629193567,
+        "box2_yaw": 1.1354448960798882
+      },
+      "measurement": {
+        "status": "COMPLETE",
+        "physics_samples": 3076,
+        "duration_s": 6.149999999999545,
+        "contact": true,
+        "contact_kinds": [
+          "robot_obstacle"
+        ],
+        "contact_duration_s": {
+          "robot_obstacle": 0.7100000000000005,
+          "bowl_obstacle": 0.0
+        },
+        "peak_obstacle_force_n": 412.3805870525435,
+        "fell_below_table": false,
+        "longest_below_table_s": 0.0,
+        "min_bowl_plate_xy_distance_m": 0.000589010661686922,
+        "cause": "UNCONFIRMED",
+        "claim": "Observed contact/below-surface events only; grasp/drop/avoidance cause unconfirmed.",
+        "motion_contract": {
+          "version": "object-motion-observation-v1",
+          "settle_s": 1.0,
+          "rise_m": 0.03,
+          "movement_m": 0.05,
+          "near_goal_center_xy_m": 0.05,
+          "little_motion_m": 0.02
+        },
+        "motion_observations": {
+          "status": "COMPLETE",
+          "pattern": "native_task_completed",
+          "max_rise_after_settle_m": 0.12484591549528223,
+          "max_xy_movement_after_settle_m": 0.2846551104683719,
+          "min_goal_center_xy_gap_after_settle_m": 0.000589010661686922,
+          "first_obstacle_contact_elapsed_s": 1.7900000000000014,
+          "rise_ge_3cm": true,
+          "movement_ge_5cm": true,
+          "cause": "UNCONFIRMED",
+          "claim": "Motion heuristics only; no confirmed grasp, drop, avoidance or causal failure type."
+        }
+      },
+      "steps": 123,
+      "final_gap_m": 0.016689375087013514,
+      "videos": [
+        "seed_733/random/attempt_00003/videos/46a01826-e5da-4358-8f55-17f343e79f75_s1.mp4"
+      ]
+    },
+    {
+      "case": "seed_739/afs/attempt_00000",
+      "method": "afs",
+      "seed": 739,
+      "index": 0,
+      "status": "VALID",
+      "outcome": "PASS",
+      "parameters": {
+        "bowl_x": -0.06140964024112927,
+        "bowl_y": -0.008592980688524378,
+        "plate_x": 0.09035714860072513,
+        "plate_y": 0.23766347964847173,
+        "box1_x": -0.2122296277100122,
+        "box1_y": 0.11961703556389608,
+        "box1_width": 0.031071390257346253,
+        "box1_depth": 0.020390759831978137,
+        "box1_height": 0.06393941354167455,
+        "box1_yaw": -1.3151065940899656,
+        "box2_x": -0.10174117690932998,
+        "box2_y": 0.29204753165853325,
+        "box2_width": 0.031079939226575745,
+        "box2_depth": 0.05336898627840317,
+        "box2_height": 0.18317335827800174,
+        "box2_yaw": -1.461961809816433
+      },
+      "measurement": {
+        "status": "COMPLETE",
+        "physics_samples": 2401,
+        "duration_s": 4.799999999999693,
+        "contact": false,
+        "contact_kinds": [],
+        "contact_duration_s": {
+          "robot_obstacle": 0.0,
+          "bowl_obstacle": 0.0
+        },
+        "peak_obstacle_force_n": 0.0,
+        "fell_below_table": false,
+        "longest_below_table_s": 0.0,
+        "min_bowl_plate_xy_distance_m": 0.01941090993625899,
+        "cause": "UNCONFIRMED",
+        "claim": "Observed contact/below-surface events only; grasp/drop/avoidance cause unconfirmed.",
+        "motion_contract": {
+          "version": "object-motion-observation-v1",
+          "settle_s": 1.0,
+          "rise_m": 0.03,
+          "movement_m": 0.05,
+          "near_goal_center_xy_m": 0.05,
+          "little_motion_m": 0.02
+        },
+        "motion_observations": {
+          "status": "COMPLETE",
+          "pattern": "native_task_completed",
+          "max_rise_after_settle_m": 0.15784098873044494,
+          "max_xy_movement_after_settle_m": 0.2795857203804568,
+          "min_goal_center_xy_gap_after_settle_m": 0.01941090993625899,
+          "first_obstacle_contact_elapsed_s": null,
+          "rise_ge_3cm": true,
+          "movement_ge_5cm": true,
+          "cause": "UNCONFIRMED",
+          "claim": "Motion heuristics only; no confirmed grasp, drop, avoidance or causal failure type."
+        }
+      },
+      "steps": 96,
+      "final_gap_m": 0.019579040957261616,
+      "videos": [
+        "seed_739/afs/attempt_00000/videos/c8300951-5504-4106-bafe-8e453c14568d_s1.mp4"
+      ]
+    },
+    {
+      "case": "seed_739/afs/attempt_00001",
+      "method": "afs",
+      "seed": 739,
+      "index": 1,
+      "status": "VALID",
+      "outcome": "PASS",
+      "parameters": {
+        "bowl_x": -0.06959111385529301,
+        "bowl_y": -0.009435313439715322,
+        "plate_x": 0.0785165774293857,
+        "plate_y": 0.21559947810264274,
+        "box1_x": -0.18960852503535888,
+        "box1_y": 0.10444740854516754,
+        "box1_width": 0.038213805424431244,
+        "box1_depth": 0.039888164381707364,
+        "box1_height": 0.0536276029520631,
+        "box1_yaw": 0.08019387033503844,
+        "box2_x": -0.11927652905261721,
+        "box2_y": 0.28548765248368324,
+        "box2_width": 0.04266917183100332,
+        "box2_depth": 0.05728251836576741,
+        "box2_height": 0.1317972976347871,
+        "box2_yaw": -0.8687568716285773
+      },
+      "measurement": {
+        "status": "COMPLETE",
+        "physics_samples": 2501,
+        "duration_s": 4.999999999999671,
+        "contact": false,
+        "contact_kinds": [],
+        "contact_duration_s": {
+          "robot_obstacle": 0.0,
+          "bowl_obstacle": 0.0
+        },
+        "peak_obstacle_force_n": 0.0,
+        "fell_below_table": false,
+        "longest_below_table_s": 0.0,
+        "min_bowl_plate_xy_distance_m": 0.016760668968401043,
+        "cause": "UNCONFIRMED",
+        "claim": "Observed contact/below-surface events only; grasp/drop/avoidance cause unconfirmed.",
+        "motion_contract": {
+          "version": "object-motion-observation-v1",
+          "settle_s": 1.0,
+          "rise_m": 0.03,
+          "movement_m": 0.05,
+          "near_goal_center_xy_m": 0.05,
+          "little_motion_m": 0.02
+        },
+        "motion_observations": {
+          "status": "COMPLETE",
+          "pattern": "native_task_completed",
+          "max_rise_after_settle_m": 0.15443942795734233,
+          "max_xy_movement_after_settle_m": 0.27335424083972687,
+          "min_goal_center_xy_gap_after_settle_m": 0.016760668968401043,
+          "first_obstacle_contact_elapsed_s": null,
+          "rise_ge_3cm": true,
+          "movement_ge_5cm": true,
+          "cause": "UNCONFIRMED",
+          "claim": "Motion heuristics only; no confirmed grasp, drop, avoidance or causal failure type."
+        }
+      },
+      "steps": 100,
+      "final_gap_m": 0.0182274515323388,
+      "videos": [
+        "seed_739/afs/attempt_00001/videos/4c07f82a-334c-4145-a3f4-5c5c0f75758a_s1.mp4"
+      ]
+    },
+    {
+      "case": "seed_739/afs/attempt_00002",
+      "method": "afs",
+      "seed": 739,
+      "index": 2,
+      "status": "VALID",
+      "outcome": "FAIL",
+      "parameters": {
+        "bowl_x": -0.1,
+        "bowl_y": 0.01,
+        "plate_x": 0.1,
+        "plate_y": 0.19,
+        "box1_x": -0.0075,
+        "box1_y": 0.11,
+        "box1_width": 0.06,
+        "box1_depth": 0.06,
+        "box1_height": 0.2,
+        "box1_yaw": 0,
+        "box2_x": -0.075,
+        "box2_y": 0.24,
+        "box2_width": 0.06,
+        "box2_depth": 0.06,
+        "box2_height": 0.2,
+        "box2_yaw": 0.7853981633974483
+      },
+      "measurement": {
+        "status": "COMPLETE",
+        "physics_samples": 7501,
+        "duration_s": 15.000000000001679,
+        "contact": true,
+        "contact_kinds": [
+          "robot_obstacle"
+        ],
+        "contact_duration_s": {
+          "robot_obstacle": 13.860000000001298,
+          "bowl_obstacle": 0.0
+        },
+        "peak_obstacle_force_n": 377.6468072670187,
+        "fell_below_table": false,
+        "longest_below_table_s": 0.0,
+        "min_bowl_plate_xy_distance_m": 0.26907248094147423,
+        "cause": "UNCONFIRMED",
+        "claim": "Observed contact/below-surface events only; grasp/drop/avoidance cause unconfirmed.",
+        "motion_contract": {
+          "version": "object-motion-observation-v1",
+          "settle_s": 1.0,
+          "rise_m": 0.03,
+          "movement_m": 0.05,
+          "near_goal_center_xy_m": 0.05,
+          "little_motion_m": 0.02
+        },
+        "motion_observations": {
+          "status": "COMPLETE",
+          "pattern": "little_object_motion",
+          "max_rise_after_settle_m": 6.374900607397649e-13,
+          "max_xy_movement_after_settle_m": 6.938893903907228e-17,
+          "min_goal_center_xy_gap_after_settle_m": 0.26909539002298277,
+          "first_obstacle_contact_elapsed_s": 1.1420000000000008,
+          "rise_ge_3cm": false,
+          "movement_ge_5cm": false,
+          "cause": "UNCONFIRMED",
+          "claim": "Motion heuristics only; no confirmed grasp, drop, avoidance or causal failure type."
+        }
+      },
+      "steps": 300,
+      "final_gap_m": 0.2690953900229828,
+      "videos": [
+        "seed_739/afs/attempt_00002/videos/df96555f-2e24-404d-8ea6-df78b16652dd_s0.mp4"
+      ]
+    },
+    {
+      "case": "seed_739/afs/attempt_00003",
+      "method": "afs",
+      "seed": 739,
+      "index": 3,
+      "status": "VALID",
+      "outcome": "FAIL",
+      "parameters": {
+        "bowl_x": -0.095,
+        "bowl_y": 0.005,
+        "plate_x": 0.095,
+        "plate_y": 0.195,
+        "box1_x": -0.012,
+        "box1_y": 0.11,
+        "box1_width": 0.06,
+        "box1_depth": 0.06,
+        "box1_height": 0.2,
+        "box1_yaw": 0,
+        "box2_x": -0.08,
+        "box2_y": 0.25,
+        "box2_width": 0.06,
+        "box2_depth": 0.06,
+        "box2_height": 0.2,
+        "box2_yaw": 0.7853981633974483
+      },
+      "measurement": {
+        "status": "COMPLETE",
+        "physics_samples": 7501,
+        "duration_s": 15.000000000001679,
+        "contact": true,
+        "contact_kinds": [
+          "robot_obstacle"
+        ],
+        "contact_duration_s": {
+          "robot_obstacle": 13.854000000001296,
+          "bowl_obstacle": 0.0
+        },
+        "peak_obstacle_force_n": 353.3496403169703,
+        "fell_below_table": false,
+        "longest_below_table_s": 0.0,
+        "min_bowl_plate_xy_distance_m": 0.26870057685088805,
+        "cause": "UNCONFIRMED",
+        "claim": "Observed contact/below-surface events only; grasp/drop/avoidance cause unconfirmed.",
+        "motion_contract": {
+          "version": "object-motion-observation-v1",
+          "settle_s": 1.0,
+          "rise_m": 0.03,
+          "movement_m": 0.05,
+          "near_goal_center_xy_m": 0.05,
+          "little_motion_m": 0.02
+        },
+        "motion_observations": {
+          "status": "COMPLETE",
+          "pattern": "little_object_motion",
+          "max_rise_after_settle_m": 6.374900607397649e-13,
+          "max_xy_movement_after_settle_m": 7.546047120499111e-17,
+          "min_goal_center_xy_gap_after_settle_m": 0.2687248193571784,
+          "first_obstacle_contact_elapsed_s": 1.1480000000000008,
+          "rise_ge_3cm": false,
+          "movement_ge_5cm": false,
+          "cause": "UNCONFIRMED",
+          "claim": "Motion heuristics only; no confirmed grasp, drop, avoidance or causal failure type."
+        }
+      },
+      "steps": 300,
+      "final_gap_m": 0.26872481935717846,
+      "videos": [
+        "seed_739/afs/attempt_00003/videos/8762629a-428c-41cd-b4d1-205e65098010_s0.mp4"
+      ]
+    },
+    {
+      "case": "seed_739/random/attempt_00000",
+      "method": "random",
+      "seed": 739,
+      "index": 0,
+      "status": "VALID",
+      "outcome": "PASS",
+      "parameters": {
+        "bowl_x": -0.06140964024112927,
+        "bowl_y": -0.008592980688524378,
+        "plate_x": 0.09035714860072513,
+        "plate_y": 0.23766347964847173,
+        "box1_x": -0.2122296277100122,
+        "box1_y": 0.11961703556389608,
+        "box1_width": 0.031071390257346253,
+        "box1_depth": 0.020390759831978137,
+        "box1_height": 0.06393941354167455,
+        "box1_yaw": -1.3151065940899656,
+        "box2_x": -0.10174117690932998,
+        "box2_y": 0.29204753165853325,
+        "box2_width": 0.031079939226575745,
+        "box2_depth": 0.05336898627840317,
+        "box2_height": 0.18317335827800174,
+        "box2_yaw": -1.461961809816433
+      },
+      "measurement": {
+        "status": "COMPLETE",
+        "physics_samples": 2401,
+        "duration_s": 4.799999999999693,
+        "contact": false,
+        "contact_kinds": [],
+        "contact_duration_s": {
+          "robot_obstacle": 0.0,
+          "bowl_obstacle": 0.0
+        },
+        "peak_obstacle_force_n": 0.0,
+        "fell_below_table": false,
+        "longest_below_table_s": 0.0,
+        "min_bowl_plate_xy_distance_m": 0.01941090993625899,
+        "cause": "UNCONFIRMED",
+        "claim": "Observed contact/below-surface events only; grasp/drop/avoidance cause unconfirmed.",
+        "motion_contract": {
+          "version": "object-motion-observation-v1",
+          "settle_s": 1.0,
+          "rise_m": 0.03,
+          "movement_m": 0.05,
+          "near_goal_center_xy_m": 0.05,
+          "little_motion_m": 0.02
+        },
+        "motion_observations": {
+          "status": "COMPLETE",
+          "pattern": "native_task_completed",
+          "max_rise_after_settle_m": 0.15784098873044494,
+          "max_xy_movement_after_settle_m": 0.2795857203804568,
+          "min_goal_center_xy_gap_after_settle_m": 0.01941090993625899,
+          "first_obstacle_contact_elapsed_s": null,
+          "rise_ge_3cm": true,
+          "movement_ge_5cm": true,
+          "cause": "UNCONFIRMED",
+          "claim": "Motion heuristics only; no confirmed grasp, drop, avoidance or causal failure type."
+        }
+      },
+      "steps": 96,
+      "final_gap_m": 0.019579040957261616,
+      "videos": [
+        "seed_739/random/attempt_00000/videos/424c05c5-a19c-4f2e-9d9d-cbe330a7d98a_s1.mp4"
+      ]
+    },
+    {
+      "case": "seed_739/random/attempt_00001",
+      "method": "random",
+      "seed": 739,
+      "index": 1,
+      "status": "VALID",
+      "outcome": "PASS",
+      "parameters": {
+        "bowl_x": -0.06959111385529301,
+        "bowl_y": -0.009435313439715322,
+        "plate_x": 0.0785165774293857,
+        "plate_y": 0.21559947810264274,
+        "box1_x": -0.18960852503535888,
+        "box1_y": 0.10444740854516754,
+        "box1_width": 0.038213805424431244,
+        "box1_depth": 0.039888164381707364,
+        "box1_height": 0.0536276029520631,
+        "box1_yaw": 0.08019387033503844,
+        "box2_x": -0.11927652905261721,
+        "box2_y": 0.28548765248368324,
+        "box2_width": 0.04266917183100332,
+        "box2_depth": 0.05728251836576741,
+        "box2_height": 0.1317972976347871,
+        "box2_yaw": -0.8687568716285773
+      },
+      "measurement": {
+        "status": "COMPLETE",
+        "physics_samples": 2501,
+        "duration_s": 4.999999999999671,
+        "contact": false,
+        "contact_kinds": [],
+        "contact_duration_s": {
+          "robot_obstacle": 0.0,
+          "bowl_obstacle": 0.0
+        },
+        "peak_obstacle_force_n": 0.0,
+        "fell_below_table": false,
+        "longest_below_table_s": 0.0,
+        "min_bowl_plate_xy_distance_m": 0.016760668968401043,
+        "cause": "UNCONFIRMED",
+        "claim": "Observed contact/below-surface events only; grasp/drop/avoidance cause unconfirmed.",
+        "motion_contract": {
+          "version": "object-motion-observation-v1",
+          "settle_s": 1.0,
+          "rise_m": 0.03,
+          "movement_m": 0.05,
+          "near_goal_center_xy_m": 0.05,
+          "little_motion_m": 0.02
+        },
+        "motion_observations": {
+          "status": "COMPLETE",
+          "pattern": "native_task_completed",
+          "max_rise_after_settle_m": 0.15443942795734233,
+          "max_xy_movement_after_settle_m": 0.27335424083972687,
+          "min_goal_center_xy_gap_after_settle_m": 0.016760668968401043,
+          "first_obstacle_contact_elapsed_s": null,
+          "rise_ge_3cm": true,
+          "movement_ge_5cm": true,
+          "cause": "UNCONFIRMED",
+          "claim": "Motion heuristics only; no confirmed grasp, drop, avoidance or causal failure type."
+        }
+      },
+      "steps": 100,
+      "final_gap_m": 0.0182274515323388,
+      "videos": [
+        "seed_739/random/attempt_00001/videos/b6e3efd7-e9a5-4de4-b27d-979bfc0f0c96_s1.mp4"
+      ]
+    },
+    {
+      "case": "seed_739/random/attempt_00002",
+      "method": "random",
+      "seed": 739,
+      "index": 2,
+      "status": "VALID",
+      "outcome": "PASS",
+      "parameters": {
+        "bowl_x": -0.06640924636133166,
+        "bowl_y": -0.0022499756508400524,
+        "plate_x": 0.07231199762715335,
+        "plate_y": 0.22490155697600392,
+        "box1_x": -0.21136908563695903,
+        "box1_y": 0.10647915570583259,
+        "box1_width": 0.020441355370134424,
+        "box1_depth": 0.02553975641033116,
+        "box1_height": 0.11450236603460559,
+        "box1_yaw": -0.6013321536298762,
+        "box2_x": -0.08162502935432839,
+        "box2_y": 0.260365880381764,
+        "box2_width": 0.033342417190159554,
+        "box2_depth": 0.04409610575921646,
+        "box2_height": 0.09453678505602231,
+        "box2_yaw": -0.8423690656228799
+      },
+      "measurement": {
+        "status": "COMPLETE",
+        "physics_samples": 2401,
+        "duration_s": 4.799999999999693,
+        "contact": false,
+        "contact_kinds": [],
+        "contact_duration_s": {
+          "robot_obstacle": 0.0,
+          "bowl_obstacle": 0.0
+        },
+        "peak_obstacle_force_n": 0.0,
+        "fell_below_table": false,
+        "longest_below_table_s": 0.0,
+        "min_bowl_plate_xy_distance_m": 0.01977410330948368,
+        "cause": "UNCONFIRMED",
+        "claim": "Observed contact/below-surface events only; grasp/drop/avoidance cause unconfirmed.",
+        "motion_contract": {
+          "version": "object-motion-observation-v1",
+          "settle_s": 1.0,
+          "rise_m": 0.03,
+          "movement_m": 0.05,
+          "near_goal_center_xy_m": 0.05,
+          "little_motion_m": 0.02
+        },
+        "motion_observations": {
+          "status": "COMPLETE",
+          "pattern": "native_task_completed",
+          "max_rise_after_settle_m": 0.1465893668426671,
+          "max_xy_movement_after_settle_m": 0.26507577399383575,
+          "min_goal_center_xy_gap_after_settle_m": 0.01977410330948368,
+          "first_obstacle_contact_elapsed_s": null,
+          "rise_ge_3cm": true,
+          "movement_ge_5cm": true,
+          "cause": "UNCONFIRMED",
+          "claim": "Motion heuristics only; no confirmed grasp, drop, avoidance or causal failure type."
+        }
+      },
+      "steps": 96,
+      "final_gap_m": 0.023170335973396457,
+      "videos": [
+        "seed_739/random/attempt_00002/videos/d7685e4e-c94a-46cc-b1a9-30844b0f83dc_s1.mp4"
+      ]
+    },
+    {
+      "case": "seed_739/random/attempt_00003",
+      "method": "random",
+      "seed": 739,
+      "index": 3,
+      "status": "VALID",
+      "outcome": "FAIL",
+      "parameters": {
+        "bowl_x": -0.06745864288272045,
+        "bowl_y": -0.0028776732684569085,
+        "plate_x": 0.07257257368245,
+        "plate_y": 0.2047678238115216,
+        "box1_x": -0.013095802633678294,
+        "box1_y": 0.1058255713284848,
+        "box1_width": 0.05858719544113658,
+        "box1_depth": 0.04481012819523497,
+        "box1_height": 0.11962364703848619,
+        "box1_yaw": 0.5341379144760463,
+        "box2_x": -0.08656128665992233,
+        "box2_y": 0.2476861663499308,
+        "box2_width": 0.03928985447225891,
+        "box2_depth": 0.03819855300240467,
+        "box2_height": 0.18123822867170516,
+        "box2_yaw": -1.2220440202782974
+      },
+      "measurement": {
+        "status": "COMPLETE",
+        "physics_samples": 7501,
+        "duration_s": 15.000000000001679,
+        "contact": true,
+        "contact_kinds": [
+          "robot_obstacle"
+        ],
+        "contact_duration_s": {
+          "robot_obstacle": 13.484000000001172,
+          "bowl_obstacle": 0.0
+        },
+        "peak_obstacle_force_n": 320.31862743271284,
+        "fell_below_table": false,
+        "longest_below_table_s": 0.0,
+        "min_bowl_plate_xy_distance_m": 0.2504503824519201,
+        "cause": "UNCONFIRMED",
+        "claim": "Observed contact/below-surface events only; grasp/drop/avoidance cause unconfirmed.",
+        "motion_contract": {
+          "version": "object-motion-observation-v1",
+          "settle_s": 1.0,
+          "rise_m": 0.03,
+          "movement_m": 0.05,
+          "near_goal_center_xy_m": 0.05,
+          "little_motion_m": 0.02
+        },
+        "motion_observations": {
+          "status": "COMPLETE",
+          "pattern": "little_object_motion",
+          "max_rise_after_settle_m": 6.374900607397649e-13,
+          "max_xy_movement_after_settle_m": 7.892991815694472e-17,
+          "min_goal_center_xy_gap_after_settle_m": 0.25047890062373535,
+          "first_obstacle_contact_elapsed_s": 1.5180000000000011,
+          "rise_ge_3cm": false,
+          "movement_ge_5cm": false,
+          "cause": "UNCONFIRMED",
+          "claim": "Motion heuristics only; no confirmed grasp, drop, avoidance or causal failure type."
+        }
+      },
+      "steps": 300,
+      "final_gap_m": 0.2504789006237354,
+      "videos": [
+        "seed_739/random/attempt_00003/videos/0641a809-83fa-4835-9d89-f7142f081b71_s0.mp4"
+      ]
+    }
+  ]
+}
