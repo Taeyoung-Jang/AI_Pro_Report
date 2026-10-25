@@ -1,0 +1,8 @@
+{
+  "development/robot_arm_free_pair_analysis_20261024/analysis.json": "18ee9497835414238ad33cc535a204339d0857a44701973e60c01829ce6c2fb6",
+  "development/robot_arm_free_pair_analysis_20261024/episodes.csv": "97503b8cb68892813cfed45359df4dd420e5b3d6b53f4b39bc873ff01f37cc78",
+  "development/robot_arm_free_pair_analysis_20261024/analyze.py": "0f541a66801e5473f93418be30f560e7710334cf13d498bf01b0d432d10939b0",
+  "development/robot_arm_free_pair_analysis_20261024/near_goal_frames.jpg": "701e94e37781bf77b71150f47fb0f07b6f801dc438480e14b4e4bc2781cdc93e",
+  "docs/ROBOT_ARM_CAPABILITY.md": "a0866e8104bb18f84d6e075295dc484c41b4afbfd414b3f90b61d2ab02d7d4c0",
+  "docs/TECHNICAL_REPORT.md": "6d96b3a47a8b365eed28550d58545b8b7a25bea9d15084986830959e497e221a"
+}

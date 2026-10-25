@@ -10,6 +10,7 @@
 - `additional_work.tex`: 제출 자료 보완, 회귀 검증, 정량 평가와 후속 구현의 우선순위·완료 기준.
 - `figures/`: 보고서 그림. 현재 본문은 `humanoid_scene.png`만 사용합니다(`arm_failure_frames.png`는 시연 영상과 겹쳐 본문에서 제외).
 - `evidence/robot_arm_environment_20261023/`: 로봇팔 비교·통제 실험 분석 사본.
+- `evidence/robot_arm_free_pair_20261024/`: 이전 두 상자 로봇팔 실험(16개 변수)의 분석 사본. 최종 보고서 결과에는 쓰지 않습니다.
 - `evidence/humanoid_matched_local_20261023/`: 최종 비교 집계, 실행·제안 기록, 실패 분석과 해시 근거의 소형 사본. 영상·전체 trace는 원본 경로에 남습니다.
 - `Makefile`: XeLaTeX로 PDF를 두 번 빌드하여 전체 쪽 수 참조를 갱신합니다.
 
