@@ -1,0 +1,2 @@
+file '/home/tae0jang/Documents/Workspace/AI_Pro_Report/video/out/humanoid_baseline_pass.mp4'
+file '/home/tae0jang/Documents/Workspace/AI_Pro_Report/video/out/humanoid_goal_occupied_fail.mp4'

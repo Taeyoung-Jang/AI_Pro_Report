@@ -1,0 +1,23 @@
+[Script Info]
+ScriptType: v4.00+
+PlayResX: 1920
+PlayResY: 1080
+WrapStyle: 0
+
+[V4+ Styles]
+Format: Name, Fontname, Fontsize, PrimaryColour, SecondaryColour, OutlineColour, BackColour, Bold, Italic, Underline, StrikeOut, ScaleX, ScaleY, Spacing, Angle, BorderStyle, Outline, Shadow, Alignment, MarginL, MarginR, MarginV, Encoding
+Style: Default,Noto Sans CJK KR,38,&H00FFFFFF,&H00FFFFFF,&H00000000,&H99000000,0,0,0,0,100,100,0,0,3,10,0,2,60,60,40,1
+
+[Events]
+Format: Layer, Start, End, Style, Name, MarginL, MarginR, MarginV, Effect, Text
+Dialogue: 0,0:00:00.00,0:00:15.50,Default,,0,0,0,,{\an7\fs40\b1\pos(40,140)}창고 배치 · AFS 제안: 바닥 마찰 0.8→1.15, 장애물 2 위치 0→0.45
+Dialogue: 0,0:00:00.00,0:00:15.50,Default,,0,0,0,,{\an7\fs28\pos(40,196)}AFS 예상: 이동 정체  ·  청록 기둥 = 사람 모형 (정해진 경로로 움직이며 로봇을 피하지 않음)
+Dialogue: 0,0:00:00.00,0:00:09.50,Default,,0,0,0,,{\an9\fs32\pos(1880,140)}실제 속도
+Dialogue: 0,0:00:09.50,0:00:12.50,Default,,0,0,0,,{\an9\fs32\pos(1880,140)}113배속
+Dialogue: 0,0:00:00.00,0:00:03.70,Default,,0,0,0,,로봇이 장애물을 돌아 목표로 이동
+Dialogue: 0,0:00:03.70,0:00:06.09,Default,,0,0,0,,사람이 통로를 가로질러 걷기 시작
+Dialogue: 0,0:00:06.09,0:00:06.41,Default,,0,0,0,,이동이 막혀 정지 → 다음 로봇 판단(LLM 응답)을 기다리는 중 (23.5초)
+Dialogue: 0,0:00:06.41,0:00:07.61,Default,,0,0,0,,40.4초: 응답을 기다리던 로봇에 사람이 접촉
+Dialogue: 0,0:00:07.61,0:00:09.50,Default,,0,0,0,,41.6초: 넘어짐
+Dialogue: 0,0:00:09.50,0:00:12.50,Default,,0,0,0,,이후 로봇 판단 16회: 일어서기 요청(지원 안 됨), 기어가기 시도
+Dialogue: 0,0:00:12.50,0:00:15.50,Default,,0,0,0,,{\fs48\b1}FAIL · 넘어짐 (예상한 이동 정체와 다른 유형) · 로봇 판단 20회 소진
