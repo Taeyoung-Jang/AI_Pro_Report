@@ -1,4 +1,4 @@
-"""환경 생성기의 세 산출물(MJCF, 이동 지도, 장면 그래프)을 시작 장면과 변경 장면으로 비교하는 그림을 만든다.
+"""환경 생성기의 세 표현(MJCF, 이동 지도, 장면 그래프)을 시작 장면과 변경 장면으로 비교하는 그림을 만든다.
 
 AFS가 상자 가로 위치를 1.0에서 0.0으로 바꾼 휴머노이드 사례를 사용한다.
 출력: assets/env_generation.png (1920x1080), assets/env_map_<이름>.png
@@ -121,8 +121,8 @@ def draw_graph(ax, graph):
 def main():
     data = [load(r) for _, r in SCENES]
     fig = plt.figure(figsize=(19.2, 10.8), dpi=100, facecolor=hexc(c.BG))
-    fig.text(0.025, 0.95, "환경 생성기: 하나의 장면 파라미터 → 세 가지 산출물", fontsize=30, weight="bold", color=INK)
-    fig.text(0.025, 0.905, "값 하나(상자 가로 위치)만 바꿔도 세 산출물이 함께, 서로 일치하게 바뀝니다.",
+    fig.text(0.025, 0.95, "환경 생성기: 하나의 장면 파라미터 → 세 가지 표현", fontsize=30, weight="bold", color=INK)
+    fig.text(0.025, 0.905, "값 하나(상자 가로 위치)만 바꿔도 세 표현이 함께, 서로 일치하게 바뀝니다.",
              fontsize=18, color=MUTED)
     gs = fig.add_gridspec(2, 3, left=0.025, right=0.985, top=0.82, bottom=0.04, hspace=0.32, wspace=0.08,
                           width_ratios=[0.8, 1.3, 1.3])
