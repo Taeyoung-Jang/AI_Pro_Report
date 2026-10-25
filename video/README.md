@@ -31,6 +31,7 @@ $PY -I scripts/render_env_generation.py  # assets/env_generation.png     MJCF·�
 slides/build_slides.sh                   # slides/png/slide-01~13.png   개요·성과 슬라이드(본문 그림 재사용)
 $PY -I scripts/assemble_rough_cut.py     # out/rough_cut.mp4            무음 가편집본 10:00
 $PY -I scripts/make_subtitled.py        # out/final_subtitled.mp4 (+ out/narration.srt)  narration.md 원고를 아래 자막 띠에 입힌 완성본
+$PY -I scripts/make_narrated.py         # out/final_narrated.mp4  원고를 edge-tts(ko-KR-InJoonNeural, 원고가 Microsoft 음성 서비스로 전송됨)로 읽어 음성을 입힌 완성본
 $PY -I scripts/index_humanoid.py <휴머노이드 결과 디렉터리> assets/humanoid_index.json  # 42개 실행 목록
 ```
 

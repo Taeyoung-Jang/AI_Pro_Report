@@ -19,7 +19,7 @@ SEED = 253785482
 ROOT = os.path.join(c.HUMANOID, f"seed_{SEED}")
 ATT = os.path.join(ROOT, f"seeds/{SEED}/afs/attempts")
 # (장 이름, 길이 초)
-CARDS = [("observe", 11.0), ("propose", 17.0), ("validate", 10.0), ("result", 12.0)]
+CARDS = [("observe", 12.0), ("propose", 23.0), ("validate", 9.0), ("result", 6.0)]  # 내레이션 문장 시각에 맞춘 길이
 VW, VH, VX, VY = 1100, 619, 760, 250
 
 FAMILY_KO = {"goal_occupied": "목표 위치 점유", "obstacle_interference": "장애물 간섭",

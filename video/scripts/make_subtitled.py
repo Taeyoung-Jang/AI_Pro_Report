@@ -5,6 +5,7 @@
 - 기존 클립의 자막·진행 막대와 겹치지 않도록 본 화면을 줄여 위에 두고, 아래 띠에 자막을 넣는다.
 출력: out/final_subtitled.mp4, out/narration.srt
 """
+import json
 import os
 import re
 import sys
@@ -68,7 +69,8 @@ def balanced(s):
     return pieces
 
 
-def timed(sections):
+def timed(sections, voice=None):
+    """voice가 있으면({구간 시작초: [음성 시작 지연, 음성 길이]}) 자막을 실제 음성 구간에 맞춘다."""
     events = []
     for a, b, text in sections:
         parts = chunks(text)
@@ -77,6 +79,9 @@ def timed(sections):
         total = sum(len(p) for p in parts)
         t = a + 0.3
         span = (b - a) - 0.6
+        if voice and str(a) in voice:
+            lead, dur = voice[str(a)]
+            t, span = a + lead, dur
         for p in parts:
             d = span * len(p) / total
             events.append((t, t + d - GAP, p))
@@ -92,7 +97,9 @@ def srt_time(t):
 
 def main():
     sections = parse(os.path.join(c.VIDEO, "narration.md"))
-    events = timed(sections)
+    vpath = os.path.join(c.ASSETS, "narration_voice.json")  # make_narrated.py가 만드는 음성 구간 정보
+    voice = json.load(open(vpath)) if os.path.exists(vpath) else None
+    events = timed(sections, voice)
     srt = os.path.join(c.OUT, "narration.srt")
     with open(srt, "w", encoding="utf-8") as f:
         for i, (a, b, t) in enumerate(events, 1):
