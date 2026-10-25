@@ -69,7 +69,7 @@ def draw(plan, ctx, upto, path):
         y2 = 520
         box(x, y2, w, 480, "② 실험 세트와 시도 횟수")
         rows = [("세트 (시드)", str(plan["seed"])), ("방법", plan["method"].upper()),
-                ("실행 시도", f"{budget['max_attempts']}회 (첫 1회는 공통 시작 장면)"),
+                ("실행 시도", f"{budget['max_attempts']}회 (공통 시작 장면 1회 + 평가 {budget['max_attempts'] - 1}회)"),
                 ("AFS 제안 요청", f"최대 {budget['max_afs_requests']}회"),
                 ("AFS의 LLM", "GPT-6 Luna" if budget["afs_model"].endswith("gpt-6-luna") else budget["afs_model"])]
         for i, (k, v) in enumerate(rows):

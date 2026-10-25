@@ -40,7 +40,7 @@ def tiles():
 def draw_layers(ts, bg_path, fg_path):
     bg = Image.new("RGB", (c.W, c.H), c.BG)
     d = ImageDraw.Draw(bg)
-    d.text((36, 30), "실험 1 · Panda 로봇팔 + GR00T N1.7: 같은 시도 횟수 12회씩", font=c.font(44, True), fill=c.INK)
+    d.text((36, 30), "실험 1 · Panda 로봇팔 + GR00T N1.7: 세트당 평가 2회 (방법당 6회)", font=c.font(44, True), fill=c.INK)
     d.text((c.W - 36, 44), "영상 2배속 · 행=시도 순서, 열=세트", font=c.font(26), fill=c.MUTED, anchor="ra")
     for mi, (m, label, col) in enumerate(METHODS):
         x0 = 36 + mi * (PANEL_W + 60)
@@ -50,7 +50,7 @@ def draw_layers(ts, bg_path, fg_path):
                    font=c.font(22), fill=c.MUTED, anchor="md")
     for t in ts:
         d.rectangle([t["x"] - 4, t["y"] - 4, t["x"] + TW + 3, t["y"] + TH + 3], fill=(215, 215, 212))
-    d.text((36, c.H - 46), "각 세트의 처음 2회(시도 0·1)는 두 방법이 같은 장면을 쓰는 공통 시작 장면입니다.",
+    d.text((36, c.H - 46), "위 두 줄(시도 0·1)은 두 방법이 같은 장면을 쓰는 공통 시작 장면으로, 평가에서 제외합니다.",
            font=c.font(24), fill=c.MUTED)
     bg.save(bg_path)
 
@@ -58,8 +58,9 @@ def draw_layers(ts, bg_path, fg_path):
     d = ImageDraw.Draw(fg)
     for mi, (m, label, col) in enumerate(METHODS):
         x0 = 36 + mi * (PANEL_W + 60)
-        n_fail = sum(t["outcome"] == "FAIL" for t in ts if t["method"] == m)
-        d.text((x0 + PANEL_W, TOP + 2), f"FAIL {n_fail}/12 = {100 * n_fail / 12:.1f}%",
+        ev = [t for t in ts if t["method"] == m and t["attempt"] >= 2]  # 공통 시작 장면(시도 0·1) 제외
+        n_fail = sum(t["outcome"] == "FAIL" for t in ev)
+        d.text((x0 + PANEL_W, TOP + 2), f"평가 FAIL {n_fail}/{len(ev)} = {100 * n_fail / len(ev):.1f}%",
                font=c.font(34, True), fill=c.FAIL_C, anchor="ra")
     for t in ts:
         col = c.FAIL_C if t["outcome"] == "FAIL" else c.PASS_C
@@ -70,6 +71,9 @@ def draw_layers(ts, bg_path, fg_path):
         bw = 92
         d.rectangle([x, y, x + bw, y + 36], fill=col + (235,))
         d.text((x + bw // 2, y + 18), t["outcome"], font=c.font(24, True), fill=(255, 255, 255, 255), anchor="mm")
+        if t["attempt"] < 2:  # 공통 시작 장면은 흐리게 하고 표시
+            d.rectangle([x, y, x + TW, y + TH], fill=(250, 250, 248, 150))
+            d.text((x + TW - 8, y + TH - 8), "공통 시작", font=c.font(22, True), fill=c.MUTED + (255,), anchor="rd")
     fg.save(fg_path)
 
 

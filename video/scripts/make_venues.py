@@ -5,6 +5,7 @@
 결과는 suite_summary.json에서 읽는다.
 출력: out/humanoid_venues.mp4
 """
+import glob
 import json
 import os
 import sys
@@ -83,8 +84,13 @@ def result_lines(summary, venue):
     v = next(x for x in summary["venues"] if x["venue"] == venue)
     if not v["complete"]:
         return [("시작 장면부터 FAIL (로봇 판단 20회 소진)", c.FAIL_C), ("→ 비교 실행을 진행하지 않음", c.MUTED)]
-    a, r = v["arms"]["afs"], v["arms"]["random"]
-    return [(f"AFS  FAIL {a['fail']}/{a['valid']}", c.AFS_C), (f"Random 테스트  FAIL {r['fail']}/{r['valid']}", c.RAND_C)]
+    res = {}
+    for m in ("afs", "random"):  # 첫 실행(공통 시작 장면)을 뺀 평가 실행만 센다
+        outs = [json.load(open(p))["task_outcome"] for p in sorted(glob.glob(os.path.join(
+            c.VENUES, venue, f"campaign/seeds/*/{m}/attempts/attempt_*/rollout/result.json")))][1:]
+        res[m] = (outs.count("FAIL"), len(outs))
+    (af, an), (rf, rn) = res["afs"], res["random"]
+    return [(f"AFS  FAIL {af}/{an}", c.AFS_C), (f"Random 테스트  FAIL {rf}/{rn}", c.RAND_C)]
 
 
 def main():
@@ -92,7 +98,7 @@ def main():
     im = Image.new("RGB", (c.W, c.H), c.BG)
     d = ImageDraw.Draw(im)
     d.text((X0, 34), "실험 2 확장 · 다른 배치에서도 실행", font=c.font(46, True), fill=c.INK)
-    d.text((c.W - X0, 50), "같은 G1 휴머노이드 + LLM Agent · 장소마다 방법당 3회", font=c.font(26), fill=c.MUTED, anchor="ra")
+    d.text((c.W - X0, 50), "같은 G1 휴머노이드 + LLM Agent · 장소마다 공통 시작 장면 + 방법당 2회", font=c.font(26), fill=c.MUTED, anchor="ra")
     for i, (venue, name, desc) in enumerate(VENUES):
         x = X0 + i * (VW + GAP)
         d.text((x, 118), name, font=c.font(36, True), fill=c.INK)

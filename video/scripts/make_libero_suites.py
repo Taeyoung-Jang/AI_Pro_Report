@@ -22,15 +22,15 @@ SUITES = [
     dict(key="spatial", name="LIBERO-Spatial (주 실험)", task="그릇을 집어 접시에 놓기",
          runs=os.path.join(c.ARM, "environment_comparison_v2/seed_*/{m}/attempt_*"),
          video=os.path.join(c.ARM, "environment_comparison_v2/seed_661/random/attempt_00001"),
-         design="3세트 × 방법당 4회", note="AFS가 장애물로 이송 경로를 막는 실패를 찾음"),
+         design="3세트 × 평가 2회 = 방법당 6회", note="AFS가 장애물로 이송 경로를 막는 실패를 찾음"),
     dict(key="object", name="LIBERO-Object", task="버터를 집어 바구니에 넣기",
          runs=os.path.join(c.ARM_OG, "object/set_*/seed_*/{m}/attempt_*"),
          video=os.path.join(c.ARM_OG, "object/set_1/seed_470290/random/attempt_00001"),
-         design="3세트 × 방법당 4회 구성을 독립적으로 3번 반복", note="세 번 모두 AFS ≥ Random 테스트\n다만 AFS 제안 대부분이 범위 끝값 조합\n(버터 질량 최대, 장애물 최대 크기 등)"),
+         design="3세트 × 평가 2회를 독립적으로 3번 반복 (방법당 18회)", note="세 번 모두 AFS ≥ Random 테스트\n다만 AFS 제안 대부분이 범위 끝값 조합\n(버터 질량 최대, 장애물 최대 크기 등)"),
     dict(key="goal", name="LIBERO-Goal", task="가운데 서랍 열기",
          runs=os.path.join(c.ARM_OG, "goal/set_*/seed_*/{m}/attempt_*"),
          video=os.path.join(c.ARM_OG, "goal/set_1/seed_477723/random/attempt_00000"),
-         design="3세트 × 방법당 4회 구성을 독립적으로 3번 반복", note="비교 불가: 정책이 기본 장면에서도\n거의 항상 실패 (Random 테스트 전부 FAIL)", na=True),
+         design="3세트 × 평가 2회를 독립적으로 3번 반복 (방법당 18회)", note="비교 불가: 정책이 기본 장면에서도\n거의 항상 실패 (Random 테스트 전부 FAIL)", na=True),
 ]
 
 
@@ -39,6 +39,8 @@ def count(pattern, method):
     for d in glob.glob(pattern.format(m=method)):
         rp = os.path.join(d, "receipt.json")
         if not os.path.exists(rp):  # 제외된 실행(응답 오류·초기 침투)은 receipt가 없다
+            continue
+        if int(d[-5:]) < 2:  # 세트별 처음 2회는 공통 시작 장면으로 평가에서 제외
             continue
         r = json.load(open(rp))
         if r.get("status") != "VALID":

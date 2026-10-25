@@ -1,2 +1,16 @@
 /build/
 *.synctex.gz
+# 실험 원본(약 20 GB)과 압축본은 저장소에 넣지 않는다
+/experiment_results/
+/experiment_results_*.tar.zst
+# 영상 산출물(스크립트로 다시 만든다)
+/video/out/
+/video/slides/build/
+/video/slides/png/
+/video/.venv/
+/experiment_results_20261025/
+/demo_recording_20261025_v2/
+/experiment_results_qwen38/
+# 대용량 실험 압축 파일
+/humanoid_qwen38_20261025_v1_20261025T074253_124151Z.tar.gz
+/robot_arm_and_humanoid_results_20261025T041015_006723Z.tar.gz

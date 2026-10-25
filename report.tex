@@ -1,5 +1,5 @@
 % !TeX program = xelatex
-% 한글 보고서. 본문 10쪽 이내, 참고문헌과 부록은 별도.
+% 한글 보고서. 부록(용어 정리) 포함 10쪽 이내.
 \documentclass[a4paper,10pt,twocolumn]{article}
 \usepackage{kotex}
 \usepackage[margin=18mm,top=20mm,bottom=20mm,columnsep=6mm]{geometry}
@@ -44,6 +44,9 @@
 \fancyhead[L]{\small Physical AI 작업 수행 검증 및 회귀 테스트 자동화}
 \fancyfoot[C]{\small \thepage}
 \newcommand{\code}[1]{\texttt{\detokenize{#1}}}
+% 부록 A 용어 연결: 본문 \gl{키}{용어} → 용어\dag(누르면 부록 항목으로 이동), 부록 \glt{키}{용어}가 이동 위치
+\newcommand{\gl}[2]{\hyperlink{gl:#1}{#2\textsuperscript{\dag}}}
+\newcommand{\glt}[2]{\leavevmode\hypertarget{gl:#1}{#2}}
 \renewcommand{\refname}{참고문헌}
 \captionsetup[table]{name=표}
 \captionsetup[figure]{name=그림}
@@ -61,24 +64,23 @@
   {\LARGE\bfseries AI 기반 Physical AI 작업 수행 검증 및\\[3pt]
   회귀 테스트 자동화 기술\par}
   \vspace{6pt}
-  {\large 행동 피드백 기반 능동 실패 탐색: 로봇팔 pick-and-place와 휴머노이드 사례\par}
+  % {\large 행동 피드백 기반 능동 실패 탐색: 로봇팔 pick-and-place와 휴머노이드 사례\par}
   \vspace{4pt}
-  {\small 2026년 10월}
+  % {\small 2026년 10월}
 \end{center}
 \begin{center}
 \begin{minipage}{0.9\textwidth}
 \small
 \textbf{요약.}
-Physical AI는 물체 배치, 장애물, 작업자 위치 등 3D 환경 변화에 따라 같은 명령에서도
-다른 결과를 낸다. 본 과제는 장면 파라미터로부터 시뮬레이션 환경을 자동 생성하고,
-이전 실행의 행동 기록을 읽은 LLM이 실패 가능성이 높은 다음 환경을 제안하는
-능동 실패 탐색(Active Failure Search, AFS)과, 실행 결과를 판정·보존하여 회귀 테스트로
-재사용하는 파이프라인을 구현하였다. LIBERO Panda 로봇팔과 공개 VLA 정책
-GR00T~N1.7의 pick-and-place 실험에서 AFS는 동일 예산(12회)으로 실패 발견율
-\textbf{58.3\%}를 기록해 Random(16.7\%) 대비 \textbf{3.5배}의 실패를 발견했다.
-G1 휴머노이드의 동적 사람 횡단 환경에서도 AFS는 40\%, Random은 0\%였다.
-전체 실험에서 초기 정의한 실패 유형 6종 중 \textbf{4종}(충돌, 장애물 간섭, 목표 위치 점유,
-작업자 안전 위험)과 도달 불가 후보 1종을 자동 발견하여 세 가지 목표 지표를 모두 달성하였다.
+Physical AI는 물체 배치, 장애물, 작업자 위치 등 3D 환경 변화에 따라 같은 명령에서도 다른 결과를 낸다. 
+본 과제는 장면 파라미터로부터 시뮬레이션 환경을 자동 생성하고, 이전 실행의 행동 기록을 읽은 LLM이 실패 가능성이 높은 다음 환경을 제안하는
+능동 실패 탐색(Active Failure Search, AFS)과, 실행 결과를 판정·보존하여 회귀 테스트로 재사용하는 파이프라인을 구현하였다. 
+카메라 영상을 보고 동작을 정하는 공개 로봇 AI 모델(GR00T~N1.7)이 로봇팔로 그릇을 집어 접시에 옮기는 실험에서 AFS는 같은 시도 횟수(3세트, 두 방법 각 6회)에서 실패 발견율
+\textbf{100\%}(6/6)로, Random 테스트(16.7\%, 1/6)보다 \textbf{6배} 많은 실패 사례를 찾았다.
+사람이 가로질러 지나가는 G1 휴머노이드 환경(독립 실험 3세트, 두 방법 각 18회)에서도 AFS는 \textbf{33.3\%}로 Random 테스트(11.1\%)보다 3배 많은 실패 사례를 찾았다.
+전체 실험에서 처음 정의한 실패 유형 6종 중 \textbf{4종}(충돌, 장애물 간섭, 목표 위치 점유, 작업자 안전 위험)를 자동 발견하고, 도달 불가 1종을 부분적으로 관측하였다. 
+실패 발견율 목표(30\%)와 Random 테스트 대비 향상 목표를 두 실험 모두에서 달성하였다.
+({\footnotesize\dag\ 표시 용어는 부록 A에 설명이 있다.})
 \end{minipage}
 \end{center}
 \vspace{5mm}]
@@ -87,44 +89,37 @@ G1 휴머노이드의 동적 사람 횡단 환경에서도 AFS는 40\%, Random�
 \input{chapters/01_introduction}
 
 % ================================================================== 2
-\input{chapters/02_related_work}
+\input{chapters/02_system}
 
 % ================================================================== 3
-\input{chapters/03_system}
+\input{chapters/03_afs}
 
 % ================================================================== 4
-\input{chapters/04_afs}
+\input{chapters/04_setup}
 
 % ================================================================== 5
-\input{chapters/05_setup}
+\input{chapters/05_results}
 
 % ================================================================== 6
-\input{chapters/06_results}
+\input{chapters/06_failure_cases}
 
 % ================================================================== 7
-\input{chapters/07_failure_cases}
+\input{chapters/07_regression}
 
 % ================================================================== 8
-\input{chapters/08_regression}
-
-% ================================================================== 9
-\input{chapters/09_conclusion}
+\input{chapters/08_conclusion}
 
 % ================================================================== 참고문헌
 \input{chapters/references}
 
 % ================================================================== 부록
 \onecolumn
+\raggedbottom
 \appendix
 \renewcommand{\thesection}{부록 \Alph{section}}
 \renewcommand{\thetable}{\Alph{section}.\arabic{table}}
 \setcounter{table}{0}
 
-\input{chapters/appendix/A_setup_details}
-\input{chapters/appendix/B_failure_rules}
-\input{chapters/appendix/C_afs_feedback}
-\input{chapters/appendix/D_trial_results}
-\input{chapters/appendix/E_regression_state}
-\input{chapters/appendix/F_glossary}
+\input{chapters/appendix/A_glossary}
 
 \end{document}

@@ -165,7 +165,7 @@ Random 테스트 대비 향상 & 같은 시도 횟수에서 Random 테스트 대
 정책 (두뇌) & GR00T N1.7 (NVIDIA VLA): 카메라 영상·명령 → 관절 동작 & LLM Agent (GPT-6 Luna)가 이동·밀기 기능 선택 + GR00T 보행 정책 \\
 작업 & 그릇을 집어 접시에 놓기 & 상자·장애물·횡단하는 사람이 있는 통로에서 목표 도달 \\
 환경 변경 & 10개 변수 (그릇·접시·장애물) & 21개 변수 (상자·바닥 물성, 통로 폭, 장애물, 사람) \\
-시도 횟수 & 3세트 × 4회 = 방법당 12회 & 3세트 × 7회 = 방법당 21회 (평가: 공통 시작 장면 제외 18회) \\
+시도 횟수 & 3세트 × 2회 = 방법당 6회 & 3세트 × 6회 = 방법당 18회 (공통 시작 장면은 평가 전 실행, 제외) \\
 공통 시작 장면 & 세트별 처음 2회, 같은 무작위 장면 & 세트별 처음 1회, 같은 기본 장면 \\
 탐색 LLM & GPT-6 Luna Pro & GPT-6 Luna \\
 \bottomrule
@@ -180,14 +180,14 @@ Random 테스트 대비 향상 & 같은 시도 횟수에서 Random 테스트 대
 \begin{axis}[
   ybar, width=\linewidth, height=62mm, bar width=13pt,
   ymin=0, ymax=118, ylabel={실패 발견율 (\%)},
-  symbolic x coords={A,B,C,D}, xtick=data,
-  xticklabels={{로봇팔\\전체},{로봇팔\\탐색 단계},{휴머노이드\\전체},{휴머노이드\\탐색 단계}},
+  symbolic x coords={A,B}, xtick=data,
+  xticklabels={{로봇팔},{휴머노이드}},
   xticklabel style={font=\footnotesize,align=center}, tick label style={font=\footnotesize},
   nodes near coords, nodes near coords style={font=\footnotesize},
   legend style={font=\footnotesize,at={(0.5,1.02)},anchor=south,draw=none,legend columns=3},
   axis lines*=left, enlarge x limits=0.18]
-\addplot[fill=afs,draw=afs] coordinates {(A,58.3) (B,100) (C,28.6) (D,33.3)};
-\addplot[fill=rnd,draw=rnd] coordinates {(A,16.7) (B,16.7) (C,9.5) (D,11.1)};
+\addplot[fill=afs,draw=afs] coordinates {(A,100) (B,33.3)};
+\addplot[fill=rnd,draw=rnd] coordinates {(A,16.7) (B,11.1)};
 \draw[failc,dashed,thick] (rel axis cs:0,0.254) -- (rel axis cs:1,0.254);
 \addlegendimage{legend image code/.code={\draw[failc,dashed,thick] (0cm,0.08cm) -- (0.5cm,0.08cm);}}
 \legend{AFS, Random 테스트, 목표 30\%}
@@ -195,14 +195,14 @@ Random 테스트 대비 향상 & 같은 시도 횟수에서 Random 테스트 대
 \end{tikzpicture}
 \end{column}
 \begin{column}{0.4\textwidth}
-\textbf{로봇팔} (12회)\\
-AFS \bignum{58.3\%}{afs} \; Random 테스트 16.7\%\\
-{\small\color{muted}+250\%, 3.5배}\par\vspace{5mm}
-\textbf{휴머노이드} (공통 시작 장면 제외 18회)\\
-AFS \bignum{33.3\%}{afs} \; Random 테스트 11.1\%\\
+\textbf{로봇팔} (3세트 × 2회 = 6회)\\
+AFS \bignum{100\%}{afs}\\ Random 테스트 16.7\%\\
+{\small\color{muted}+500\%, 6배 · 3건은 같은 장면 재제안}\par\vspace{4mm}
+\textbf{휴머노이드} (3세트 × 6회 = 18회)\\
+AFS \bignum{33.3\%}{afs}\\ Random 테스트 11.1\%\\
 {\small\color{muted}+200\%, 3배 · 세 세트 모두 2건씩 (Random 테스트 0/0/2)}\par
-\vspace{3mm}
-{\scriptsize\color{muted}탐색 단계: 공통 시작 장면 이후 각 방법이 스스로 고른 시험}
+\vspace{2mm}
+{\scriptsize\color{muted}공통 시작 장면은 평가에서 제외}
 \end{column}
 \end{columns}
 \end{frame}
@@ -258,7 +258,7 @@ AFS \bignum{33.3\%}{afs} \; Random 테스트 11.1\%\\
 충돌 & \textcolor{passc}{\textbf{O}} & 로봇팔 & 로봇–장애물 접촉 10.7--13.7초, 그릇 미이동 \\
 장애물 간섭 & \textcolor{passc}{\textbf{O}} & 휴머노이드 & 장애물 부근 경로 계획 반복 실패, 정체 \\
 목표 위치 점유 & \textcolor{passc}{\textbf{O}} & 휴머노이드 & 상자가 목표 영역 점유, 목표 0.85\,m 앞 정체 \\
-작업자 안전 위험 & \textcolor{passc}{\textbf{O}} & 휴머노이드 & 사람 1\,m 이내 0.5초 이상 노출, AFS 14/21회 \\
+작업자 안전 위험 & \textcolor{passc}{\textbf{O}} & 휴머노이드 & 사람 1\,m 이내 0.5초 이상 노출, AFS 11/18회 \\
 도달 불가 & 부분 & 로봇팔·휴머노이드 & 접시 8.7\,cm 앞 미완료, 최종 목표점 경로 없음 반복 \\
 인식 오류 & -- & -- & 후속 실험 (이번엔 실제 위치 값 제공) \\
 \bottomrule
@@ -276,8 +276,8 @@ AFS \bignum{33.3\%}{afs} \; Random 테스트 11.1\%\\
 \toprule
 목표 & 결과 & 근거 \\
 \midrule
-실패 발견율 30\% 이상 & \textbf{달성} & 로봇팔 58.3\%; 휴머노이드 33.3\% (공통 시작 장면 제외 18회) \\
-Random 테스트 대비 20\% 이상 향상 & \textbf{달성} & 로봇팔 +250\%, 휴머노이드 +200\% \\
+실패 발견율 30\% 이상 & \textbf{달성} & 로봇팔 100\% (6/6); 휴머노이드 33.3\% (6/18) \\
+Random 테스트 대비 20\% 이상 향상 & \textbf{달성} & 로봇팔 +500\%, 휴머노이드 +200\% \\
 실패 유형 6종 중 4종 & \textbf{달성} & 충돌, 장애물 간섭, 목표 위치 점유, 작업자 안전 위험 \\
 3D 장면 구조화·후보 생성 & 구현 & 10개·21개 장면 변수, 장면 그래프·MJCF·이동 지도 생성 \\
 행동 기반 취약 조건 탐색 & 구현 & 관측 → 가설 → 제안 → FAIL 연결 확인 \\
