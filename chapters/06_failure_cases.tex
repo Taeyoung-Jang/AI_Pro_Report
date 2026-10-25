@@ -1,0 +1,73 @@
+\section{실패 사례 분석}
+
+\begin{figure*}[!t]
+\centering
+\begin{tikzpicture}
+\begin{axis}[name=h, width=0.46\textwidth, height=46mm,
+  xlabel={장애물 높이 (cm)}, ylabel={최종 그릇–접시 거리 (cm)},
+  xmin=9, xmax=18, ymin=0, ymax=27, xtick={10,12,14,15,17},
+  label style={font=\small}, tick label style={font=\scriptsize},
+  axis lines*=left, legend style={font=\scriptsize,draw=none,at={(0.03,0.97)},anchor=north west}]
+\fill[rnd!35] (axis cs:12,0) rectangle (axis cs:14,27);
+\addplot[only marks,mark=*,mark size=2.4pt,color=afs] coordinates {(10,0.6) (12,0.8)};
+\addplot[only marks,mark=x,mark size=3.4pt,line width=1.2pt,color=red!70!black] coordinates {(14,24.1) (15,24.1) (17,24.1)};
+\legend{PASS, FAIL}
+\node[font=\scriptsize,align=center] at (axis cs:13,14) {경계\\12--14};
+\end{axis}
+\begin{axis}[at={(h.east)}, anchor=west, xshift=16mm, width=0.46\textwidth, height=46mm,
+  xlabel={접시 이동량 (이송 경로 대비 \%)}, ylabel={최종 그릇–접시 거리 (cm)},
+  xmin=-4, xmax=54, ymin=0, ymax=10, xtick={0,12.5,25,37.5,50},
+  label style={font=\small}, tick label style={font=\scriptsize}, axis lines*=left]
+\fill[rnd!35] (axis cs:37.5,0) rectangle (axis cs:50,10);
+\addplot[only marks,mark=*,mark size=2.4pt,color=afs] coordinates {(0,1.5) (12.5,1.6) (25,1.8) (37.5,3.0)};
+\addplot[only marks,mark=x,mark size=3.4pt,line width=1.2pt,color=red!70!black] coordinates {(50,8.7)};
+\node[font=\scriptsize,align=center] at (axis cs:43.75,6.5) {경계\\37.5--50};
+\end{axis}
+\end{tikzpicture}
+\caption{로봇팔 통제 실험의 PASS/FAIL 경계. (좌) 장애물 높이: 14\,cm 이상에서 그릇이 움직이지 않고 실패.
+(우) 접시 이동량: 50\%에서 그릇을 운반했으나 접시 8.7\,cm 앞에서 미완료. 음영은 경계 구간.}\label{fig:boundary}
+\end{figure*}
+
+\begin{table}[!t]
+\centering\footnotesize\setlength{\tabcolsep}{3pt}
+\caption{로봇팔 통제 실험 결과(11개 장면)}\label{tab:control}
+\begin{tabularx}{\linewidth}{@{}Ycccc@{}}
+\toprule
+장면 & 결과 & 시간(s) & 접촉(s) & 그릇–접시(m) \\
+\midrule
+접시 이동 0/12.5/25\% & PASS & 5.2/4.9/4.8 & 0 & .015/.016/.018 \\
+접시 이동 37.5\% & PASS & 13.1 & 0 & 0.030 \\
+접시 이동 50\% & FAIL & 15.0 & 0 & 0.087 \\
+장애물 10/12\,cm & PASS & 4.9/4.9 & 0 & .006/.008 \\
+장애물 14/15/17\,cm & FAIL & 15.0 & 13.5--13.6 & 0.241 \\
+15\,cm, 왼쪽 3\,cm & FAIL & 15.0 & 13.5 & 0.241 \\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+\subsection*{로봇팔: 접근 차단 충돌과 PASS/FAIL 경계}
+실험 1의 FAIL 7건은 모두 제한 시간(약 15초) 안에 성공하지 못했고, 1초 이후 그릇의 이동은 1\,mm 미만이었으며
+로봇과 장애물의 접촉이 10--14초 지속되었다. 그릇과 장애물 사이의 접촉은 한 번도 없었다.
+반면 PASS는 약 5초 만에 끝나며 그릇이 15--17\,cm 들렸다가 접시 중심 2\,cm 이내에 놓였다.
+즉 실패는 운반 중 충돌이 아니라 \textbf{잡기 전 접근 단계의 충돌}이다. AFS는 첫 실패의 접촉 기록을
+읽고 장애물을 이송 경로 중앙에 크게 배치하는 방향으로 수렴하였다. 다만 6건의 제안이 모두 장애물
+크기를 상한으로 정했기 때문에, 이 실험만으로는 크기·높이·위치 중 어느 변수가 실패를 일으켰는지 구분할 수 없다.
+
+이를 확인하기 위해 같은 정책으로 장애물 높이와 접시 위치만 하나씩 바꾼 통제 실험(11개 장면)을
+수행하였다(그림~\ref{fig:boundary}, 표~\ref{tab:control}). 장애물 높이 10·12\,cm에서는 PASS,
+14·15·17\,cm에서는 모두 FAIL이었고 최대 접촉력은 198--279\,N이었다. 높이 15\,cm에서 장애물을 왼쪽으로
+3\,cm 옮겨도 결과가 같아, 이 정도의 위치 변화보다 높이가 결과를 좌우했다. 접시를 이송 경로의 37.5\%까지 옮기면
+PASS(다만 실행 시간이 약 13초로 늘어남), 50\%에서는 그릇을 들고 운반했지만 접시 8.7\,cm 앞에서 놓지 못해
+FAIL이었다. 따라서 이 정책의 안전 운용 경계는 \textbf{장애물 높이 12--14\,cm}, \textbf{접시 이동 37.5--50\%}
+구간에 있다. 이 경계값은 영상으로는 확인하기 어렵고, 통제된 반복 실행으로만 얻을 수 있는 결과다.
+
+\subsection*{휴머노이드: 목표 위치 점유}
+예비 실험에서 공통 시작 장면이 PASS(최종 목표 거리 0.116\,m)로 끝난 뒤, AFS는 상자 위치 하나만 통로 가장자리에서 중앙으로 바꿨다.
+상자가 목표 영역을 점유하자 경로 계획기는 목표점이 막혀 경로를 찾지 못했고(no feasible path),
+상자 밀기 요청은 로봇이 상자 면과 약 90도 어긋난 방향에 있어 실행되지 않았다.
+로봇은 허용된 판단 10회를 모두 쓰고 목표 0.86\,m 앞에서 멈췄다. 두 변수(상자의 가로·진행 방향 위치)를 바꾼
+다른 FAIL에서도 목표점 경로 없음과 우회 경로 차단이 반복되어 목표 0.43\,m 앞에서 종료되었다.
+두 사례 모두 단순한 환경 변화가 경로 계획과 물체 밀기 기능의 한계를 드러낸 경우다.
+본 실험(3세트)에서도 AFS는 두 세트에서 상자를 통로 중앙으로 옮기는 제안을 독립적으로 내놓았고,
+두 경우 모두 목표 위치 점유로 목표 0.85--0.86\,m 앞에서 종료되어 예비 실험의 실패가 재현되었다.
+또한 통로 폭을 1.6\,m로 좁힌 제안에서는 목표 3.65\,m 앞에서 정체하는 새로운 목표 위치 점유 사례가 발견되었다.

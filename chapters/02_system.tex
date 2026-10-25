@@ -50,15 +50,15 @@
 \node[pill=c1] at (115.5,94) {AGENT};
 \agenticon{(7.5,88.8)}{c1}
 \node[title,anchor=west] at (12.3,89.3) {탐색 Agent};
-\node[sub,anchor=west] at (31,89.3) {LLM (GPT-6 Luna Pro) \textbullet\ 한 번의 응답에서 관측 분석부터 환경 제안까지 수행};
+\node[sub,anchor=west] at (31,89.3) {LLM (GPT-6 Luna Pro / Luna) \textbullet\ 한 번의 응답에서 관측 분석부터 환경 제안까지 수행};
 \stepbox{5}{c1}{관측}
-  {\textbullet\ 목표 결과·종료 상태\\\textbullet\ 행동 기록: 경로 거절,\\\hspace*{1.6mm}중간 목표 도착, 조작 요청\\\textbullet\ 측정값: 접촉 시간,\\\hspace*{1.6mm}물체 이동, 목표 거리}
-  {예) 초기 장면 FAIL, 로봇–장애물\\접촉 13.3초, 그릇 미이동}
+  {\textbullet\ 목표 결과·종료 상태\\\textbullet\ 행동 기록: 계획 실패,\\\hspace*{1.6mm}중간 목표 도착, 조작 요청\\\textbullet\ 측정값: 접촉 시간,\\\hspace*{1.6mm}물체 이동, 목표 거리}
+  {예) 시작 장면 FAIL, 로봇–장애물\\접촉 13.3초, 그릇 미이동}
 \stepbox{44.5}{c1}{가설}
   {\textbullet\ 관측된 사실로 실패 원인 추론\\\textbullet\ 다른 설명과 불확실성 검토\\\textbullet\ 아직 못 찾은 실패 유형,\\\hspace*{1.6mm}성공 경계 근처를 우선}
   {예) ``경로 중앙의 크고 높은 상자가\\그리퍼 접근을 막을 것''}
 \stepbox{84}{c1}{제안}
-  {\textbullet\ 허용 범위 안의 변경 축·값\\\textbullet\ 근거로 삼은 이전 실행 명시\\\textbullet\ 예상 실패 유형과 근거\\\textbullet\ 정해진 형식으로 출력}
+  {\textbullet\ 허용 범위 안의 변수·값\\\textbullet\ 근거로 삼은 이전 실행 명시\\\textbullet\ 예상 실패 유형과 근거\\\textbullet\ 정해진 형식으로 출력}
   {예) 장애물 폭·깊이 6\,cm,\\높이 17\,cm로 변경}
 \draw[step=c1] (41.3,69.5)--(44.2,69.5);
 \draw[step=c1] (80.8,69.5)--(83.7,69.5);
@@ -68,7 +68,7 @@
 \node[font=\figsans\footnotesize\bfseries,text=cg!90!black] at (145,81.2) {후보 검증·선택};
 \node[anchor=north west,text width=33.5mm,align=left,inner sep=0pt,
   font=\figsans\fontsize{6.4}{7.9}\selectfont,text=black!80] at (128.5,77.3)
-  {\textbullet\ 값의 범위·형식\\\textbullet\ 근거 실행의 실재 여부\\\textbullet\ 변경 축 수·남은 예산\\\textbullet\ 기준 장면·중복 확인};
+  {\textbullet\ 값의 범위·형식\\\textbullet\ 근거 실행이 실제로 있는지\\\textbullet\ 변수 개수·남은 시도 횟수\\\textbullet\ 시작 장면·중복 확인};
 \node[anchor=south west,text width=33.5mm,align=left,inner sep=0pt,
   font=\figsans\fontsize{6}{7.2}\selectfont,text=cg] at (128.5,56.6) {범위 밖 후보는 실행 전 거부,\\통과한 후보만 실행};
 \draw[flow=c1] (120.3,69.5)--(126.6,69.5);
@@ -76,7 +76,7 @@
 \fill[cgl,panel] (0,0) rectangle (30,46);
 \node[title,text=cg] at (15,41.5) {입력};
 \node[align=left,sub,anchor=north west,text width=27mm] at (2,36)
-  {\textbullet\ 작업 목표\\[1.8mm]\textbullet\ 환경 변경 범위\\[1.8mm]\textbullet\ 테스트 대상 로봇\\[1.8mm]\textbullet\ 실행 예산};
+  {\textbullet\ 작업 목표\\[1.8mm]\textbullet\ 환경 변경 범위\\[1.8mm]\textbullet\ 테스트 대상 로봇\\[1.8mm]\textbullet\ 시도 횟수};
 \fill[c2l,panel] (36,0) rectangle (98,46);
 \node[badge=c2] at (41,41.5) {2}; \node[title,text=c2,anchor=west] at (44.5,41.5) {시뮬레이션 실행};
 \fill[c3l,panel] (104,0) rectangle (166,46);
@@ -117,16 +117,64 @@
 \caption{전체 처리 흐름. 핵심인 능동 실패 탐색(AFS)에서 탐색 Agent(LLM)는 판정된 실행 기록을 관측하고, 실패 가설을 세운 뒤, 다음 테스트 환경을 제안한다. 예시는 로봇팔 실험의 실제 기록이다. 제안은 규칙 기반 검증을 통과해야 실행된다. 점선의 로봇 Agent는 외부에서 제공된 테스트 대상으로, 본 시스템은 이를 수정하지 않고 생성된 환경에서 실행만 한다. 나머지는 규칙 기반 프로그램이다.}\label{fig:arch}
 \end{figure*}
 
-그림~\ref{fig:arch}와 같이 시스템은 환경을 제안하는 역할, 로봇을 실행하는 역할, 결과를 판정하는 역할을 분리한다.
-탐색기는 고정된 작업과 허용된 환경 변경 범위 안에서 테스트 후보만 만들고, 로봇은 주어진 장면에서
-원래 목표를 수행한다. 로봇 Agent(VLA 정책 또는 LLM Agent)는 외부에서 제공된 테스트 대상으로,
-본 시스템은 그 내부를 수정하지 않고 블랙박스로 실행하며 결과만 관측한다. 평가기는 실행 기록에서 목표 결과와 실패 유형을 측정하며, 저장소는 장면,
-작업 목표, 모델·소프트웨어 버전, 영상과 상태 기록을 함께 보존한다. 이 분리 덕분에 탐색기가
-예상한 실패가 판정에 섞이지 않고, 같은 사례를 다른 버전에서 다시 실행할 수 있다.
+본 과제의 시스템은 그림~\ref{fig:arch}과 같이 환경을 제안하는 역할, 로봇을 실행하는 역할, 결과를 판정하는 역할을 분리한다. 
+AFS는 고정된 작업과 허용된 환경 변경 범위 안에서 테스트 후보(AFS가 제안한 시험 환경)만 만들고, 로봇은 주어진 장면에서 원래 목표를 수행한다. 
+로봇 Agent(VLA 정책 또는 LLM Agent)는 외부에서 제공된 테스트 대상으로, 본 시스템은 그 내부를 수정하지 않고 블랙박스로 실행하며 결과만 관측한다. 
+평가기는 실행 기록에서 작업 성공 여부와 실패 유형을 측정하며, 저장소는 장면, 작업 목표, 모델·소프트웨어 버전, 영상과 상태 기록을 함께 보존한다. 
+이 분리 덕분에 AFS가 예상한 실패가 판정에 섞이지 않고, 같은 사례를 다른 버전에서 다시 실행할 수 있다.
+
+\subsection*{주요 적용 기술}
+\begin{table}[!t]
+\centering\footnotesize\setlength{\tabcolsep}{3pt}
+\caption{구성 요소별 적용 기술}\label{tab:tech}
+\begin{tabularx}{\linewidth}{@{}p{17mm}Y@{}}
+\toprule
+구성 요소 & 적용 기술 \\
+\midrule
+장면 표현 & 장면 파라미터 벡터, 3D 장면 그래프~\cite{sg}, 점유 격자 이동 지도 \\
+물리 시뮬레이션 & \gl{mujoco}{MuJoCo}~\cite{mujoco}, \gl{mjcf}{MJCF} 자동 생성~\cite{mjcf}, \gl{robosuite}{robosuite}·\gl{libero}{LIBERO}~\cite{robosuite,libero} \\
+테스트 대상 & \gl{panda}{Panda} + \gl{groot}{GR00T~N1.7} VLA~\cite{groot}; \gl{g1}{G1} + LLM Agent + \gl{wbc}{GR00T 보행 제어}~\cite{wbc} \\
+능동 실패 탐색 & \gl{luna}{GPT-6 Luna Pro / Luna}(OpenRouter), 구조화된 입출력 형식, 규칙 기반 후보 검증 \\
+판정 & 접촉·자세·경로 계획·점유·사람 거리 규칙 기반 검출기, 12종 실패 유형 \\
+자산화 & 실행별 기록 묶음과 SHA-256 해시, 재실행·비교 실행기 \\
+\bottomrule
+\end{tabularx}
+\end{table}
+표~\ref{tab:tech}는 구성 요소별 적용 기술이다. 카메라 영상은 테스트 대상 로봇의 제어에만 쓰이며,
+AFS에는 영상 대신 장면 관계와 행동 관측을 텍스트로 제공한다(3절).
+
+초기 기획 대비 두 가지를 변경하였다. 
+물리 엔진은 PyBullet 대신 MuJoCo를 사용했는데, 검증 대상인 LIBERO 과제와 G1 모델·보행 정책이 모두 MuJoCo 기반으로 제공되기 때문이다. 
+또한 3D 비전은 AFS 입력에서 제외하고, 시뮬레이터의 정확한 상태·접촉 정보로 장면 그래프와 판정을 구성하였다. 
 
 \subsection*{3단계 판정}
 \begin{enumerate}
-\item \textbf{실행 유효성}: LLM 서비스·네트워크 중단, 물체가 겹친 채 시작한 장면, 불완전한 기록은 판정 불가로 분리하고 로봇 실패로 집계하지 않는다.
-\item \textbf{목표 결과}: 원래 작업의 성공 조건으로 PASS/FAIL을 판정한다. 로봇팔은 그릇이 접시 위에 놓였는지(LIBERO 기본 판정), 휴머노이드는 목표 반경 0.25\,m 안에서 1초 이상 머물렀는지를 본다.
-\item \textbf{실패 유형}: 접촉, 자세, 경로 계획 결과, 목표 영역 점유, 사람과의 거리 등 관측 규칙으로 대표 유형 1개를 부여한다(부록 B).
+\item \textbf{실행 유효성}: LLM 서비스·네트워크 중단, 물체가 겹친 채 시작한 장면, 불완전한 기록(상태 기록 간격 0.25초 초과 등)은 판정 불가로 분리하고 로봇 실패로 집계하지 않는다.
+\item \textbf{작업 성공 여부}: 원래 작업의 성공 조건으로 PASS/FAIL을 판정한다. 로봇팔은 그릇이 접시 위에 놓였는지(LIBERO 기본 판정), 휴머노이드는 목표 반경 0.25\,m 안에서 1초 이상 머물렀는지를 본다.
+\item \textbf{실패 유형}: 표~\ref{tab:taxonomy}의 관측 규칙으로 대표 유형 1개를 부여하고, 함께 관측된 현상은 보조 진단으로 보존한다.
 \end{enumerate}
+
+\begin{table*}[!t]
+\centering\small
+\caption{12종 실패 유형과 판정 규칙(요약)}\label{tab:taxonomy}
+\begin{tabularx}{\textwidth}{@{}p{26mm}p{30mm}Y@{}}
+\toprule
+분류 & 유형 & 판정 규칙 \\
+\midrule
+\multirow{6}{26mm}{초기 정의 6종} & 충돌 & 로봇 몸체와 장애물의 접촉이 지속되며 작업 실패 \\
+& 도달 불가 & 목표점 경로 계획이 반복 실패하거나, 물체 운반 후 목표 위치 미완료 \\
+& 장애물 간섭 & 마지막 10초에 경로 계획 실패 2회 이상, 장애물과 0.55\,m 이내, 정체 \\
+& 목표 위치 점유 & 목표 영역이 물체로 점유된 상태에서 종료 구간 정체 \\
+& 작업자 안전 위험 & 사람과 접촉 또는 1\,m 이내 0.5초 이상 연속 노출 \\
+& 인식 오류 & 잘못된 대상 선택, 가림에 의한 인식 실패 \\
+\midrule
+\multirow{4}{26mm}{행동 수행 4종} & 넘어짐 & 몸통 높이 0.45\,m 미만 또는 기울기 60도 이상이 0.5초 이상 \\
+& 이동 정체 & 2초 이상의 이동 실행에서 순이동 0.05\,m 이하 \\
+& 물체 조작 실패 & 상자 밀기 등 조작 요청이 최종적으로 실행되지 않거나 실패 \\
+& 목표 완료 실패 & 목표 반경 안에 도착했으나 체류 시간 미충족 \\
+\midrule
+\multirow{2}{26mm}{시스템 관측 2종} & 목표점 경로 없음 & 최종 목표점이 막혀 경로 계획기가 경로를 찾지 못함(no feasible path)이 2회 이상, 마지막 행동도 실패 \\
+& 중간 목표 반복 & 최종 목표 밖 같은 중간 목표에 반복 도착 \\
+\bottomrule
+\end{tabularx}
+\end{table*}

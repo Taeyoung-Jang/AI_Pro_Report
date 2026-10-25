@@ -1,34 +1,37 @@
 \section{서론}
 
 \subsection*{배경과 문제}
-제조·물류 현장에 로봇팔, AMR, 시각-언어-행동(VLA) 모델~\cite{rt2} 기반 Physical AI의 도입이 늘고 있다. 이들은 실제 공간에서
-행동하므로 소프트웨어 정확도만으로는 품질을 보장할 수 없고, 물체 위치 변화나 장애물 추가,
-작업자 접근에 따라 현장에서 실패할 수 있다. 현재의 검증은 사람이 예상 가능한 케이스를
-수작업으로 정의하거나 실제 장비에서 제한적으로 반복하는 방식에 의존한다. 이 방식은
-테스트 작성에 시간이 들고, 충돌·안전 위험이 있으며, 드문 실패나 PASS/FAIL 경계 조건을
-체계적으로 찾기 어렵다. 현장 배치가 바뀔 때마다 테스트를 다시 작성해야 하는 것도 문제다.
+제조·물류 현장에 로봇팔, \gl{amr}{자율 이동 로봇(AMR)}, \gl{vla}{시각-언어-행동(VLA) 모델}~\cite{rt2} 기반 Physical AI의 도입이 늘고 있다. 
+이들은 실제 공간에서 행동하므로 소프트웨어 정확도만으로는 품질을 보장할 수 없고, 물체 위치 변화나 장애물 추가, 작업자 접근에 따라 현장에서 실패할 수 있다. 
+현재의 검증은 사람이 예상 가능한 케이스를 수작업으로 정의하거나 실제 장비에서 제한적으로 반복하는 방식에 의존한다. 
+이 방식은 테스트 작성에 시간이 들고, 충돌·안전 위험이 있으며, 드문 실패나 PASS/FAIL 경계 조건을 체계적으로 찾기 어렵다. 
+현장 배치가 바뀔 때마다 테스트를 다시 작성해야 하는 것도 문제다.
 
 \subsection*{목표 지표}
-과제의 평가 지표와 목표는 표~\ref{tab:metric}과 같다. 세 지표 모두 같은 시험 예산에서 Random 탐색과 비교한다.
-\begin{table*}[!t]
-\centering\small
+과제의 평가 지표와 목표는 표~\ref{tab:metric}과 같다. 
+세 지표 모두 같은 시도 횟수에서, 허용 범위 안의 환경을 무작위로 골라 시험하는 \gl{random}{Random 테스트}와 비교한다.
+\begin{table}[!htb]
+\centering\footnotesize\setlength{\tabcolsep}{3pt}
 \caption{과제 평가 지표와 목표}\label{tab:metric}
-\begin{tabularx}{\textwidth}{@{}p{38mm}Yp{40mm}@{}}
+\begin{tabularx}{\linewidth}{@{}>{\raggedright\arraybackslash}p{19mm}Yp{12mm}@{}}
 \toprule
 지표 & 정의 & 목표 \\
 \midrule
-실패 발견율 (FDR) & 유효 테스트 중 작업 실패를 발견한 비율, $N_{\mathrm{FAIL}}/N_{\mathrm{VALID}}$ & 30\% 이상 \\
-실패 탐색 성능 향상 (Gain) & 동일 테스트 예산에서 Random 대비 실패 발견 향상 & 20\% 이상 \\
+\gl{fdr}{실패 발견율 (FDR)} & 유효 테스트 중 작업 실패를 발견한 비율, $N_{\mathrm{FAIL}}/N_{\mathrm{VALID}}$ & 30\% 이상 \\
+실패 탐색 성능 향상 (Gain) & 같은 시도 횟수에서 Random 테스트 대비 실패 발견 향상 & 20\% 이상 \\
 실패 유형 다양성 & 사전 정의한 주요 실패 유형 6종 중 자동 발견한 유형 수 & 6종 중 4종 이상 \\
 \bottomrule
 \end{tabularx}
-\end{table*}
+\end{table}
 
 \subsection*{기여}
+기존의 블랙박스 안전 검증은 주로 거리나 충돌 여부 같은 수치 하나를 기준으로 실패 조건을 탐색한다.
+본 과제는 LLM이 로봇의 \textbf{행동 기록}과 \textbf{장면의 공간 관계}를 읽고 실패 원인을 추론하여 다음 시험을 설계하도록 한다. 
+주요 기여는 다음과 같다.
 \begin{enumerate}
-\item 장면 파라미터로부터 3D 장면 그래프, 이동 지도, 물리 시뮬레이션 모델을 일관되게 생성하고 실행 전에 유효성을 검사하는 환경 생성기.
-\item 이전 실행의 행동, 로봇 기능 호출 결과, 측정값을 근거로 다음 테스트 환경을 제안하는 LLM 기반 AFS와 후보 검증기.
-\item 실행 유효성, 목표 달성, 실패 유형을 단계적으로 판정하는 평가기와 6종/12종 실패 분류 체계.
-\item 로봇팔(VLA)과 휴머노이드(LLM Agent) 두 플랫폼에서 Random 대비 AFS의 실패 탐색 효율을 검증.
-\item 발견한 실패·성공 사례를 다시 실행하여 이전 결과와 비교하는 회귀 테스트 실행기.
+\item \textbf{행동 기록 기반 \gl{afs}{능동 실패 탐색(AFS, Active Failure Search)}}: 성공·실패 여부뿐 아니라 경로 계획 실패(planning failure), 조작 요청 결과, 접촉 시간 같은 행동 기록을 LLM(Large Language Model)에 제공하여, 실패 가설을 세우고 그에 맞는 다음 테스트 환경을 제안하게 하였다.
+\item \textbf{LLM이 다룰 수 있는 3D 장면 표현}: \gl{gp}{장면 파라미터(scene parameter)}로부터 \gl{sg}{3D 장면 그래프(3D scene graph)}, \gl{map}{이동 지도(occupancy grid map)}, \gl{simmodel}{물리 시뮬레이션 모델(physics simulation model)}을 일관되게 생성하는 \gl{envgen}{환경 생성기(environment generator)}를 구현하고, 장면 그래프의 객체 간 거리·목표 영역 점유 같은 공간 관계를 텍스트로 변환하여 LLM이 영상 없이도 3D 장면 구성을 근거로 추론하게 하였다.
+\item \textbf{검증 가능한 제안 형식}: 제안마다 근거로 삼은 이전 실행(\gl{basis}{근거 실행}), 예상 실패 유형, 가설이 틀렸다고 판단할 결과(\gl{basis}{반증 조건})를 명시하게 하고 규칙 기반 검증기를 거치게 하였다. 예상은 판정에 쓰지 않고 독립된 평가기가 결과를 정하므로, LLM 가설의 적중 여부를 사후에 확인할 수 있다.
+\item \textbf{두 종류의 테스트 대상에 대한 검증}: VLA 정책 기반 로봇팔과 \gl{agent}{LLM Agent} 기반 휴머노이드에서 Random 테스트 대비 실패 탐색 효율을 비교하고, 장애물 높이·접시 위치의 PASS/FAIL 경계와 로봇 기능(경로 계획, 상자 밀기)에서 발생하는 실패를 확인하였다.
+\item \textbf{판정과 \gl{reg}{회귀 테스트} 자산화}: 실행 유효성, 목표 달성, 실패 유형을 단계적으로 판정하는 평가기와 12종 실패 분류 체계, 발견한 사례를 다시 실행하여 이전 결과와 비교하는 회귀 테스트 실행기를 구현하였다.
 \end{enumerate}
