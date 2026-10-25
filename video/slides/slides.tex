@@ -1,0 +1,305 @@
+% !TeX program = xelatex
+% 시연 영상용 개요·성과 슬라이드 (16:9). build_slides.sh가 본문 그림을 추출한 뒤 빌드하고 PNG로 내보낸다.
+\documentclass[aspectratio=169,11pt]{beamer}
+\usepackage{kotex}
+\setmainfont{Noto Sans CJK KR}
+\setsansfont{Noto Sans CJK KR}
+\newfontfamily\figsans{Noto Sans CJK KR}
+\usepackage{booktabs,tabularx,array,multirow}
+\usepackage{tikz}
+\usetikzlibrary{arrows.meta,positioning,shadows,calc,backgrounds}
+\usepackage{pgfplots}
+\pgfplotsset{compat=1.16}
+\pgfkeys{/pgf/number format/assume math mode=true}  % 그래프 숫자를 본문 글꼴로
+\newcolumntype{Y}{>{\raggedright\arraybackslash}X}
+\renewcommand{\arraystretch}{1.25}
+
+\definecolor{ink}{HTML}{1E2024}
+\definecolor{muted}{HTML}{6E7278}
+\definecolor{bg}{HTML}{FAFAF8}
+\definecolor{afs}{HTML}{234C70}
+\definecolor{rnd}{HTML}{B0BEC5}
+\definecolor{passc}{HTML}{228B54}
+\definecolor{failc}{HTML}{C8322D}
+\setbeamercolor{background canvas}{bg=bg}
+\setbeamercolor{normal text}{fg=ink}
+\setbeamercolor{frametitle}{fg=ink,bg=bg}
+\setbeamercolor{structure}{fg=afs}
+\setbeamerfont{frametitle}{size=\LARGE,series=\bfseries}
+\setbeamertemplate{navigation symbols}{}
+\setbeamertemplate{itemize items}{\color{afs}\textbullet}
+\setbeamertemplate{frametitle}{\vspace*{5mm}\insertframetitle\par
+  \ifx\insertframesubtitle\empty\else{\normalsize\color{muted}\mdseries\insertframesubtitle\par}\fi}
+\setbeamertemplate{footline}{\hfill{\scriptsize\color{muted}\insertframenumber\hspace*{6mm}}\vspace*{3mm}}
+\setbeamersize{text margin left=10mm,text margin right=10mm}
+\newcommand{\bignum}[2]{{\color{#2}\fontsize{30}{32}\selectfont\bfseries #1}}
+
+\begin{document}
+
+% ------------------------------------------------------------------ 1 표지
+{\setbeamertemplate{footline}{}
+\begin{frame}
+\vspace*{10mm}
+{\fontsize{22}{32}\selectfont\bfseries AI 기반 Physical AI 작업 수행 검증 및\\회귀 테스트 자동화 기술\par}
+\vspace{6mm}
+{\large\color{muted} 행동 피드백 기반 능동 실패 탐색(AFS) 시연\par}
+\vspace{14mm}
+{\normalsize 실험 1 \; 로봇팔 pick-and-place: Franka Panda 로봇팔 + GR00T N1.7 VLA 정책\\[1mm] 실험 2 \; 휴머노이드 이동: Unitree G1 휴머노이드 + LLM Agent\par}
+\end{frame}}
+
+% ------------------------------------------------------------------ 2 배경과 문제
+\begin{frame}{배경과 문제}{같은 명령도 환경이 조금 바뀌면 실패한다}
+\vspace{4mm}
+\begin{columns}[T]
+\begin{column}{0.5\textwidth}
+\textbf{Physical AI의 특성}
+\begin{itemize}
+\item 로봇팔, 자율 이동 로봇, VLA 모델이 현장에 도입
+\item 실제 공간에서 행동 → 소프트웨어 정확도만으로 품질 보장 불가
+\item 물체 위치, 장애물, 작업자 접근에 따라 결과가 달라짐
+\end{itemize}
+\end{column}
+\begin{column}{0.46\textwidth}
+\textbf{현재 검증 방식의 한계}
+\begin{itemize}
+\item 예상 가능한 케이스를 사람이 수작업 정의
+\item 실제 장비 반복은 시간·충돌 위험
+\item 드문 실패, PASS/FAIL 경계를 체계적으로 찾기 어려움
+\item 현장 배치가 바뀔 때마다 테스트 재작성
+\end{itemize}
+\end{column}
+\end{columns}
+\vspace{8mm}
+\begin{center}
+\colorbox{afs!10}{\parbox{0.9\textwidth}{\centering\large
+\textbf{목표}: 실패할 가능성이 높은 테스트 환경을 자동으로 찾아내고, 찾은 실패를 회귀 테스트로 재사용}}
+\end{center}
+\end{frame}
+
+% ------------------------------------------------------------------ 3 목표 지표
+\begin{frame}{과제 평가 지표}{같은 시도 횟수에서 Random 테스트와 비교}
+\vspace{6mm}
+\begin{tabularx}{\textwidth}{@{}p{40mm}Yp{24mm}@{}}
+\toprule
+지표 & 정의 & 목표 \\
+\midrule
+실패 발견율 (FDR) & 유효 테스트 중 작업 실패를 발견한 비율 & \textbf{30\% 이상} \\
+Random 테스트 대비 향상 & 같은 시도 횟수에서 Random 테스트 대비 실패 발견 향상률 & \textbf{20\% 이상} \\
+실패 유형 다양성 & 사전 정의한 주요 실패 유형 6종 중 발견 수 & \textbf{4종 이상} \\
+\bottomrule
+\end{tabularx}
+\vspace{8mm}
+
+{\color{muted} 실패 유형 6종: 충돌 · 도달 불가 · 장애물 간섭 · 목표 위치 점유 · 작업자 안전 위험 · 인식 오류}
+\end{frame}
+
+% ------------------------------------------------------------------ 4 시스템 구성
+\begin{frame}{시스템 구성}{탐색(AFS) · 실행 · 판정을 분리하고, 테스트 대상 로봇은 블랙박스로 실행}
+\centering
+\resizebox{!}{0.84\textheight}{\input{build/fig_arch.tex}}
+\end{frame}
+
+% ------------------------------------------------------------------ 5 적용 기술
+\begin{frame}{주요 적용 기술}
+\vspace{4mm}
+\small
+\begin{tabularx}{\textwidth}{@{}p{34mm}Y@{}}
+\toprule
+구성 요소 & 적용 기술 \\
+\midrule
+장면 표현 & 장면 파라미터 벡터, 3D 장면 그래프, 점유 격자 이동 지도 \\
+물리 시뮬레이션 & MuJoCo, MJCF 자동 생성, robosuite·LIBERO \\
+테스트 대상 & Panda 로봇팔 + GR00T N1.7 VLA 정책 \quad / \quad G1 휴머노이드 + LLM Agent + GR00T 보행 제어 \\
+능동 실패 탐색 & GPT-6 Luna Pro / Luna (OpenRouter), 구조화된 입출력, 규칙 기반 후보 검증 \\
+판정 & 접촉·자세·경로 계획·점유·사람 거리 규칙 기반 검출기, 12종 실패 유형 \\
+자산화 & 실행별 기록 묶음과 SHA-256 해시, 재실행·비교 실행기 \\
+\bottomrule
+\end{tabularx}
+\vspace{5mm}
+
+{\color{muted} AFS에는 영상 대신 장면 관계와 행동 관측을 텍스트로 제공합니다.}
+\end{frame}
+
+% ------------------------------------------------------------------ 6 AFS 입출력
+\begin{frame}{능동 실패 탐색(AFS): 무엇을 읽고 무엇을 내놓는가}
+\vspace{3mm}
+\begin{columns}[T]
+\begin{column}{0.48\textwidth}
+\textbf{입력: 이전 실행의 행동 관측}
+\begin{itemize}
+\item 목표 결과·종료 상태
+\item 로봇 기능 실행 결과 (경로 계획 실패, 상자 밀기 결과)
+\item 물리 측정값 (접촉 시간·접촉력, 물체 이동량)
+\item 장면 관계 (상자–목표 ``비어 있음 / 점유'')
+\item 이전 제안의 예상 유형과 실제 검출 유형
+\end{itemize}
+\end{column}
+\begin{column}{0.48\textwidth}
+\textbf{출력: 검증 가능한 제안}
+\begin{itemize}
+\item 근거로 삼은 이전 실행
+\item 변경할 변수와 값 (1--2개)
+\item 실패 가설과 대안 설명
+\item 예상 실패 유형 (12종 중)
+\item 반증 조건과 측정 계획
+\end{itemize}
+\end{column}
+\end{columns}
+\vspace{6mm}
+\begin{center}
+\colorbox{afs!10}{\parbox{0.92\textwidth}{\centering
+규칙 기반 검증기가 범위·근거·남은 시도 횟수를 검사한 뒤 실행 \;→\; 독립된 평가기가 판정\\
+{\small\color{muted}예상은 판정에 쓰지 않으므로, LLM 가설의 적중 여부를 사후에 확인할 수 있다}}}
+\end{center}
+\end{frame}
+
+% ------------------------------------------------------------------ 7 실험 설정
+\begin{frame}{두 종류의 테스트 대상}
+\vspace{3mm}
+\small
+\begin{tabularx}{\textwidth}{@{}p{28mm}YY@{}}
+\toprule
+& 실험 1: 로봇팔 pick-and-place & 실험 2: 휴머노이드 이동 \\
+\midrule
+로봇 (몸체) & Franka Emika Panda: 7자유도 로봇팔 + 집게형 그리퍼 & Unitree G1: 키 약 1.3\,m 휴머노이드 \\
+정책 (두뇌) & GR00T N1.7 (NVIDIA VLA): 카메라 영상·명령 → 관절 동작 & LLM Agent (GPT-6 Luna)가 이동·밀기 기능 선택 + GR00T 보행 정책 \\
+작업 & 그릇을 집어 접시에 놓기 & 상자·장애물·횡단하는 사람이 있는 통로에서 목표 도달 \\
+환경 변경 & 10개 변수 (그릇·접시·장애물) & 21개 변수 (상자·바닥 물성, 통로 폭, 장애물, 사람) \\
+시도 횟수 & 3세트 × 2회 = 방법당 6회 & 3세트 × 6회 = 방법당 18회 (공통 시작 장면은 평가 전 실행, 제외) \\
+공통 시작 장면 & 세트별 처음 2회, 같은 무작위 장면 & 세트별 처음 1회, 같은 기본 장면 \\
+탐색 LLM & GPT-6 Luna Pro & GPT-6 Luna \\
+\bottomrule
+\end{tabularx}
+\end{frame}
+
+% ------------------------------------------------------------------ 8 결과
+\begin{frame}{결과: AFS가 3배 이상 많은 실패 사례를 찾았다}{같은 시도 횟수에서 Random 테스트와 비교}
+\begin{columns}[c]
+\begin{column}{0.56\textwidth}
+\begin{tikzpicture}
+\begin{axis}[
+  ybar, width=\linewidth, height=62mm, bar width=13pt,
+  ymin=0, ymax=118, ylabel={실패 발견율 (\%)},
+  symbolic x coords={A,B}, xtick=data,
+  xticklabels={{로봇팔},{휴머노이드}},
+  xticklabel style={font=\footnotesize,align=center}, tick label style={font=\footnotesize},
+  nodes near coords, nodes near coords style={font=\footnotesize},
+  legend style={font=\footnotesize,at={(0.5,1.02)},anchor=south,draw=none,legend columns=3},
+  axis lines*=left, enlarge x limits=0.18]
+\addplot[fill=afs,draw=afs] coordinates {(A,100) (B,33.3)};
+\addplot[fill=rnd,draw=rnd] coordinates {(A,16.7) (B,11.1)};
+\draw[failc,dashed,thick] (rel axis cs:0,0.254) -- (rel axis cs:1,0.254);
+\addlegendimage{legend image code/.code={\draw[failc,dashed,thick] (0cm,0.08cm) -- (0.5cm,0.08cm);}}
+\legend{AFS, Random 테스트, 목표 30\%}
+\end{axis}
+\end{tikzpicture}
+\end{column}
+\begin{column}{0.4\textwidth}
+\textbf{로봇팔} (3세트 × 2회 = 6회)\\
+AFS \bignum{100\%}{afs}\\ Random 테스트 16.7\%\\
+{\small\color{muted}+500\%, 6배 · 3건은 같은 장면 재제안}\par\vspace{4mm}
+\textbf{휴머노이드} (3세트 × 6회 = 18회)\\
+AFS \bignum{33.3\%}{afs}\\ Random 테스트 11.1\%\\
+{\small\color{muted}+200\%, 3배 · 세 세트 모두 2건씩 (Random 테스트 0/0/2)}\par
+\vspace{2mm}
+{\scriptsize\color{muted}공통 시작 장면은 평가에서 제외}
+\end{column}
+\end{columns}
+\end{frame}
+
+% ------------------------------------------------------------------ 9 예상 적중
+\begin{frame}{LLM 가설은 얼마나 맞았나}
+\vspace{3mm}
+\begin{columns}[T]
+\begin{column}{0.47\textwidth}
+\textbf{로봇팔}
+\begin{itemize}
+\item 6건 모두 ``이송 경로의 장애물이 접근을 막을 것''
+\item 6건 모두 로봇–장애물 접촉(10.7--13.7초)을 동반한 FAIL
+\end{itemize}
+\vspace{3mm}
+\textbf{휴머노이드} (제안 18건)
+\begin{itemize}
+\item 목표 위치 점유 예상 3건 → \textcolor{passc}{\textbf{3건 모두 적중}}
+\item 충돌·이동 정체 예상 9건 → 모두 PASS
+\end{itemize}
+\end{column}
+\begin{column}{0.47\textwidth}
+\textbf{발견한 취약점}
+\begin{itemize}
+\item 두 방법의 FAIL 8건이 모두 \textbf{상자 위치} 또는 \textbf{통로 폭} 변경
+\item 장애물 형상·바닥 마찰은 취약점이 아니었음
+\end{itemize}
+\vspace{4mm}
+\colorbox{afs!10}{\parbox{0.95\linewidth}{
+관측된 실패 메커니즘(차단, 점유)을 겨냥할 때 잘 맞고,\\
+아직 관측되지 않은 유형을 겨냥할 때는 빗나감}}
+\end{column}
+\end{columns}
+\end{frame}
+
+% ------------------------------------------------------------------ 10 경계
+\begin{frame}{PASS/FAIL 경계: 어디서부터 실패하는가}{로봇팔 통제 실험 11개 장면, 한 번에 한 조건만 변경}
+\centering
+\resizebox{0.95\textwidth}{!}{\input{build/fig_boundary.tex}}
+\vspace{3mm}
+
+\small 장애물 높이 \textbf{12--14\,cm}, 접시 이동 \textbf{37.5--50\%} 사이에서 결과가 바뀐다 → 배포 전 우선 점검 조건
+\end{frame}
+
+% ------------------------------------------------------------------ 11 실패 유형
+\begin{frame}{실패 유형 다양성: 6종 중 4종 발견 + 도달 불가 부분 관측}
+\vspace{3mm}
+\small
+\begin{tabularx}{\textwidth}{@{}p{30mm}cp{28mm}Y@{}}
+\toprule
+유형 & 발견 & 실험 & 관측 근거 \\
+\midrule
+충돌 & \textcolor{passc}{\textbf{O}} & 로봇팔 & 로봇–장애물 접촉 10.7--13.7초, 그릇 미이동 \\
+장애물 간섭 & \textcolor{passc}{\textbf{O}} & 휴머노이드 & 장애물 부근 경로 계획 반복 실패, 정체 \\
+목표 위치 점유 & \textcolor{passc}{\textbf{O}} & 휴머노이드 & 상자가 목표 영역 점유, 목표 0.85\,m 앞 정체 \\
+작업자 안전 위험 & \textcolor{passc}{\textbf{O}} & 휴머노이드 & 사람 1\,m 이내 0.5초 이상 노출, AFS 11/18회 \\
+도달 불가 & 부분 & 로봇팔·휴머노이드 & 접시 8.7\,cm 앞 미완료, 최종 목표점 경로 없음 반복 \\
+인식 오류 & -- & -- & 후속 실험 (이번엔 실제 위치 값 제공) \\
+\bottomrule
+\end{tabularx}
+\vspace{4mm}
+
+{\color{muted} 12종 체계로 확장 · 확장 유형인 넘어짐은 창고 배치에서 관측}
+\end{frame}
+
+% ------------------------------------------------------------------ 12 목표 달성
+\begin{frame}{목표 달성 현황}
+\vspace{3mm}
+\small
+\begin{tabularx}{\textwidth}{@{}p{46mm}p{16mm}Y@{}}
+\toprule
+목표 & 결과 & 근거 \\
+\midrule
+실패 발견율 30\% 이상 & \textbf{달성} & 로봇팔 100\% (6/6); 휴머노이드 33.3\% (6/18) \\
+Random 테스트 대비 20\% 이상 향상 & \textbf{달성} & 로봇팔 +500\%, 휴머노이드 +200\% \\
+실패 유형 6종 중 4종 & \textbf{달성} & 충돌, 장애물 간섭, 목표 위치 점유, 작업자 안전 위험 \\
+3D 장면 구조화·후보 생성 & 구현 & 10개·21개 장면 변수, 장면 그래프·MJCF·이동 지도 생성 \\
+행동 기반 취약 조건 탐색 & 구현 & 관측 → 가설 → 제안 → FAIL 연결 확인 \\
+회귀 테스트 자산화 & 구현 & 재실행·비교 실행기, 로봇 LLM 교체 후 결과 유지 확인 \\
+\bottomrule
+\end{tabularx}
+\vspace{4mm}
+
+\textbf{앞으로}\; 현장 디지털 트윈에서 탐색 → 실제 로봇으로 재현 · 실제 인식 결과로 시험
+\end{frame}
+
+% ------------------------------------------------------------------ 13 마무리
+{\setbeamertemplate{footline}{}
+\begin{frame}
+\vspace*{12mm}
+{\fontsize{24}{30}\selectfont\bfseries 실패를 기다리지 않고, 찾아서 남긴다\par}
+\vspace{8mm}
+\begin{itemize}
+\item 행동 기록을 읽는 LLM이 다음 시험을 설계 \;→\; Random 테스트보다 3배 이상 많은 실패 사례 발견
+\item PASS/FAIL 경계를 정량적으로 제시 \;→\; 배포 전 점검 우선순위
+\item 발견한 실패는 기록과 함께 저장 \;→\; 정책·배치가 바뀔 때 회귀 테스트로 재실행
+\end{itemize}
+\end{frame}}
+
+\end{document}

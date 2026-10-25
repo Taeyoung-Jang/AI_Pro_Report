@@ -1,0 +1,3 @@
+file '/home/tae0jang/Documents/Workspace/AI_Pro_Report/video/assets/input_card/card_0.mp4'
+file '/home/tae0jang/Documents/Workspace/AI_Pro_Report/video/assets/input_card/card_1.mp4'
+file '/home/tae0jang/Documents/Workspace/AI_Pro_Report/video/assets/input_card/card_2.mp4'

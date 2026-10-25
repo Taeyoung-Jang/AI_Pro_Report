@@ -1,0 +1,26 @@
+[Script Info]
+ScriptType: v4.00+
+PlayResX: 1920
+PlayResY: 1080
+WrapStyle: 0
+
+[V4+ Styles]
+Format: Name, Fontname, Fontsize, PrimaryColour, SecondaryColour, OutlineColour, BackColour, Bold, Italic, Underline, StrikeOut, ScaleX, ScaleY, Spacing, Angle, BorderStyle, Outline, Shadow, Alignment, MarginL, MarginR, MarginV, Encoding
+Style: Default,Noto Sans CJK KR,38,&H00FFFFFF,&H00FFFFFF,&H00000000,&H99000000,0,0,0,0,100,100,0,0,3,10,0,2,60,60,40,1
+
+[Events]
+Format: Layer, Start, End, Style, Name, MarginL, MarginR, MarginV, Effect, Text
+Dialogue: 0,0:00:00.00,0:00:13.19,Default,,0,0,0,,{\an7\fs40\b1\pos(40,140)}시작 장면 · 상자는 통로 가장자리 (가로 위치 1.0)
+Dialogue: 0,0:00:00.00,0:00:02.79,Default,,0,0,0,,로봇 판단 1: 목표 (7.0, 0.0)로 이동 → 중앙 통로로 진행
+Dialogue: 0,0:00:02.79,0:00:05.42,Default,,0,0,0,,로봇 판단 2: 목표 (7.0, 0.0)로 이동 → 중앙 통로로 진행
+Dialogue: 0,0:00:05.42,0:00:08.15,Default,,0,0,0,,로봇 판단 3: 목표 (7.0, 0.0)로 이동 → 중앙 통로로 진행
+Dialogue: 0,0:00:08.15,0:00:10.19,Default,,0,0,0,,로봇 판단 4: 목표 (7.0, 0.0)로 이동 → 중앙 통로로 진행
+Dialogue: 0,0:00:00.00,0:00:00.29,Default,,0,0,0,,{\an9\fs32\pos(1880,140)}LLM 응답 대기 · 30배속
+Dialogue: 0,0:00:00.29,0:00:02.79,Default,,0,0,0,,{\an9\fs32\pos(1880,140)}로봇 동작 · 4배속
+Dialogue: 0,0:00:02.79,0:00:02.92,Default,,0,0,0,,{\an9\fs32\pos(1880,140)}LLM 응답 대기 · 30배속
+Dialogue: 0,0:00:02.92,0:00:05.42,Default,,0,0,0,,{\an9\fs32\pos(1880,140)}로봇 동작 · 4배속
+Dialogue: 0,0:00:05.42,0:00:05.65,Default,,0,0,0,,{\an9\fs32\pos(1880,140)}LLM 응답 대기 · 30배속
+Dialogue: 0,0:00:05.65,0:00:08.15,Default,,0,0,0,,{\an9\fs32\pos(1880,140)}로봇 동작 · 4배속
+Dialogue: 0,0:00:08.15,0:00:08.28,Default,,0,0,0,,{\an9\fs32\pos(1880,140)}LLM 응답 대기 · 30배속
+Dialogue: 0,0:00:08.28,0:00:10.20,Default,,0,0,0,,{\an9\fs32\pos(1880,140)}로봇 동작 · 4배속
+Dialogue: 0,0:00:10.19,0:00:13.19,Default,,0,0,0,,{\fs48\b1}PASS · 목표 도달 (로봇 판단 4회)

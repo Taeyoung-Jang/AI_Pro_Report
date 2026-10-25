@@ -1,0 +1,4 @@
+file '/home/tae0jang/Documents/Workspace/AI_Pro_Report/video/assets/afs_loop/observe.mp4'
+file '/home/tae0jang/Documents/Workspace/AI_Pro_Report/video/assets/afs_loop/propose.mp4'
+file '/home/tae0jang/Documents/Workspace/AI_Pro_Report/video/assets/afs_loop/validate.mp4'
+file '/home/tae0jang/Documents/Workspace/AI_Pro_Report/video/assets/afs_loop/result.mp4'
